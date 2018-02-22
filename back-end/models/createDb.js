@@ -1,13 +1,13 @@
 const User = require('./table/user'),
-Target = require('./table/Target'),
-Contact = require('./table/contact'),
-TargetContact = require('./table/TargetContact');
+Posting = require('./table/Posting'),
+Applicant = require('./table/applicant'),
+PostingApplicant = require('./table/PostingApplicant');
 
 User.sync({force:true})
 .then(() => {
-    Target.sync({force:true}).then(()=>{
-        Contact.sync({force:true}).then(()=>{
-            TargetContact.sync({force:true}).then(()=>{
+    Posting.sync({force:true}).then(()=>{
+        Applicant.sync({force:true}).then(()=>{
+            PostingApplicant.sync({force:true}).then(()=>{
                 process.exit();
             })
         })

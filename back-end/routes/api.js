@@ -1,19 +1,19 @@
 const express = require('express');
 const router = express.Router();
-const Target = require('../models/table/target');
-const Contact = require('../models/table/contact');
+const Posting = require('../models/table/posting');
+const Applicant = require('../models/table/applicant');
 
-router.get('/targets', (req, res) => {
-    Target.findAll({
+router.get('/postings', (req, res) => {
+    Posting.findAll({
         where:{userId: 1}
-    }).then((targets) => res.json(targets))
+    }).then((postings) => res.json(postings))
 })
-.get('/contacts', (req, res) => {
-    Contact.findAll({
+.get('/applicants', (req, res) => {
+    Applicant.findAll({
         where:{userId: 1}
-    }).then((contacts) => res.json(contacts))
+    }).then((applicants) => res.json(applicants))
 })
-.post('/target', (req, res) => {
+.post('/posting', (req, res) => {
     console.log(req.body);
     res.status(201).send();
 })

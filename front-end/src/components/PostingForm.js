@@ -1,9 +1,9 @@
 import React from 'react';
 
-const addContact = () => {
-    const contactElement = (<React.Fragment>
+const addApplicant = () => {
+    const applicantElement = (<React.Fragment>
         <div className="col-left">
-        <div className="ui-input"><span className="required"></span><span>Contact Name</span>
+        <div className="ui-input"><span className="required"></span><span>Applicant Name</span>
         <div className="clearfix"></div>
         <input type="text" required /></div>
         <div className="ui-input"><span>Title</span>
@@ -20,18 +20,18 @@ const addContact = () => {
         </div>
         </React.Fragment>)
 
-    document.querySelector('form').append(contactElement);
+    document.querySelector('form').append(applicantElement);
 }
 
-const TargetForm = (props) => {
+const PostingForm = (props) => {
     
     return (
     <form>
     <h3 className="form-legend">Information</h3>
         <div className="col-left">
-            <div className="ui-input"><span className="required"></span><span>Target Name</span>
+            <div className="ui-input"><span className="required"></span><span>Posting Name</span>
             <div className="clearfix"></div>
-            <input type="text" name="targetName" required onChange={props.onFormChangeHandler} /></div>
+            <input type="text" name="postingName" required onChange={props.onFormChangeHandler} /></div>
             <div className="ui-input"><span></span><span>Industry</span>
             <div className="clearfix"></div>
             <input type="text" name="industry" onChange={props.onFormChangeHandler} /></div>
@@ -52,27 +52,27 @@ const TargetForm = (props) => {
         </div>
         <div className="clearfix"></div>
     <h3 className="form-legend">
-    Related Contacts
-    <button className="add-contact" onClick={addContact}>Add Contact</button>
+    Related Applicants
+    <button className="add-applicant" onClick={addApplicant}>Add Applicant</button>
     </h3>
     <div className="col-left">
-    <div className="ui-input"><span className="required"></span><span>Contact Name</span>
+    <div className="ui-input"><span className="required"></span><span>Applicant Name</span>
     <div className="clearfix"></div>
-    <input type="text" name="relatedContactName" required onChange={props.onFormChangeHandler} /></div>
+    <input type="text" name="relatedApplicantName" required onChange={props.onFormChangeHandler} /></div>
     <div className="ui-input"><span>Title</span>
     <div className="clearfix"></div>
-    <input type="text" name="relatedContactTitle" required onChange={props.onFormChangeHandler} /></div>
+    <input type="text" name="relatedApplicantTitle" required onChange={props.onFormChangeHandler} /></div>
     </div>
     <div className="col-right">
     <div className="ui-input"><span>Email</span>
     <div className="clearfix"></div>
-    <input type="email" name="relatedContactEmail" required onChange={props.onFormChangeHandler} /></div>
+    <input type="email" name="relatedApplicantEmail" required onChange={props.onFormChangeHandler} /></div>
     <div className="ui-input"><span>Phone</span>
     <div className="clearfix"></div>
-    <input type="phone" name="relatedContactPhone" required onChange={props.onFormChangeHandler} /></div>
+    <input type="phone" name="relatedApplicantPhone" required onChange={props.onFormChangeHandler} /></div>
     </div>
     </form>
     )
 }
 
-export default TargetForm;
+export default PostingForm;

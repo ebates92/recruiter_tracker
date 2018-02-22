@@ -2,7 +2,7 @@ const Sequelize = require('sequelize'),
 sequelize = require('../db'),
 User = require('./user');
 
-const Target = sequelize.define('target',{
+const Posting = sequelize.define('posting',{
 
     name: {
         type: Sequelize.STRING, allowNull:false,
@@ -31,7 +31,7 @@ const Target = sequelize.define('target',{
     }
 });
 
-Target.belongsTo(User);
+Posting.belongsTo(User);
 
 
-module.exports = Target;
+module.exports = Posting;

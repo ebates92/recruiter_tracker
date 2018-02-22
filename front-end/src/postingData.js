@@ -7,8 +7,8 @@ const data =
     location: '',
     industry: '',
     employees: 0,
-    relatedContactIds: [],
-    objectType: "Target"
+    relatedApplicantIds: [],
+    objectType: "Posting"
 },{
     name:"GenePoint",
     annualRevenue:"50M",
@@ -17,8 +17,8 @@ const data =
     location: '',
     industry: '',
     employees: 0,
-    relatedContactIds: [],
-    objectType: "Target"
+    relatedApplicantIds: [],
+    objectType: "Posting"
 },{
     name:"Pyramid Construction Inc",
     annualRevenue:"50M",
@@ -27,8 +27,8 @@ const data =
     location: '',
     industry: '',
     employees: 0,
-    relatedContactIds: [],
-    objectType: "Target"
+    relatedApplicantIds: [],
+    objectType: "Posting"
 },{
     name:"Edge",
     annualRevenue:"50M",
@@ -37,8 +37,8 @@ const data =
     location: '',
     industry: '',
     employees: 0,
-    relatedContactIds: [],
-    objectType: "Target"
+    relatedApplicantIds: [],
+    objectType: "Posting"
 }];
 
 export default data;

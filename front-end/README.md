@@ -226,7 +226,7 @@ Note that **the project only includes a few ES6 [polyfills](https://en.wikipedia
 * [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) via [`promise`](https://github.com/then/promise).
 * [`fetch()`](https://developer.mozilla.org/en/docs/Web/API/Fetch_API) via [`whatwg-fetch`](https://github.com/github/fetch).
 
-If you use any other ES6+ features that need **runtime support** (such as `Array.from()` or `Symbol`), make sure you are including the appropriate polyfills manually, or that the browsers you are targeting already support them.
+If you use any other ES6+ features that need **runtime support** (such as `Array.from()` or `Symbol`), make sure you are including the appropriate polyfills manually, or that the browsers you are postinging already support them.
 
 Also note that using some newer syntax features like `for...of` or `[...nonArrayValue]` causes Babel to emit code that depends on ES6 runtime features and might not work without a polyfill. When in doubt, use [Babel REPL](https://babeljs.io/repl/) to see what any specific syntax compiles down to.
 
@@ -1116,7 +1116,7 @@ You may also specify any configuration value [`http-proxy-middleware`](https://g
   // ...
   "proxy": {
     "/api": {
-      "target": "<url>",
+      "posting": "<url>",
       "ws": true
       // ...
     }
@@ -1135,13 +1135,13 @@ Matches are regular expressions, so that you can use a regexp to match multiple 
   "proxy": {
     // Matches any request starting with /api
     "/api": {
-      "target": "<url_1>",
+      "posting": "<url_1>",
       "ws": true
       // ...
     },
     // Matches any request starting with /foo
     "/foo": {
-      "target": "<url_2>",
+      "posting": "<url_2>",
       "ssl": true,
       "pathRewrite": {
         "^/foo": "/foo/beta"
@@ -1150,12 +1150,12 @@ Matches are regular expressions, so that you can use a regexp to match multiple 
     },
     // Matches /bar/abc.html but not /bar/sub/def.html
     "/bar/[^/]*[.]html": {
-      "target": "<url_3>",
+      "posting": "<url_3>",
       // ...
     },
     // Matches /baz/abc.html and /baz/sub/def.html
     "/baz/.*/.*[.]html": {
-      "target": "<url_4>"
+      "posting": "<url_4>"
       // ...
     }
   }
@@ -1167,7 +1167,7 @@ Matches are regular expressions, so that you can use a regexp to match multiple 
 
 When setting up a WebSocket proxy, there are a some extra considerations to be aware of.
 
-If you’re using a WebSocket engine like [Socket.io](https://socket.io/), you must have a Socket.io server running that you can use as the proxy target. Socket.io will not work with a standard WebSocket server. Specifically, don't expect Socket.io to work with [the websocket.org echo test](http://websocket.org/echo.html).
+If you’re using a WebSocket engine like [Socket.io](https://socket.io/), you must have a Socket.io server running that you can use as the proxy posting. Socket.io will not work with a standard WebSocket server. Specifically, don't expect Socket.io to work with [the websocket.org echo test](http://websocket.org/echo.html).
 
 There’s some good documentation available for [setting up a Socket.io server](https://socket.io/docs/).
 
@@ -1181,7 +1181,7 @@ Either way, you can proxy WebSocket requests manually in `package.json`:
   "proxy": {
     "/socket": {
       // Your compatible WebSocket server
-      "target": "ws://<socket_url>",
+      "posting": "ws://<socket_url>",
       // Tell http-proxy-middleware that this is a WebSocket proxy.
       // Also allows you to proxy WebSocket requests without an additional HTTP request
       // https://github.com/chimurai/http-proxy-middleware#external-websocket-upgrade
