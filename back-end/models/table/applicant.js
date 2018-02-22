@@ -2,7 +2,7 @@ const Sequelize = require('sequelize'),
 sequelize = require('../db'),
 User = require('./user');
 
-const Contact = sequelize.define('contact', {
+const Applicant = sequelize.define('applicant', {
 
     name: {
         type: Sequelize.STRING, allowNull:false,
@@ -27,7 +27,7 @@ const Contact = sequelize.define('contact', {
 
 });
 
-Contact.belongsTo(User);
+Applicant.belongsTo(User);
 
 
-module.exports = Contact;
+module.exports = Applicant;

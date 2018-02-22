@@ -1,5 +1,5 @@
 import React from 'react';
-import TargetForm from './TargetForm.js';
+import PostingForm from './PostingForm.js';
 
 const closeModal = () => {
     document.querySelector('body').setAttribute('style', 'position: ');
@@ -10,9 +10,9 @@ const Modal = (props) => {
     return (
         <div className="modal-overlay hide" data-modal-container>
             <div className="modal-container">
-                <div className="modal-header"><h2>New Target</h2></div>
+                <div className="modal-header"><h2>New Posting</h2></div>
                 <div className="modal-body">
-                <TargetForm onFormChangeHandler={props.onFormChangeHandler} />
+                <PostingForm onFormChangeHandler={props.onFormChangeHandler} />
                 </div>
                 <div className="modal-footer">
                 <button onClick={closeModal}>Cancel</button>

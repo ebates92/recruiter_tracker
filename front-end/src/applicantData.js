@@ -2,19 +2,19 @@ const data =
 [{
     name:"Zach Smith",
     company: '',
-    objectType: "Contact"
+    objectType: "Applicant"
 },{
     name:"Julia Pattel",
     company: '',
-    objectType: "Contact"
+    objectType: "Applicant"
 },{
     name:"Sean Forbes",
     company: '',
-    objectType: "Contact"
+    objectType: "Applicant"
 },{
     name:"Stella Pavlova",
     company: '',
-    objectType: "Contact"
+    objectType: "Applicant"
 }];
 
 export default data;

@@ -4,8 +4,8 @@ import axios from 'axios';
 import Modal from './Modal.js';
 import Header from './Header.js';
 import Container from './Container.js';
-// import Targets from '../targetData.js';
-import Contacts from '../contactData.js';
+// import Postings from '../postingData.js';
+import Applicants from '../applicantData.js';
 // import {
 //   BrowserRouter as Router,
 //   Route
@@ -17,21 +17,21 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      targetData: [],
+      postingData: [],
       error: null,
       filteredList: [],
       formObject: {
-        targetName: 'a',
+        postingName: 'a',
         industry: '',
         annualRevenue: null,
         employees: null,
         location: '',
         dealLead: '',
         title: '',
-        relatedContactName: '',
-        relatedContactEmail: '',
-        relatedContactTitle: '',
-        relatedContactPhone: ''
+        relatedApplicantName: '',
+        relatedApplicantEmail: '',
+        relatedApplicantTitle: '',
+        relatedApplicantPhone: ''
       }
     }
     this._onChangeHandler = this._onChangeHandler.bind(this);
@@ -40,8 +40,8 @@ class App extends Component {
   }
 
   _onFormChangeHandler(event) {
-    const input = event.target.name;
-    const value = event.target.value;
+    const input = event.posting.name;
+    const value = event.posting.value;
     this.setState(prevState => ({
         formObject: {
           ...prevState.formObject,
@@ -52,7 +52,7 @@ class App extends Component {
 
   _onFormSubmission(){
     const data = this.state.formObject;
-    axios.post(`${url}/target`, data)
+    axios.post(`${url}/posting`, data)
     .then(function (response) {
       console.log(response);
     })
@@ -63,8 +63,8 @@ class App extends Component {
 
   _onChangeHandler(searchTerm, callback) {
     const re = new RegExp('^' + searchTerm + '.*', 'gi');
-    const companyContactArray = this.state.targetData.concat(Contacts);
-    let filteredList = companyContactArray.filter(record => record.name.match(re));
+    const companyApplicantArray = this.state.postingData.concat(Applicants);
+    let filteredList = companyApplicantArray.filter(record => record.name.match(re));
     // Return first 5 results
     filteredList = filteredList.slice(0, 5);
     this.setState({
@@ -74,12 +74,12 @@ class App extends Component {
   }
 
   componentDidMount() {
-      axios.get(`${url}/targets`)
+      axios.get(`${url}/postings`)
         .then(res => res.data)
         .then(
-          (targetRecords) => {
+          (postingRecords) => {
             this.setState({
-              targetData: targetRecords
+              postingData: postingRecords
             });
           },
           (error) => {
@@ -89,12 +89,12 @@ class App extends Component {
           }
         )
 
-        axios.get(`${url}/contacts`)
+        axios.get(`${url}/applicants`)
         .then(res => res.data)
         .then(
-          (contactRecords) => {
+          (applicantRecords) => {
             this.setState({
-              contactData: contactRecords
+              applicantData: applicantRecords
             });
           },
           (error) => {
@@ -109,8 +109,8 @@ class App extends Component {
     return (
       <div className="App">
           <Modal onFormChangeHandler={this._onFormChangeHandler} onFormSubmission={this._onFormSubmission} />
-          <Header records={this.state.targetData} contactRecords={Contacts} onChangeHandler={this._onChangeHandler} filteredList={this.state.filteredList}/>
-          <Container records={this.state.targetData} />
+          <Header records={this.state.postingData} applicantRecords={Applicants} onChangeHandler={this._onChangeHandler} filteredList={this.state.filteredList}/>
+          <Container records={this.state.postingData} />
       </div>
     );
   }

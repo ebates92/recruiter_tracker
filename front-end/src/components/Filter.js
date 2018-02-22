@@ -15,7 +15,7 @@ class Filter extends Component {
                 <img src={logo} height="32px" width="32px" alt="logo" />
                 </div>
                 <div className="filter">
-                <h3>Targets</h3>
+                <h3>Postings</h3>
                 <h2>{this.state.currentView} <i class="fas fa-caret-down"></i></h2> 
                 </div>
                 </div>

@@ -1,7 +1,7 @@
 const User = require('./table/user'),
-Target = require('./table/Target'),
-Contact = require('./table/contact'),
-TargetContact = require('./table/TargetContact');
+Posting = require('./table/Posting'),
+Applicant = require('./table/applicant'),
+PostingApplicant = require('./table/PostingApplicant');
 
 User.create({
     firstName: 'Tyler',
@@ -9,7 +9,7 @@ User.create({
     email: 'test@test.com',
     password: 'test123'
 }).then((user) => {
-    return Target.create({
+    return Posting.create({
                 userId: user.dataValues.id,
                 name: "Dickensen plc",
                 annualRevenue: "50M",
@@ -17,11 +17,11 @@ User.create({
                 stage: "Prospecting",
                 location: "Kentucky",
                 industry: "",
-                objectType: "Target",
+                objectType: "Posting",
                 employees: 0,
             })
             .then(() =>
-                Target.create({
+                Posting.create({
                     userId: user.dataValues.id,
                     name: "GenePoint",
                     annualRevenue: "50M",
@@ -29,12 +29,12 @@ User.create({
                     stage: "Researching",
                     location: "Kentucky",
                     industry: "",
-                    objectType: "Target",
+                    objectType: "Posting",
                     employees: 0,
                 })
             )
             .then(() =>
-                Target.create({
+                Posting.create({
                     userId: user.dataValues.id,
                     name: "Pyramid Construction Inc",
                     annualRevenue: "50M",
@@ -42,12 +42,12 @@ User.create({
                     stage: "Pending Approval",
                     location: "Kentucky",
                     industry: "",
-                    objectType: "Target",
+                    objectType: "Posting",
                     employees: 0,
                 })
             )
             .then(() => 
-                Target.create({
+                Posting.create({
                     userId: user.dataValues.id,
                     name: "Edge",
                     annualRevenue: "50M",
@@ -55,7 +55,7 @@ User.create({
                     stage: "Approved",
                     location: "Kentucky",
                     industry: "",
-                    objectType: "Target",
+                    objectType: "Posting",
                     employees: 0,
                 })
             )
