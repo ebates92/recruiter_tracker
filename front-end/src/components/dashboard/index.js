@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import '../App.css';
+// import '../App.css';
 import axios from 'axios';
-import Modal from './Modal.js';
-import Header from './Header.js';
-import Container from './Container.js';
+import Modal from './modal';
+import Header from './header';
+import Container from './container';
 // import Postings from '../postingData.js';
-import Applicants from '../applicantData.js';
+import Applicants from './applicantData.js';
 // import {
 //   BrowserRouter as Router,
 //   Route
@@ -13,7 +13,7 @@ import Applicants from '../applicantData.js';
 const url = 'http://localhost:3000/api';
 
 
-class App extends Component {
+class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -116,4 +116,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Dashboard;

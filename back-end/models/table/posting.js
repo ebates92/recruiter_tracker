@@ -4,31 +4,29 @@ User = require('./user');
 
 const Posting = sequelize.define('posting',{
 
-    name: {
+    positionTitle: {
         type: Sequelize.STRING, allowNull:false,
         validate:{notEmpty:true}
     },
-    annualRevenue: {
+    jobDescription: {
         type: Sequelize.STRING, allowNull:true
     },
-    dealLead: {
+    salaryRange: {
         type: Sequelize.STRING,allowNull:true
     },
-    stage:{
+    qualifications:{
         type: Sequelize.STRING, allowNull: true
     },
-    location:{
+    hiringManager:{
         type: Sequelize.STRING, allowNull: true
     },
-    employees:{
-        type: Sequelize.INTEGER, allowNull: true
+    additionalNotes:{
+        type: Sequelize.TEXT, allowNull: true
     },
-    industry:{
-        type: Sequelize.STRING, allowNull: true
+    isFilled:{
+        type: Sequelize.BOOLEAN, allowNull: true
     },
-    objectType:{
-        type: Sequelize.STRING, allowNull: true
-    }
+
 });
 
 Posting.belongsTo(User);

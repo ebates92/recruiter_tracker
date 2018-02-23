@@ -4,7 +4,12 @@ Posting = require('./posting'),
 Applicant = require('./applicant');
 
 const PostingApplicant = sequelize.define('postingApplicant',{
-
+    applicantStage: {
+        type: Sequelize.STRING, allowNull:true
+    },
+    isRejected: {
+        type: Sequelize.BOOLEAN, allowNull:true
+    },
 });
 
 PostingApplicant.belongsTo(Posting);

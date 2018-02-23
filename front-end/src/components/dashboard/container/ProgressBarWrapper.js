@@ -28,16 +28,25 @@ import React from 'react';
     return (
       <div className="progressbar-wrapper">
           <div className="status pipeline">
-            <span>Pipeline</span>
+            <span>Sourcing</span>
           </div>
           <div className="status researching">
-          <span>Researching</span>
+            <span>Screening</span>
           </div>
           <div className="status pending">
-          <span>Pending Approval</span>
+            <span>Initial Interview</span>
+          </div>
+          <div className="status pending">
+            <span>Final Interview</span>
+          </div>
+          <div className="status pending">
+            <span>Verification</span>
+          </div>
+          <div className="status pending">
+            <span>Offer</span>
           </div>
           <div className="status approved">
-          <span>Approved</span>
+            <span>Complete</span>
           </div>
       </div>
     );
