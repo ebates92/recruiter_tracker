@@ -20,7 +20,7 @@ import Authentication from '../authentication';
 export default () => (
     <Router>
         <Switch>
-            <PrivateRoute path="/" component = {Dashboard} />
+            <PrivateRoute path="/" exact component = {Dashboard} />
             <Route path="/login" render={props => <Login {...props} />} />
         </Switch>
     </Router>
@@ -28,6 +28,7 @@ export default () => (
 
 
 // should call the authentication folder to see if authenticated.  If not it will redirect to login.
+// separating this in a function allows you to build multiple ensure authenticated routes in your switch board
 const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route
       {...rest}
@@ -37,6 +38,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
         ) : (
           <Redirect
             to={{
+                // passes the url that was originally tried to be accessed to the login page. This will allow for it to redirect back.
               pathname: "/login",
               state: { from: props.location }
             }}
