@@ -36,21 +36,33 @@ import Record from './Record.js';
 const RecordColumn = (props) => {
   return (
     <React.Fragment>
-    {/* Prospecting */}
+    {/* Sourcing */}
     <div className="status-col">
-    <Record records={props.records.filter((record) => record.stage === 'Prospecting')} />
+    <Record records={props.records.filter((record) => record.stage === 'Sourcing')} />
     </div>
-    {/* Researching */}
+    {/* Screening */}
     <div className="status-col">
-    <Record records={props.records.filter((record) => record.stage === 'Researching')} />
+    <Record records={props.records.filter((record) => record.stage === 'Screening')} />
     </div>
-    {/* Pending Approval */}
+    {/* Initial Interview */}
     <div className="status-col">
-    <Record records={props.records.filter((record) => record.stage === 'Pending Approval')} />
+    <Record records={props.records.filter((record) => record.stage === 'Initial Interview')} />
     </div>
-    {/* Approved */}
+    {/* Final Interview */}
     <div className="status-col">
-    <Record records={props.records.filter((record) => record.stage === 'Approved')} />
+    <Record records={props.records.filter((record) => record.stage === 'Final Interview')} />
+    </div>
+    {/* Background Check */}
+    <div className="status-col">
+    <Record records={props.records.filter((record) => record.stage === 'Background Check')} />
+    </div>
+    {/* Offer */}
+    <div className="status-col">
+    <Record records={props.records.filter((record) => record.stage === 'Offer')} />
+    </div>
+    {/* To Be Onboarded */}
+    <div className="status-col">
+    <Record records={props.records.filter((record) => record.stage === 'To Be Onboarded')} />
     </div>
     </React.Fragment>
   );

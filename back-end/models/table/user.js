@@ -23,10 +23,24 @@ const User = sequelize.define('user', {
     password: {
         type:Sequelize.STRING,
         allowNull:true
-    }
+    },
+
+    strategyId: {
+        type:Sequelize.TEXT,
+        allowNull:true
+    },
+
+    calendly_url: {
+        type:Sequelize.STRING,
+        allowNull:true
+    },
+
+    calendly_api: {
+        type:Sequelize.STRING,
+        allowNull:true
+    },
     
   });
 
-
-    
+  
 module.exports = User;
