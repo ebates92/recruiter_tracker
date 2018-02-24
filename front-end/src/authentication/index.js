@@ -8,10 +8,14 @@ import React from 'react';
 const Authentication = {
     isAuthenticated: false,
     authenticate(email, password, cb) {
-        const myRequest = new Request('http://localhost:3000/auth', {method: 'POST', body: {email, password}});
-        fetch(myRequest)
+        let formData = new FormData();
+        formData.append('email', 'test@test.com');
+        formData.append('password', 'test');
+        fetch('http://localhost:3000/auth', {
+            method: 'POST', body: formData})
                .then(res => res.json())
                .then(json => {
+                console.log(json);
                 this.isAuthenticated = json.isAuth;
                 setTimeout(cb, 100); //fake async
                })

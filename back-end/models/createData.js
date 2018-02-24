@@ -7,7 +7,7 @@ User.create({
     firstName: 'Tyler',
     lastName: 'Test',
     email: 'test@test.com',
-    password: 'test123'
+    password: '$2a$10$lsNvqFpYHUfUMb9pJDqh1uagi0YFS7hARDYMsfn1eo.yo35eCMLVa'
 }).then((user) => {
     return Posting.create({
                 userId: user.dataValues.id,
@@ -19,6 +19,7 @@ User.create({
                 industry: "",
                 objectType: "Posting",
                 employees: 0,
+                positionTitle: "Title"
             })
             .then(() =>
                 Posting.create({
@@ -31,6 +32,7 @@ User.create({
                     industry: "",
                     objectType: "Posting",
                     employees: 0,
+                    positionTitle: "Title"
                 })
             )
             .then(() =>
@@ -44,6 +46,7 @@ User.create({
                     industry: "",
                     objectType: "Posting",
                     employees: 0,
+                    positionTitle: "Title"
                 })
             )
             .then(() => 
@@ -57,6 +60,7 @@ User.create({
                     industry: "",
                     objectType: "Posting",
                     employees: 0,
+                    positionTitle: "Title"
                 })
             )
 }).then(() => process.exit());
