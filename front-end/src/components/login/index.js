@@ -45,36 +45,54 @@ class Login extends React.Component {
         }
 
         return (
-            <div className="login-container">
 
-                <div className="login-title">Sign-in with:</div>
-                <div className="login-passport">
-                    <button onClick={this.login}>LinkedIn</button>
-                    <button onClick={this.login}>Google</button>
+            <div className="login-page-container">
+                <div className='login-header'>
+                    <div className='login-company-name'>Ladder</div>
+
+                    <div className='login-options'>
+                    
+
+                        {/* <div className="login-title">Sign-in with:</div> */}
+                        <div className="login-passport">
+                            <button onClick={this.login}>LinkedIn</button>
+                            <button onClick={this.login}>Google</button>
+                        </div>
+                    
+
+                        <div className="login-email-password-container">
+                            <div className='login-email-password'>
+                                <input type='email' name='email' onChange={this.onLoginFormChangeHandler} placeholder='email' />
+                                <input type='password' name='password' onChange={this.onLoginFormChangeHandler} placeholder='password' />
+                                <button className="sign-in" onClick={this.login}>Sign in</button>
+                            </div>
+                            <Link className="forgot-password" to='/forgotpassword'>Forgot password</Link>
+                        </div>
+
+                    </div>
+
                 </div>
 
-                <div className="login-email-password">
-                    <input type='email' name='email' onChange={this.onLoginFormChangeHandler} placeholder='email' />
-                    <input type='password' name='password' onChange={this.onLoginFormChangeHandler} placeholder='password' />
-                    <button className="sign-in" onClick={this.login}>Sign in</button>
-                    <Link className="forgot-password" to='/forgotpassword'>Forgot password</Link>
-                </div>
+                <div className="signup-email-password">
+                    <div className='signup-form-intro'>Join your peers in a simplier world</div>
+                    <div className='signup-form-subintro'>Create a free account and learn about your new favorite tool.</div>
 
-                <div className="login-email-password">
+                    <div className='signup-form'>
+                        <label>First name:</label>
+                        <input name="firstname" type='text' value={this.state.firstname} onChange={this.onLoginFormChangeHandler} />
 
-                    <label>First name:</label>
-                    <input name="firstname" type='text' value={this.state.firstname} onChange={this.onLoginFormChangeHandler} />
+                        <label>Last name:</label>
+                        <input name="lastname" type='text' onChange={this.onLoginFormChangeHandler} />
 
-                    <label>Last name:</label>
-                    <input name="lastname" type='text' onChange={this.onLoginFormChangeHandler} />
+                        <label>Email:</label>
+                        <input name="email" type='email' onChange={this.onLoginFormChangeHandler} />
 
-                    <label>Email:</label>
-                    <input name="email" type='email' onChange={this.onLoginFormChangeHandler} />
+                        <label>Password:</label>
+                        <input name="password" type='password' onChange={this.onLoginFormChangeHandler} />
 
-                    <label>Password:</label>
-                    <input name="password" type='password' onChange={this.onLoginFormChangeHandler} />
+                        <button onClick={this.login}>Join for free</button>
+                    </div>
 
-                    <button onClick={this.login}>Join for free</button>
                 </div>
             </div>
         )
