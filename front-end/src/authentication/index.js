@@ -7,9 +7,17 @@ import React from 'react';
 //  the callback is used to set certain other parameters such as redirect props in the login component
 const Authentication = {
     isAuthenticated: false,
-    authenticate(cb) {
-        this.isAuthenticated = true;
-        setTimeout(cb, 100); //fake async
+    authenticate(email, password, cb) {
+        const myRequest = new Request('http://localhost:3000/auth', {method: 'POST', body: {email, password}});
+        fetch(myRequest)
+               .then(res => res.json())
+               .then(json => {
+                this.isAuthenticated = json.isAuth;
+                setTimeout(cb, 100); //fake async
+               })
+               .catch(err => {
+                   console.log(err);
+               })
     },
     // calling this with an onclick should let you signout             fakeAuth.signout(() => history.push("/"));
     signout(cb) {

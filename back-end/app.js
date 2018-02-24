@@ -7,8 +7,9 @@ var bodyParser = require('body-parser');
 
 
 //  ROUTE FILES
-var api = require('./routes/api');
 
+var auth = require('./routes/auth');
+var api = require('./routes/api');
 
 var app = express();
 
@@ -26,6 +27,7 @@ app.use(cookieParser());
 
 
 // ROUTES
+app.use('/auth', auth);
 app.use('/api', api);
 
 

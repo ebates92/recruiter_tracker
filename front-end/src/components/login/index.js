@@ -19,7 +19,7 @@ class Login extends React.Component {
     // within a class you don't need to use const or let
     // will take you to the authentication login for what you submit
     login = () => {
-        Authentication.authenticate(() => {
+        Authentication.authenticate(this.state.email, this.state.password, () => {
             this.setState({ redirectToReferrer: true })
         })
     }
@@ -33,12 +33,11 @@ class Login extends React.Component {
         )
     }
 
-    
+
     render() {
         // ask Chris about this structure. didn't know you could have js in the render...
         const { from } = this.props.location.state || { from: { pathname: '/' }}
         const { redirectToReferrer } = this.state;
-
         // will redirect user to requested page if already authenticated
         if (redirectToReferrer) {
             return <Redirect to={from} />
