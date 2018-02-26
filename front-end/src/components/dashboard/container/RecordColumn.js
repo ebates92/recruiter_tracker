@@ -34,35 +34,37 @@ import Record from './Record.js';
 //   }
 
 const RecordColumn = (props) => {
+  console.log('recordcolumn')
+  console.log(props)
   return (
     <React.Fragment>
     {/* Sourcing */}
     <div className="status-col">
-    <Record records={props.records.filter((record) => record.stage === 'Sourcing')} />
+    <Record postingApplicantRecords={props.postingApplicantRecords.filter((record) => record.applicantStage === 'Sourcing')} postingRecords={props.postingRecords} applicantRecords={props.applicantRecords} />
     </div>
     {/* Screening */}
     <div className="status-col">
-    <Record records={props.records.filter((record) => record.stage === 'Screening')} />
+    <Record postingApplicantRecords={props.postingApplicantRecords.filter((record) => record.applicantStage === 'Screening')} postingRecords={props.postingRecords} applicantRecords={props.applicantRecords} />
     </div>
     {/* Initial Interview */}
     <div className="status-col">
-    <Record records={props.records.filter((record) => record.stage === 'Initial Interview')} />
+    <Record postingApplicantRecords={props.postingApplicantRecords.filter((record) => record.applicantStage === 'Initial Interview')} postingRecords={props.postingRecords} applicantRecords={props.applicantRecords} />
     </div>
     {/* Final Interview */}
     <div className="status-col">
-    <Record records={props.records.filter((record) => record.stage === 'Final Interview')} />
+    <Record postingApplicantRecords={props.postingApplicantRecords.filter((record) => record.applicantStage === 'Final Interview')} postingRecords={props.postingRecords} applicantRecords={props.applicantRecords} />
     </div>
     {/* Background Check */}
     <div className="status-col">
-    <Record records={props.records.filter((record) => record.stage === 'Background Check')} />
+    <Record postingApplicantRecords={props.postingApplicantRecords.filter((record) => record.applicantStage === 'Background Check')} postingRecords={props.postingRecords} applicantRecords={props.applicantRecords} />
     </div>
     {/* Offer */}
     <div className="status-col">
-    <Record records={props.records.filter((record) => record.stage === 'Offer')} />
+    <Record postingApplicantRecords={props.postingApplicantRecords.filter((record) => record.applicantStage === 'Offer')} postingRecords={props.postingRecords} applicantRecords={props.applicantRecords} />
     </div>
     {/* To Be Onboarded */}
     <div className="status-col">
-    <Record records={props.records.filter((record) => record.stage === 'To Be Onboarded')} />
+    <Record postingApplicantRecords={props.postingApplicantRecords.filter((record) => record.applicantStage === 'To Be Onboarded')} postingRecords={props.postingRecords} applicantRecords={props.applicantRecords} />
     </div>
     </React.Fragment>
   );

@@ -24,12 +24,14 @@ import RecordColumn from './RecordColumn.js';
 //   }
 
 const Container = (props) => {
+  console.log('container')
+  console.log(props)
   return (
             <div className="container">
-            <ProgressBarWrapper />
-            <div className="status-columns">
-            <RecordColumn records={props.records} />
-            </div>
+              <ProgressBarWrapper />
+              <div className="status-columns">
+                <RecordColumn postingRecords={props.postingRecords} applicantRecords={props.applicantRecords} postingApplicantRecords={props.postingApplicantRecords} />
+              </div>
             </div>
           ); 
 }
