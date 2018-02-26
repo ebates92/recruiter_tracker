@@ -54,17 +54,17 @@ const RecordColumn = (props) => {
     <div className="status-col">
     <Record postingApplicantRecords={props.postingApplicantRecords.filter((record) => record.applicantStage === 'Final Interview')} postingRecords={props.postingRecords} applicantRecords={props.applicantRecords} />
     </div>
-    {/* Background Check */}
+    {/* Verification */}
     <div className="status-col">
-    <Record postingApplicantRecords={props.postingApplicantRecords.filter((record) => record.applicantStage === 'Background Check')} postingRecords={props.postingRecords} applicantRecords={props.applicantRecords} />
+    <Record postingApplicantRecords={props.postingApplicantRecords.filter((record) => record.applicantStage === 'Verification')} postingRecords={props.postingRecords} applicantRecords={props.applicantRecords} />
     </div>
     {/* Offer */}
     <div className="status-col">
     <Record postingApplicantRecords={props.postingApplicantRecords.filter((record) => record.applicantStage === 'Offer')} postingRecords={props.postingRecords} applicantRecords={props.applicantRecords} />
     </div>
-    {/* To Be Onboarded */}
+    {/* Complete */}
     <div className="status-col">
-    <Record postingApplicantRecords={props.postingApplicantRecords.filter((record) => record.applicantStage === 'To Be Onboarded')} postingRecords={props.postingRecords} applicantRecords={props.applicantRecords} />
+    <Record postingApplicantRecords={props.postingApplicantRecords.filter((record) => record.applicantStage === 'Complete')} postingRecords={props.postingRecords} applicantRecords={props.applicantRecords} />
     </div>
     </React.Fragment>
   );
