@@ -6,7 +6,7 @@ import React from 'react';
 // provides back methods that can be used globally
 //  the callback is used to set certain other parameters such as redirect props in the login component
 const Authentication = {
-    isAuthenticated: false,
+    isAuthenticated: true,
     authenticate(cb) {
         this.isAuthenticated = true;
         setTimeout(cb, 100); //fake async

@@ -35,18 +35,18 @@ import RollUpSummary from './RollUpSummary';
 // }
 
 const Header = (props) => {
-    console.log(props.records.length);
-    return     <header className="header">
-                    <div className="header-top">
-                    <Filter />
-                    <SearchBar onChangeHandler={props.onChangeHandler} filteredList={props.filteredList} defaultRecords={props.records.slice(0,5)} />
-                    <GlobalActions />
-                    </div>
-                    <div className="header-bottom">
-                    <RollUpSummary totalRecords={props.records.length}/>
-                    </div>
-                    </header>
-
+    return (
+        <header className="header">
+            <div className="header-top">
+                <Filter />
+                <SearchBar onChangeHandler={props.onChangeHandler} filteredList={props.filteredList} defaultRecords={props.postingRecords.slice(0,5)} />
+                <GlobalActions />
+            </div>
+            <div className="header-bottom">
+                <RollUpSummary totalRecords={props.postingRecords.length}/>
+            </div>
+        </header>
+    )
 }
 
 export default Header; 

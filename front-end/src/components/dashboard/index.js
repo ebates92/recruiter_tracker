@@ -5,7 +5,7 @@ import Modal from './modal';
 import Header from './header';
 import Container from './container';
 // import Postings from '../postingData.js';
-import Applicants from './applicantData.js';
+// import Applicants from './applicantData.js';
 // import {
 //   BrowserRouter as Router,
 //   Route
@@ -18,6 +18,8 @@ class Dashboard extends Component {
     super(props);
     this.state = {
       postingData: [],
+      applicantData: [],
+      postingApplicantData: [],
       error: null,
       filteredList: [],
       formObject: {
@@ -63,7 +65,7 @@ class Dashboard extends Component {
 
   _onChangeHandler(searchTerm, callback) {
     const re = new RegExp('^' + searchTerm + '.*', 'gi');
-    const companyApplicantArray = this.state.postingData.concat(Applicants);
+    const companyApplicantArray = this.state.postingData.concat(this.state.applicantData);
     let filteredList = companyApplicantArray.filter(record => record.name.match(re));
     // Return first 5 results
     filteredList = filteredList.slice(0, 5);
@@ -74,6 +76,7 @@ class Dashboard extends Component {
   }
 
   componentDidMount() {
+    console.log('api request occurring')
       axios.get(`${url}/postings`)
         .then(res => res.data)
         .then(
@@ -103,14 +106,31 @@ class Dashboard extends Component {
             })
           }
         )
+
+
+        axios.get(`${url}/postingApplicant`)
+        .then(res => res.data)
+        .then(
+          (postingApplicants) => {
+            console.log(postingApplicants)
+            this.setState({
+              postingApplicantData: postingApplicants
+            });
+          },
+          (error) => {
+            this.setState({
+              error
+            })
+          }
+        )
     }
 
   render() {
     return (
       <div className="App">
           <Modal onFormChangeHandler={this._onFormChangeHandler} onFormSubmission={this._onFormSubmission} />
-          <Header records={this.state.postingData} applicantRecords={Applicants} onChangeHandler={this._onChangeHandler} filteredList={this.state.filteredList}/>
-          <Container records={this.state.postingData} />
+          <Header postingRecords={this.state.postingData}  onChangeHandler={this._onChangeHandler} filteredList={this.state.filteredList}/>
+          <Container postingRecords={this.state.postingData} applicantRecords={this.state.applicantData} postingApplicantRecords={this.state.postingApplicantData} />
       </div>
     );
   }

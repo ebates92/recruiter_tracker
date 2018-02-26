@@ -75,7 +75,7 @@ class Login extends React.Component {
 
                 <div className="signup-email-password">
                     <div className='signup-form-intro'>Join your peers in a simplier world</div>
-                    <div className='signup-form-subintro'>Create a free account and learn about your new favorite tool.</div>
+                    <div className='signup-form-subintro'>Create a free account and learn how to simplify your recruiting process.</div>
 
                     <div className='signup-form'>
                         <label>First name:</label>
