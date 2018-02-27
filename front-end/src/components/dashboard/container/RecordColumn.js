@@ -5,24 +5,8 @@ class RecordColumn extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      newPostingApplicantRecords: this.props.postingApplicantRecords,
+      // newPostingApplicantRecords: this.props.postingApplicantRecords,
     }
-  }
-
-  componentWillReceiveProps() {
-    console.log('component will edit props')
-    const newPostingRecords = this.props.postingRecords.filter((record) => {record.positionTitle === this.props.postingSelected})
-    console.log(newPostingRecords)
-    const newPostingApplicantRecords = this.props.postingApplicantRecords.filter((postingApplicantRecord) => {
-      newPostingRecords.forEach((newPostingRecord) => {
-        if(postingApplicantRecord.postingId === newPostingRecord.id) {
-          return true;
-        }
-      })
-    })
-    this.setState({newPostingApplicantRecords})
-    console.log(newPostingApplicantRecords)
-    let newApplicantRecords;
   }
 
   render () {

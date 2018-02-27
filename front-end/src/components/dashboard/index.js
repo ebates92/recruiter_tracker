@@ -20,6 +20,7 @@ class Dashboard extends Component {
       postingData: [],
       applicantData: [],
       postingApplicantData: [],
+      newPostingApplicantData: [],
       postingSelected: 'All',
       error: null,
       filteredList: [],
@@ -78,8 +79,26 @@ class Dashboard extends Component {
   }
 
 
+  // NEED TO TALK TO CHRIS ON HOW TO FIX THE .FILTER IS NOT A FUNCTION
   _postingSelectedHandler(event) {
-    this.setState({postingSelected: event.target.innerHTML})
+
+    // figures out the posting that was filtered by
+    const newPostingData = this.state.postingData.filter((record) => record.positionTitle === event.target.innerHTML)
+    // modifies the posting applicant data that should be shared back to the container
+    const newPostingApplicantDataFunction = () => {
+      if (event.target.innerHTML === "All") {
+          return this.state.postingApplicantData
+      } else {
+        return this.state.postingApplicantData.filter((postingApplicantRecord) => postingApplicantRecord.postingId === newPostingData[0].id)
+      } 
+    }
+
+    const newPostingApplicantData = newPostingApplicantDataFunction();
+
+    this.setState({
+      postingSelected: event.target.innerHTML,
+      newPostingApplicantData: newPostingApplicantData,
+    })
   };
   
 
@@ -122,7 +141,8 @@ class Dashboard extends Component {
           (postingApplicants) => {
             console.log(postingApplicants)
             this.setState({
-              postingApplicantData: postingApplicants
+              postingApplicantData: postingApplicants,
+              newPostingApplicantData: postingApplicants
             });
           },
           (error) => {
@@ -138,7 +158,7 @@ class Dashboard extends Component {
       <div className="App">
           <Modal onFormChangeHandler={this._onFormChangeHandler} onFormSubmission={this._onFormSubmission} />
           <Header postingSelectedHandler={this._postingSelectedHandler} postingRecords={this.state.postingData}  onChangeHandler={this._onChangeHandler} postingSelected={this.state.postingSelected} filteredList={this.state.filteredList}/>
-          <Container postingSelected={this.state.postingSelected} postingRecords={this.state.postingData} applicantRecords={this.state.applicantData} postingApplicantRecords={this.state.postingApplicantData} />
+          <Container postingSelected={this.state.postingSelected} postingRecords={this.state.postingData} applicantRecords={this.state.applicantData} postingApplicantRecords={this.state.newPostingApplicantData} />
       </div>
     );
   }
