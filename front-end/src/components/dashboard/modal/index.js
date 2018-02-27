@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
-import PostingForm from './PostingForm.js';
+import { 
+    AddApplicant,
+    PostingForm,
+    AddApplicantToPostingForm
+} from './Modal-types.js';
 
 const closeModal = () => {
     document.querySelector('body').setAttribute('style', 'position: ');
@@ -10,9 +14,14 @@ const closeModal = () => {
     constructor(props) {
         super(props);
         this.state = {
-            modalHeader: 'New Posting'
+            modalComponent: PostingForm
         }
     }
+
+    componentWillRecieveProps() {
+
+    }
+
     render() {
         return (
             <div className="modal-overlay hide" data-modal-container>

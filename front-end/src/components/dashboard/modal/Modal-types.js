@@ -1,6 +1,6 @@
 import React from 'react';
 
-const addApplicant = () => {
+const AddApplicant = (props) => {
     const applicantElement = (
         <React.Fragment>
             <div className="col-left">
@@ -70,7 +70,7 @@ const PostingForm = (props) => {
     )
 }
 
-const addApplicantToPostingForm = (props) => {
+const AddApplicantToPostingForm = (props) => {
     return (
         <form>
             <div className="clearfix"></div>
@@ -103,4 +103,8 @@ const addApplicantToPostingForm = (props) => {
 
 }
 
-export default PostingForm;
+module.exports = {
+    AddApplicant,
+    PostingForm,
+    AddApplicantToPostingForm
+}
