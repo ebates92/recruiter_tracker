@@ -32,17 +32,12 @@ import React from 'react';
 const Record = (props) => {
 
   const recordCards = 
-  // () => {
 
-    // if (props.postingApplicantRecords.length != 0) {
+    
+
       props.postingApplicantRecords.map((record) => {
-        console.log('record')
-        console.log(record.applicantId)
-        console.log(props.applicantRecords)
         const applicantRecord = props.applicantRecords.filter((applicant) => applicant.id === record.applicantId);
         const positionRecord = props.postingRecords.filter((posting) => posting.id === record.postingId)
-        console.log(applicantRecord)
-        console.log(positionRecord)
 
         return (
           <a href="/" className="ui card" id="card" key={record.id}>

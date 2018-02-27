@@ -38,7 +38,7 @@ const Header = (props) => {
     return (
         <header className="header">
             <div className="header-top">
-                <Filter />
+                <Filter postingSelectedHandler={props.postingSelectedHandler} postingSelected={props.postingSelected} postingRecords={props.postingRecords}/>
                 <SearchBar onChangeHandler={props.onChangeHandler} filteredList={props.filteredList} defaultRecords={props.postingRecords.slice(0,5)} />
                 <GlobalActions />
             </div>

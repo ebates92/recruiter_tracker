@@ -20,6 +20,7 @@ class Dashboard extends Component {
       postingData: [],
       applicantData: [],
       postingApplicantData: [],
+      postingSelected: 'All',
       error: null,
       filteredList: [],
       formObject: {
@@ -39,6 +40,7 @@ class Dashboard extends Component {
     this._onChangeHandler = this._onChangeHandler.bind(this);
     this._onFormChangeHandler = this._onFormChangeHandler.bind(this);
     this._onFormSubmission = this._onFormSubmission.bind(this);
+    this._postingSelectedHandler = this._postingSelectedHandler.bind(this);
   }
 
   _onFormChangeHandler(event) {
@@ -74,6 +76,12 @@ class Dashboard extends Component {
     })
     callback(filteredList);
   }
+
+
+  _postingSelectedHandler(event) {
+    this.setState({postingSelected: event.target.innerHTML})
+  };
+  
 
   componentDidMount() {
     console.log('api request occurring')
@@ -129,8 +137,8 @@ class Dashboard extends Component {
     return (
       <div className="App">
           <Modal onFormChangeHandler={this._onFormChangeHandler} onFormSubmission={this._onFormSubmission} />
-          <Header postingRecords={this.state.postingData}  onChangeHandler={this._onChangeHandler} filteredList={this.state.filteredList}/>
-          <Container postingRecords={this.state.postingData} applicantRecords={this.state.applicantData} postingApplicantRecords={this.state.postingApplicantData} />
+          <Header postingSelectedHandler={this._postingSelectedHandler} postingRecords={this.state.postingData}  onChangeHandler={this._onChangeHandler} postingSelected={this.state.postingSelected} filteredList={this.state.filteredList}/>
+          <Container postingSelected={this.state.postingSelected} postingRecords={this.state.postingData} applicantRecords={this.state.applicantData} postingApplicantRecords={this.state.postingApplicantData} />
       </div>
     );
   }
