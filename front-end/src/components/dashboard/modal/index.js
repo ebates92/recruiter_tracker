@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PostingForm from './PostingForm.js';
 
 const closeModal = () => {
@@ -6,22 +6,30 @@ const closeModal = () => {
     document.querySelector('[data-modal-container]').classList.add('hide');
 }
 
-const Modal = (props) => {
-    return (
-        <div className="modal-overlay hide" data-modal-container>
-            <div className="modal-container">
-                <div className="modal-header"><h2>New Posting</h2></div>
-                <div className="modal-body">
-                <PostingForm onFormChangeHandler={props.onFormChangeHandler} />
-                </div>
-                <div className="modal-footer">
-                <button onClick={closeModal}>Cancel</button>
-                <button>Save & New</button>
-                <button type="submit" onClick={props.onFormSubmission}>Save</button>
+ class Modal extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            modalHeader: 'New Posting'
+        }
+    }
+    render() {
+        return (
+            <div className="modal-overlay hide" data-modal-container>
+                <div className="modal-container">
+                    <div className="modal-header"><h2>{this.props.modalType}</h2></div>
+                    <div className="modal-body">
+                        <PostingForm onFormChangeHandler={this.props.onFormChangeHandler} />
+                    </div>
+                    <div className="modal-footer">
+                    <button onClick={closeModal}>Cancel</button>
+                    <button>Save & New</button>
+                    <button type="submit" onClick={this.props.onFormSubmission}>Save</button>
+                    </div>
                 </div>
             </div>
-        </div>
-    )
+        )
+    }
 }
 
 export default Modal;

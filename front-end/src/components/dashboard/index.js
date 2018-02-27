@@ -20,10 +20,17 @@ class Dashboard extends Component {
       postingData: [],
       applicantData: [],
       postingApplicantData: [],
-      newPostingApplicantData: [],
-      postingSelected: 'All',
       error: null,
       filteredList: [],
+
+      // updating the posting dropdown and container
+      newPostingApplicantData: [],
+      postingSelected: 'All',
+
+      // update and interact with the modal
+      modalType: 'New Posting',
+
+      // pushing data to the database
       formObject: {
         postingName: 'a',
         industry: '',
@@ -79,7 +86,7 @@ class Dashboard extends Component {
   }
 
 
-  // NEED TO TALK TO CHRIS ON HOW TO FIX THE .FILTER IS NOT A FUNCTION
+  // FOR UPDATING POSTING SELECTIONS ON THE MAIN DASHBOARD CONTAINER
   _postingSelectedHandler(event) {
 
     // figures out the posting that was filtered by
@@ -100,7 +107,18 @@ class Dashboard extends Component {
       newPostingApplicantData: newPostingApplicantData,
     })
   };
-  
+
+  // FOR UPDATING THE MODAL THAT IS DISPLAYED
+  _engagingTheModal= (event) => {
+    console.log('i should be doing this')
+    console.log(event.target.innerHTML)
+    document.querySelector('body').setAttribute('style', 'position: fixed');
+    document.querySelector('[data-modal-container]').classList.remove('hide');
+    this.setState({
+      modalType: event.target.innerHTML
+    })
+  }
+
 
   componentDidMount() {
     console.log('api request occurring')
@@ -156,8 +174,8 @@ class Dashboard extends Component {
   render() {
     return (
       <div className="App">
-          <Modal onFormChangeHandler={this._onFormChangeHandler} onFormSubmission={this._onFormSubmission} />
-          <Header postingSelectedHandler={this._postingSelectedHandler} postingRecords={this.state.postingData}  onChangeHandler={this._onChangeHandler} postingSelected={this.state.postingSelected} filteredList={this.state.filteredList}/>
+          <Modal modalType={this.state.modalType} onFormChangeHandler={this._onFormChangeHandler} onFormSubmission={this._onFormSubmission} />
+          <Header engagingTheModal={this._engagingTheModal} postingSelectedHandler={this._postingSelectedHandler} postingRecords={this.state.postingData}  onChangeHandler={this._onChangeHandler} postingSelected={this.state.postingSelected} filteredList={this.state.filteredList}/>
           <Container postingSelected={this.state.postingSelected} postingRecords={this.state.postingData} applicantRecords={this.state.applicantData} postingApplicantRecords={this.state.newPostingApplicantData} />
       </div>
     );
