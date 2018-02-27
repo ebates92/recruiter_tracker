@@ -132,8 +132,9 @@ html, body{
   padding-right: 25px;
 }
 
-#console-group button {
-  background-color: #f3f2f2;
+.greenbutton {
+  background-color: rgba(22, 216, 22, 1);
+  color: black;
 }
 
 .header-bottom {
@@ -158,7 +159,7 @@ html, body{
   align-items: center;
   width: 25%;
   height: 32px;
-  background-color: #006fd2;
+  background-color: rgba(22, 216, 22, 1);
   border-radius: 2px;
   position: relative;
   margin-left: 4px;
@@ -186,7 +187,7 @@ html, body{
   content: '';
   height: 0;
   display: block;
-  border-color: transparent transparent transparent #006fd2;
+  border-color: transparent transparent transparent rgba(22, 216, 22, 1);
   border-width: 16px;
   border-style: solid;
   position: absolute;
@@ -562,4 +563,39 @@ html, body{
   font-size: 1.3rem;
   margin-left: .2rem;
   margin-top: 1rem;
+}
+
+
+
+/* MAIN DASHBOARD - POSTING DROPDOWN TOGGLE */
+
+.posting-dropdown-title {
+  position: relative;
+  font-size: 1.5rem;
+}
+
+.no-posting-dropdown {
+  display:none;
+}
+
+.yes-posting-dropdown {
+  position: absolute;
+  left: 0;
+  top: 1.5rem;
+  margin: .2rem;
+  box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
+  background-color: rgb(247, 247, 247);
+  z-index: 3;
+}
+
+.yes-posting-dropdown > div {
+  z-index: 1;
+  font-size: 1rem;
+  padding: .2rem;
+  padding-bottom: .5rem;
+}
+
+.yes-posting-dropdown > div:hover {
+  background-color: rgba(22, 216, 22, 1);
+  color: white;
 }
