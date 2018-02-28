@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
 // import ModalTypes from './Modal-types.js';
 
-const closeModal = () => {
-    document.querySelector('body').setAttribute('style', 'position: ');
-    document.querySelector('[data-modal-container-newapplicant]').classList.add('hide');
-}
-
  class NewApplicant extends Component {
 
     render() {
@@ -21,26 +16,26 @@ const closeModal = () => {
                 
                                 <div className="ui-input"><span className="required"></span><span>First name</span>
                                 <div className="clearfix"></div>
-                                <input type="text" name="firstName" required onChange={this.props.onFormChangeHandler} /></div>
+                                <input type="text" name="firstName" required onChange={this.props.onFormChangeHandler} value={this.props.formObject.firstName}/></div>
                 
                                 <div className="ui-input"><span className="required"></span><span>Last name</span>
                                 <div className="clearfix"></div>
-                                <input type="text" name="lastName" required onChange={this.props.onFormChangeHandler} /></div>
+                                <input type="text" name="lastName" required onChange={this.props.onFormChangeHandler} value={this.props.formObject.lastName}/></div>
 
                                 <div className="ui-input"><span className="required"></span><span>Email</span>
                                 <div className="clearfix"></div>
-                                <input type="text" name="email" required onChange={this.props.onFormChangeHandler} /></div>
+                                <input type="text" name="email" required onChange={this.props.onFormChangeHandler} value={this.props.formObject.email}/></div>
 
                                 <div className="ui-input"><span className="required"></span><span>Phone</span>
                                 <div className="clearfix"></div>
-                                <input type="text" name="phone" required onChange={this.props.onFormChangeHandler} /></div>
+                                <input type="text" name="phone" required onChange={this.props.onFormChangeHandler} value={this.props.formObject.phone}/></div>
                 
                             </div>
                             <div className="col-right">
                 
                                 <div className="ui-input"><span></span><span>LinkedIn Link</span>
                                 <div className="clearfix"></div>
-                                <input type="text" name="linked_in" required onChange={this.props.onFormChangeHandler} /></div>
+                                <input type="text" name="linked_in" required onChange={this.props.onFormChangeHandler} value={this.props.formObject.linked_in}/></div>
 
                                 {/* <div className="ui-input"><span></span><span>Upload resume</span>
                                 <div className="clearfix"></div>
@@ -48,13 +43,13 @@ const closeModal = () => {
 
                                 <div className="ui-input"><span></span><span>Recruiter Notes</span>
                                 <div className="clearfix"></div>
-                                <input type="text" name="recruiter_notes" required onChange={this.props.onFormChangeHandler} /></div>
+                                <input type="text" name="recruiter_notes" required onChange={this.props.onFormChangeHandler} value={this.props.formObject.recruiter_notes}/></div>
                 
                             </div>
                         </form>
                     </div>
-                    <div className="modal-footer">
-                        <button onClick={closeModal}>Cancel</button>
+                    <div id='newapplicant' className="modal-footer">
+                        <button onClick={this.props.closeModal}>Cancel</button>
                         {/* <button>Save & New</button> */}
                         <button type="submit" id='newapplicant' onClick={this.props.onFormSubmission}>Save</button>
                     </div>

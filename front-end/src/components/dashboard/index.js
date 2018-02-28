@@ -30,9 +30,9 @@ class Dashboard extends Component {
       newPostingApplicantData: [],
       postingSelected: 'All',
 
-      // update and interact with the modal
-      modalType: 'New Posting',
-      modalToDeploy: 'NewPosting',
+      // update and interact with the modal (when we refactor this code)
+      // modalType: 'New Posting',
+      // modalToDeploy: '',
 
       // pushing data to the database
       formObject: {
@@ -55,8 +55,8 @@ class Dashboard extends Component {
         isFilled: false,
 
         // add applicant to posting
-        applicantId: '',
-        postingId: '',
+        applicant: '',
+        posting: '',
         applicantStage: 'Sourcing',
         isRejected: false,
         hiringManager_notes: '',
@@ -69,9 +69,12 @@ class Dashboard extends Component {
     this._postingSelectedHandler = this._postingSelectedHandler.bind(this);
   }
 
+
+// FORM FUNCTIONS
+
   _onFormChangeHandler(event) {
-    const input = event.posting.name;
-    const value = event.posting.value;
+    const input = event.target.name;
+    const value = event.target.value;
     this.setState(prevState => ({
         formObject: {
           ...prevState.formObject,
@@ -80,16 +83,58 @@ class Dashboard extends Component {
     }))
   }
 
-  _onFormSubmission(){
+  _onFormSubmission(event){
     const data = this.state.formObject;
-    axios.post(`${url}/posting`, data)
+    const model = event.target.id
+    axios.post(`${url}/posting/${model}`, data)
     .then(function (response) {
       console.log(response);
     })
     .catch(function (error) {
       console.log(error);
-    });
+    }), this._resetState
   }
+
+  _closeModal = (event) => {
+    const id = event.target.id
+    document.querySelector('body').setAttribute('style', 'position: ');
+    document.querySelector(`[data-modal-container-${id}]`).classList.add('hide');
+    this._resetState()
+}
+
+  _resetState = () => {
+    this.setState({
+        formObject: {
+          // add applicant
+          firstName: '',
+          lastName: '',
+          email: '',
+          phone: '',
+          linked_in: '',
+          resume_link: '',
+          recruiter_notes: '',
+    
+          // add posting
+          positionTitle: '',
+          jobDescription: '',
+          salaryRange: '',
+          qualifications: '',
+          hiringManager: '',
+          additionalNotes: '',
+          isFilled: false,
+    
+          // add applicant to posting
+          applicantId: '',
+          postingId: '',
+          applicantStage: 'Sourcing',
+          isRejected: false,
+          hiringManager_notes: '',
+      }
+    })
+  }
+    
+
+// SEARCH BAR
 
   _onChangeHandler(searchTerm, callback) {
     const re = new RegExp('^' + searchTerm + '.*', 'gi');
@@ -104,7 +149,8 @@ class Dashboard extends Component {
   }
 
 
-  // FOR UPDATING POSTING SELECTIONS ON THE MAIN DASHBOARD CONTAINER
+// FOR UPDATING POSTING SELECTIONS ON THE MAIN DASHBOARD CONTAINER
+
   _postingSelectedHandler(event) {
 
     // figures out the posting that was filtered by
@@ -126,20 +172,7 @@ class Dashboard extends Component {
     })
   };
 
-  // FOR UPDATING THE MODAL THAT IS DISPLAYED
-  // _engagingTheModal= (event) => {
-    
-
-  //   const modalType = event.target.innerHTML;
-  //   const modalToDeploy = modalType.replace(/ /g,'')
-    
-  //   this.setState({
-  //     modalType,
-  //     modalToDeploy
-  //   })
-  // }
-
-
+// API CALLS
   componentDidMount() {
     console.log('api request occurring')
       axios.get(`${url}/postings`)
@@ -195,9 +228,9 @@ class Dashboard extends Component {
     const ComponentToRender = this.state.modalComponent
     return (
       <div className="App">
-          <NewApplicant modalType={this.state.modalType} modalToDeploy={this.state.modalToDeploy} onFormChangeHandler={this._onFormChangeHandler} onFormSubmission={this._onFormSubmission} />
-          <NewPosting modalType={this.state.modalType} modalToDeploy={this.state.modalToDeploy} onFormChangeHandler={this._onFormChangeHandler} onFormSubmission={this._onFormSubmission} />
-          <AddApplicantToPosting modalType={this.state.modalType} modalToDeploy={this.state.modalToDeploy} onFormChangeHandler={this._onFormChangeHandler} onFormSubmission={this._onFormSubmission} />
+          <NewApplicant formObject={this.state.formObject} closeModal={this._closeModal} onFormChangeHandler={this._onFormChangeHandler} onFormSubmission={this._onFormSubmission} />
+          <NewPosting formObject={this.state.formObject} closeModal={this._closeModal} onFormChangeHandler={this._onFormChangeHandler} onFormSubmission={this._onFormSubmission} />
+          <AddApplicantToPosting formObject={this.state.formObject} closeModal={this._closeModal} onFormChangeHandler={this._onFormChangeHandler} onFormSubmission={this._onFormSubmission} />
           <Header engagingTheModal={this._engagingTheModal} postingSelectedHandler={this._postingSelectedHandler} postingRecords={this.state.postingData}  onChangeHandler={this._onChangeHandler} postingSelected={this.state.postingSelected} filteredList={this.state.filteredList}/>
           <Container postingSelected={this.state.postingSelected} postingRecords={this.state.postingData} applicantRecords={this.state.applicantData} postingApplicantRecords={this.state.newPostingApplicantData} />
       </div>
