@@ -4,6 +4,7 @@ const User = require('../models/table/user');
 const bcrypt = require('bcryptjs');
 const config = require('../config/config.json');
 const _ = require('lodash');
+const jwt = require('jsonwebtoken');
 // const isAuthorized = require('../auth');
 // const passport = require('../config/passport-setup');
 
@@ -16,55 +17,23 @@ const verifyPassword = (password, user) => {
 }
 
 const generateAuthToken = (user) => {
-  let userId = user.dataValues.id;
-  let userRecord = {id: userId};
-  return userRecord;
-}
+    const userId = user.dataValues.id;
+    const access = 'auth';
+    const token = jwt.sign({id: userId, access}, config.secret);
+    const userRecord = {id: userId, token};
+    return userRecord;
+  }
 
 //Sign-in with Google Oauth
-// router.get('/google', passport.authenticate('google', {
-//   scope: ['profile', 'email']
-// }))
-// .get('/google/redirect', passport.authenticate('google'), (req, res) => {
-//   res.redirect('/home');
-// })
-// //Sign-in with email / password
-// .post('/', (req, res) => {
-//     res.sendStatus(201).send("WDAWDDWDAWD");
-// })
-
-// .post('/', (req, res, next) => {
-//   let {email, password} = _.pick(req.body, ['email', 'password']);
-//   userModel.findOne({
-//     where: {email}
-//   })
-//   .then((user) => {
-//     return verifyPassword(password, user);
-//   })
-//   .then((response) => {
-//     return generateAuthToken(response);
-//   })
-//   .then((userRecord) => {
-//     res.cookie('session', userRecord.token);
-//     res.send({'url':'/dashboard'});
-//   })
-//   .catch((err) => {
-//     res.status(400).send(err)
-//    })
-//   })
-
-// Prevent CORS error
-router.all('*', (req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-    next();
-  })
+router.get('/google', passport.authenticate('google', {
+  scope: ['profile', 'email']
+}))
+.get('/google/redirect', passport.authenticate('google'), (req, res) => {
+  res.redirect('/home');
+})
+//Handle username / password authentication
 .post('/', (req, res) => {
-  res.send(req.body);
   const {email, password} = _.pick(req.body, ['email', 'password']);
-  console.log("POST SUCCESS");
-  console.log(email + " " + password);
   User.findOne({
     where: {email}
   })
@@ -75,7 +44,8 @@ router.all('*', (req, res, next) => {
     return generateAuthToken(response);
   })
   .then((userRecord) => {
-    res.json({isAuth: true, userId: userRecord.id});
+    res.cookie('session', userRecord.token);
+    res.send({'url':'/dashboard'});
   })
   .catch((err) => {
     res.status(400).send(err)

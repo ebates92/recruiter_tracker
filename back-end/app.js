@@ -9,12 +9,12 @@ const bodyParser = require('body-parser');
 //  ROUTE FILES
 const auth = require('./routes/auth');
 const api = require('./routes/api');
-
+const dashboard = require('./routes/dashboard');
 const app = express();
 
 // // view engine setup
 // app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'jade');
+// app.set('view engine', 'hbs');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -26,9 +26,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 // ROUTES
-app.use('/', (req, res) => {res.sendFile(path.join(__dirname, 'index.html'))})
 app.use('/auth', auth);
 app.use('/api', api);
+app.use('/dashboard', dashboard);
 
 
 // catch 404 and forward to error handler
@@ -50,7 +50,7 @@ app.use(function(err, req, res, next) {
 });
 
 app.listen(3000, () => {
-  "App listening on port 3000";
+  console.log("App running on port 3000")
 })
 
 module.exports = app;
