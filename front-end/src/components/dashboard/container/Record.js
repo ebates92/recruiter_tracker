@@ -33,13 +33,11 @@ const Record = (props) => {
 
   const recordCards = 
 
-    
-
       props.postingApplicantRecords.map((record) => {
         const applicantRecord = props.applicantRecords.filter((applicant) => applicant.id === record.applicantId);
         const positionRecord = props.postingRecords.filter((posting) => posting.id === record.postingId)
 
-        return (
+        const card = applicantRecord.length > 0 ? (
           <a href="/" className="ui card" id="card" key={record.id}>
             <h3>{applicantRecord[0].firstName}</h3>
             <div className="content" id="card-content">
@@ -50,7 +48,9 @@ const Record = (props) => {
               {/* <h4><strong><a href={applicantRecord[0].resume_link}>Resume</a></strong></h4> */}
 
             </div>
-          </a>)
+          </a>) : null;
+          
+          return card
       })
 
     return (

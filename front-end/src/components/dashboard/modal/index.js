@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
-import { 
-    AddApplicant,
-    PostingForm,
-    AddApplicantToPostingForm
-} from './Modal-types.js';
+import ModalTypes from './Modal-types.js';
 
 const closeModal = () => {
     document.querySelector('body').setAttribute('style', 'position: ');
@@ -11,24 +7,15 @@ const closeModal = () => {
 }
 
  class Modal extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            modalComponent: PostingForm
-        }
-    }
-
-    componentWillRecieveProps() {
-
-    }
 
     render() {
         return (
-            <div className="modal-overlay hide" data-modal-container>
+            <div className="modal-overlay" data-modal-container>
                 <div className="modal-container">
                     <div className="modal-header"><h2>{this.props.modalType}</h2></div>
                     <div className="modal-body">
-                        <PostingForm onFormChangeHandler={this.props.onFormChangeHandler} />
+                        {this.props.children}
+                    
                     </div>
                     <div className="modal-footer">
                     <button onClick={closeModal}>Cancel</button>

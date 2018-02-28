@@ -4,6 +4,9 @@ import axios from 'axios';
 import Modal from './modal';
 import Header from './header';
 import Container from './container';
+import NewPosting from './modal/Add_posting.js'
+import NewApplicant from './modal/Add_applicant.js'
+import AddApplicantToPosting from './modal/Add_applicant_to_posting.js'
 // import Postings from '../postingData.js';
 // import Applicants from './applicantData.js';
 // import {
@@ -29,20 +32,35 @@ class Dashboard extends Component {
 
       // update and interact with the modal
       modalType: 'New Posting',
+      modalToDeploy: 'NewPosting',
 
       // pushing data to the database
       formObject: {
-        postingName: 'a',
-        industry: '',
-        annualRevenue: null,
-        employees: null,
-        location: '',
-        dealLead: '',
-        title: '',
-        relatedApplicantName: '',
-        relatedApplicantEmail: '',
-        relatedApplicantTitle: '',
-        relatedApplicantPhone: ''
+        // add applicant
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        linked_in: '',
+        resume_link: '',
+        recruiter_notes: '',
+
+        // add posting
+        positionTitle: '',
+        jobDescription: '',
+        salaryRange: '',
+        qualifications: '',
+        hiringManager: '',
+        additionalNotes: '',
+        isFilled: false,
+
+        // add applicant to posting
+        applicantId: '',
+        postingId: '',
+        applicantStage: 'Sourcing',
+        isRejected: false,
+        hiringManager_notes: '',
+
       }
     }
     this._onChangeHandler = this._onChangeHandler.bind(this);
@@ -109,15 +127,17 @@ class Dashboard extends Component {
   };
 
   // FOR UPDATING THE MODAL THAT IS DISPLAYED
-  _engagingTheModal= (event) => {
-    console.log('i should be doing this')
-    console.log(event.target.innerHTML)
-    document.querySelector('body').setAttribute('style', 'position: fixed');
-    document.querySelector('[data-modal-container]').classList.remove('hide');
-    this.setState({
-      modalType: event.target.innerHTML
-    })
-  }
+  // _engagingTheModal= (event) => {
+    
+
+  //   const modalType = event.target.innerHTML;
+  //   const modalToDeploy = modalType.replace(/ /g,'')
+    
+  //   this.setState({
+  //     modalType,
+  //     modalToDeploy
+  //   })
+  // }
 
 
   componentDidMount() {
@@ -172,9 +192,12 @@ class Dashboard extends Component {
     }
 
   render() {
+    const ComponentToRender = this.state.modalComponent
     return (
       <div className="App">
-          <Modal modalType={this.state.modalType} onFormChangeHandler={this._onFormChangeHandler} onFormSubmission={this._onFormSubmission} />
+          <NewApplicant modalType={this.state.modalType} modalToDeploy={this.state.modalToDeploy} onFormChangeHandler={this._onFormChangeHandler} onFormSubmission={this._onFormSubmission} />
+          <NewPosting modalType={this.state.modalType} modalToDeploy={this.state.modalToDeploy} onFormChangeHandler={this._onFormChangeHandler} onFormSubmission={this._onFormSubmission} />
+          <AddApplicantToPosting modalType={this.state.modalType} modalToDeploy={this.state.modalToDeploy} onFormChangeHandler={this._onFormChangeHandler} onFormSubmission={this._onFormSubmission} />
           <Header engagingTheModal={this._engagingTheModal} postingSelectedHandler={this._postingSelectedHandler} postingRecords={this.state.postingData}  onChangeHandler={this._onChangeHandler} postingSelected={this.state.postingSelected} filteredList={this.state.filteredList}/>
           <Container postingSelected={this.state.postingSelected} postingRecords={this.state.postingData} applicantRecords={this.state.applicantData} postingApplicantRecords={this.state.newPostingApplicantData} />
       </div>
