@@ -9,7 +9,7 @@ var bodyParser = require('body-parser');
 
 //  ROUTE FILES
 var api = require('./routes/api');
-var postData = require('.routes/post-data')
+var postData = require('./routes/post-data')
 
 
 var app = express();
@@ -29,7 +29,7 @@ app.use(cookieParser());
 
 // ROUTES
 app.use('/api', api);
-app.use('posting', postData);
+app.use('/posting', postData);
 
 
 // catch 404 and forward to error handler

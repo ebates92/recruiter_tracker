@@ -319,6 +319,7 @@ html, body{
 .ui-input {
   width: 85%;
   margin: 0 auto;
+  position: relative;
 }
 
 .ui-input span {
@@ -598,4 +599,25 @@ html, body{
 .yes-posting-dropdown > div:hover {
   background-color: rgba(22, 216, 22, 1);
   color: white;
+}
+
+
+/* ADD APPLICANT TO POSTING */
+
+.form-dropdown-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  position: absolute;
+  margin: .2rem;
+  box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
+  background-color: rgb(247, 247, 247);
+  z-index: 10;
+  top: -5rem;
+}
+
+.form-dropdowns {
+  padding-bottom: .2rem;
+  font-size: 1rem;
+  z-index: 3;
 }

@@ -23,7 +23,7 @@ class SearchBar extends Component {
         <div><h4 style={listItemInfoStyle}>{record.name}</h4><h6 style={listItemInfoStyle}>{record.objectType}</h6></div></li>)
         return <div className="searchbar-wrapper">
                 <div className="searchbar">
-                    <input type="text" placeholder="Search for Company or Applicant..." onFocus={this.clickHandler} onBlur={this.clickHandler} onChange={this.searchHandler} />
+                    <input type="text" placeholder="Search for Posting or Applicant..." onFocus={this.clickHandler} onBlur={this.clickHandler} onChange={this.searchHandler} />
                 </div>
                 <div style={divStyle}><i className="fas fa-search" style={iconStyle}></i></div>
                 <div className="searchbar-dropdown hide" data-dropdown>

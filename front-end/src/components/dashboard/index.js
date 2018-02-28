@@ -13,7 +13,7 @@ import AddApplicantToPosting from './modal/Add_applicant_to_posting.js'
 //   BrowserRouter as Router,
 //   Route
 // } from 'react-router-dom';
-const url = 'http://localhost:3000/api';
+const url = 'http://localhost:3000';
 
 
 class Dashboard extends Component {
@@ -74,7 +74,8 @@ class Dashboard extends Component {
 
   _onFormChangeHandler(event) {
     const input = event.target.name;
-    const value = event.target.value;
+    let value = event.target.value;
+
     this.setState(prevState => ({
         formObject: {
           ...prevState.formObject,
@@ -86,13 +87,14 @@ class Dashboard extends Component {
   _onFormSubmission(event){
     const data = this.state.formObject;
     const model = event.target.id
+    this._closeModal(event)
     axios.post(`${url}/posting/${model}`, data)
     .then(function (response) {
       console.log(response);
     })
     .catch(function (error) {
       console.log(error);
-    }), this._resetState
+    })
   }
 
   _closeModal = (event) => {
@@ -134,7 +136,7 @@ class Dashboard extends Component {
   }
     
 
-// SEARCH BAR
+// SEARCH BARS
 
   _onChangeHandler(searchTerm, callback) {
     const re = new RegExp('^' + searchTerm + '.*', 'gi');
@@ -175,12 +177,13 @@ class Dashboard extends Component {
 // API CALLS
   componentDidMount() {
     console.log('api request occurring')
-      axios.get(`${url}/postings`)
+      axios.get(`${url}/api/postings`)
         .then(res => res.data)
         .then(
           (postingRecords) => {
             this.setState({
-              postingData: postingRecords
+              postingData: postingRecords,
+              postingOptions: postingRecords
             });
           },
           (error) => {
@@ -190,12 +193,13 @@ class Dashboard extends Component {
           }
         )
 
-        axios.get(`${url}/applicants`)
+        axios.get(`${url}/api/applicants`)
         .then(res => res.data)
         .then(
           (applicantRecords) => {
             this.setState({
-              applicantData: applicantRecords
+              applicantData: applicantRecords,
+              applicantOptions: applicantRecords
             });
           },
           (error) => {
@@ -206,7 +210,7 @@ class Dashboard extends Component {
         )
 
 
-        axios.get(`${url}/postingApplicant`)
+        axios.get(`${url}/api/postingApplicant`)
         .then(res => res.data)
         .then(
           (postingApplicants) => {
@@ -230,7 +234,7 @@ class Dashboard extends Component {
       <div className="App">
           <NewApplicant formObject={this.state.formObject} closeModal={this._closeModal} onFormChangeHandler={this._onFormChangeHandler} onFormSubmission={this._onFormSubmission} />
           <NewPosting formObject={this.state.formObject} closeModal={this._closeModal} onFormChangeHandler={this._onFormChangeHandler} onFormSubmission={this._onFormSubmission} />
-          <AddApplicantToPosting formObject={this.state.formObject} closeModal={this._closeModal} onFormChangeHandler={this._onFormChangeHandler} onFormSubmission={this._onFormSubmission} />
+          <AddApplicantToPosting postingRecords={this.state.postingData} applicantRecords={this.state.applicantData} formObject={this.state.formObject} closeModal={this._closeModal} onFormChangeHandler={this._onFormChangeHandler} onFormSubmission={this._onFormSubmission} />
           <Header engagingTheModal={this._engagingTheModal} postingSelectedHandler={this._postingSelectedHandler} postingRecords={this.state.postingData}  onChangeHandler={this._onChangeHandler} postingSelected={this.state.postingSelected} filteredList={this.state.filteredList}/>
           <Container postingSelected={this.state.postingSelected} postingRecords={this.state.postingData} applicantRecords={this.state.applicantData} postingApplicantRecords={this.state.newPostingApplicantData} />
       </div>
