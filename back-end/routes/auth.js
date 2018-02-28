@@ -5,8 +5,7 @@ const bcrypt = require('bcryptjs');
 const config = require('../config/config.json');
 const _ = require('lodash');
 const jwt = require('jsonwebtoken');
-// const isAuthorized = require('../auth');
-// const passport = require('../config/passport-setup');
+const passport = require('../config/passport-setup');
 
 const verifyPassword = (password, user) => {
   return bcrypt.compare(password, user.dataValues.password).then((res) => {
