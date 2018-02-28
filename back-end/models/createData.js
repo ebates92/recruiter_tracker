@@ -1,3 +1,4 @@
+require('dotenv').config();
 const User = require('./table/user'),
 Posting = require('./table/Posting'),
 Applicant = require('./table/applicant'),
