@@ -8,12 +8,13 @@ import React from 'react';
 const Authentication = {
     isAuthenticated: false,
     authenticate(email, password, cb) {
-        let formData = new FormData();
-        formData.append('email', 'test@test.com');
-        formData.append('password', 'test');
+        
         fetch('http://localhost:3000/auth', {
-            method: 'POST', body: formData})
-               .then(res => res.json())
+            method: 'POST', body: {"email": email, "password": password}})
+               .then(res => {
+                console.log(res);
+                return res.json();
+               })
                .then(json => {
                 console.log(json);
                 this.isAuthenticated = json.isAuth;

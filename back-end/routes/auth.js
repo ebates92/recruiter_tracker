@@ -61,8 +61,10 @@ router.all('*', (req, res, next) => {
     next();
   })
 .post('/', (req, res) => {
+  res.send(req.body);
   const {email, password} = _.pick(req.body, ['email', 'password']);
-  console.log(email + " " + password)
+  console.log("POST SUCCESS");
+  console.log(email + " " + password);
   User.findOne({
     where: {email}
   })
