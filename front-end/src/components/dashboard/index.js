@@ -91,6 +91,7 @@ class Dashboard extends Component {
     axios.post(`${url}/posting/${model}`, data)
     .then(function (response) {
       console.log(response);
+      this.forceUpdate();
     })
     .catch(function (error) {
       console.log(error);

@@ -48,8 +48,8 @@ import React, { Component } from 'react';
                             </div>
                         </form>
                     </div>
-                    <div id='newapplicant' className="modal-footer">
-                        <button onClick={this.props.closeModal}>Cancel</button>
+                    <div className="modal-footer">
+                        <button  id='newapplicant' onClick={this.props.closeModal}>Cancel</button>
                         {/* <button>Save & New</button> */}
                         <button type="submit" id='newapplicant' onClick={this.props.onFormSubmission}>Save</button>
                     </div>

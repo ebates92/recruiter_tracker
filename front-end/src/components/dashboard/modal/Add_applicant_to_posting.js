@@ -62,14 +62,16 @@ class AddApplicantToPosting extends Component {
         })
     }
 
-    // _onBlurForDropdowns = (event) => {
-    //     this.setState({
-    //         dropdownApplicant: null,
-    //         dropdownPosting: null,
-    //         applicantOptions: this.props.applicantRecords,
-    //         postingOptions: this.props.postingRecords,
-    //     })
-    // }
+    _onBlurForDropdowns = (event) => {
+        if(event.target.accept != 'no') {
+            this.setState({
+                dropdownApplicant: null,
+                dropdownPosting: null,
+                applicantOptions: this.props.applicantRecords,
+                postingOptions: this.props.postingRecords,
+            })
+        }
+    }
 
     _searchClickHandler = (event) => {
 
@@ -81,7 +83,7 @@ class AddApplicantToPosting extends Component {
 
         if(event.target.id === 'posting') {
             this.setState({
-                applicantSearch: event.target.innerHTML
+                postingSearch: event.target.innerHTML
             })
         }
 
@@ -106,19 +108,19 @@ class AddApplicantToPosting extends Component {
 
         return (
             <div className="modal-overlay hide" data-modal-container-addapplicanttoposting>
-                <div className="modal-container">
+                <div className="modal-container" onClick={this._onBlurForDropdowns}>
                     <div className="modal-header"><h2>Add Applicant to Posting</h2></div>
                     <div className="modal-body">
                         <form>
                             <div className="col-left">
 
-                            <div className="ui-input"><span className="required"></span><span>Search for Applicant</span>
-                            <div className='form-search-container' >
-                                <div className="clearfix"></div>
-                                <input type="text" name='applicant' value={this.state.applicantSearch} required onFocus={this._onFocusForDropdownsApplicant} onChange={this._onChangeForDropdowns}/>
-                                <DropdownApplicant searchClickHandler={this._searchClickHandler} searchOptions={this.state.applicantOptions}/>
-                            </div>
-                        </div>
+                                <div className="ui-input"><span className="required"></span><span>Search for Applicant</span>
+                                    <div className='form-search-container' accept='no'>
+                                        <div className="clearfix"></div>
+                                        <input type="text" name='applicant' value={this.state.applicantSearch} required accept='no' onFocus={this._onFocusForDropdownsApplicant} onChange={this._onChangeForDropdowns}/>
+                                        <DropdownApplicant searchClickHandler={this._searchClickHandler} searchOptions={this.state.applicantOptions}/>
+                                    </div>
+                                </div>
 
                             </div>
                             <div className="col-right">
@@ -126,7 +128,7 @@ class AddApplicantToPosting extends Component {
                                 <div className="ui-input"><span className="required"></span><span>Search for Posting</span>
                                     <div className='form-search-container'>
                                         <div className="clearfix"></div>
-                                        <input type="text" name='posting' value={this.state.postingSearch} required onFocus={this._onFocusForDropdownsPosting} onBlur={this._onBlurForDropdowns} onChange={this._onChangeForDropdowns}/>
+                                        <input type="text" name='posting' value={this.state.postingSearch} required accept='no' onFocus={this._onFocusForDropdownsPosting} onBlur={this._onBlurForDropdowns} onChange={this._onChangeForDropdowns}/>
                                         <DropdownPosting searchClickHandler={this._searchClickHandler} searchOptions={this.state.postingOptions}/>
                                     </div>
                                 </div>
@@ -140,18 +142,18 @@ class AddApplicantToPosting extends Component {
 
                                 <div className="ui-input"><span className="required"></span><span>Applicant Stage</span>
                                 <div className="clearfix"></div>
-                                <input type="text" name='applicantStage' required value={this.props.formObject.applicantStage}/></div>
+                                <input type="text" name='applicantStage' required onChange={this.props.onFormChangeHandler} value={this.props.formObject.applicantStage}/></div>
 
                                 {/* <div className="ui-input"><span className="required"></span><span>Remove from Applicants</span>
                                 <div className="clearfix"></div>
-                                <input type="text" name='isRejected' required value={this.props.formObject.isRejected}/></div> */}
+                                <input type="text" name='isRejected' required onChange={this.props.onFormChangeHandler} value={this.props.formObject.isRejected}/></div> */}
 
                             </div>
                             <div className="col-right">
 
                                 <div className="ui-input"><span className="required"></span><span>Hiring Manager Notes</span>
                                 <div className="clearfix"></div>
-                                <input type="text" name='hiringManager_notes' value={this.props.formObject.hiringManager_notes}/></div>
+                                <input type="text" name='hiringManager_notes' onChange={this.props.onFormChangeHandler} value={this.props.formObject.hiringManager_notes}/></div>
 
                             </div>
                         
