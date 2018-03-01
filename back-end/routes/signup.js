@@ -5,8 +5,8 @@ const User = require('../models/table/user');
 const bcrypt = require('bcryptjs');
 
 
-
 router.post('/', (req, res, next) => {
+    console.log(req.body);
     let {firstName, lastName, email, password} = _.pick(req.body, ['firstName', 'lastName', 'email', 'password']);
     if (!firstName || !password) {
       res.status(422).send("Please fill out all required fields");
