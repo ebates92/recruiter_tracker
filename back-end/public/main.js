@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", (event) => { 
     const loginButton = document.querySelector('[data-login]');
+    const googleSignup = document.querySelector('[data-signup-google]');
 
     loginButton.addEventListener("click", (event) => {
         const email = document.querySelector('[data-login-email]').value;
@@ -8,6 +9,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
         fetch('http://localhost:3000/auth', {headers: {'content-type': 'application/json'}, method: 'POST', body: data, credentials: 'include'})
                .then(res => location.replace('http://localhost:3000/dashboard'))
                .catch(e => console.log("Invalid username / password"));
-    })
+    });
+
+    googleSignup.addEventListener("click", (event) => {
+        window.location.replace('http://localhost:3000/auth/google');
+    });
+
+
   });
 

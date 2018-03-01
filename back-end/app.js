@@ -4,17 +4,18 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-
+const hbs = require('handlebars');
 
 //  ROUTE FILES
 const auth = require('./routes/auth');
 const api = require('./routes/api');
 const dashboard = require('./routes/dashboard');
+const signup = require('./routes/signup');
 const app = express();
 
 // // view engine setup
-// app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'hbs');
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'handlebars');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -26,6 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 // ROUTES
+app.use('/signup', signup);
 app.use('/auth', auth);
 app.use('/api', api);
 app.use('/dashboard', dashboard);
@@ -46,7 +48,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.send(res.locals.error);
 });
 
 app.listen(3000, () => {

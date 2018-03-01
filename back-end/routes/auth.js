@@ -28,7 +28,7 @@ router.get('/google', passport.authenticate('google', {
   scope: ['profile', 'email']
 }))
 .get('/google/redirect', passport.authenticate('google'), (req, res) => {
-  res.redirect('/home');
+  res.redirect('http://localhost:3000/dashboard');
 })
 //Handle username / password authentication
 .post('/', (req, res) => {
