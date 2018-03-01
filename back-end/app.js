@@ -1,4 +1,10 @@
 
+
+
+//  ROUTE FILES
+var api = require('./routes/api');
+var postData = require('./routes/post-data')
+
 const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
@@ -46,7 +52,9 @@ app.use(isAuthorized);
 app.use('/signup', signup);
 app.use('/auth', auth);
 app.use('/api', api);
+app.use('/posting', postData);
 app.use('/dashboard', dashboard);
+
 
 
 // catch 404 and forward to error handler

@@ -18,6 +18,10 @@ html, body{
   height: 110px;
 }
 
+input {
+  font-size: .9rem;
+}
+
 .header-top {
   display: flex;
   justify-content: space-between;
@@ -319,6 +323,7 @@ html, body{
 .ui-input {
   width: 85%;
   margin: 0 auto;
+  position: relative;
 }
 
 .ui-input span {
@@ -599,3 +604,58 @@ html, body{
   background-color: rgba(22, 216, 22, 1);
   color: white;
 }
+
+
+/* ADD APPLICANT TO POSTING */
+
+.form-search-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  position: absolute;
+  width: 100%;
+  z-index: 10;
+  top: 1rem;
+}
+
+.form-search-container span {
+  display: block;
+  font-size: .75rem;
+  float: left;
+  color: rgb(62, 62, 60);
+}
+
+.form-search-container > input {
+  display: block;
+  min-height: 1.875rem;
+  border: 1px solid rgb(221, 219, 218);
+  border-radius: .25rem;
+  width: 100%;
+  padding: 0 1rem 0 .75rem;
+  line-height: 1.875rem;
+  margin-top: 3px;
+  font-size: .9rem;
+}
+
+.form-dropdown-container {
+  box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
+  background-color: rgb(247, 247, 247);
+  border-bottom-left-radius: .2rem;
+  border-bottom-right-radius: .2rem;
+}
+
+.form-dropdowns {
+  padding: .3rem;
+  font-size: 1rem;
+  z-index: 3;
+}
+
+.form-dropdowns:hover {
+  background-color: rgba(22, 216, 22, 1);
+  color: white;
+}
+
+.subheader-apptopost {
+  padding-top: 3rem;
+}
+

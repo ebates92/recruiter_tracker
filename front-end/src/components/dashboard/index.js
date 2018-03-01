@@ -4,13 +4,16 @@ import axios from 'axios';
 import Modal from './modal';
 import Header from './header';
 import Container from './container';
+import NewPosting from './modal/Add_posting.js'
+import NewApplicant from './modal/Add_applicant.js'
+import AddApplicantToPosting from './modal/Add_applicant_to_posting.js'
 // import Postings from '../postingData.js';
 // import Applicants from './applicantData.js';
 // import {
 //   BrowserRouter as Router,
 //   Route
 // } from 'react-router-dom';
-const url = 'http://localhost:3000/api';
+const url = 'http://localhost:3000';
 
 
 class Dashboard extends Component {
@@ -20,22 +23,44 @@ class Dashboard extends Component {
       postingData: [],
       applicantData: [],
       postingApplicantData: [],
-      newPostingApplicantData: [],
-      postingSelected: 'All',
       error: null,
       filteredList: [],
+
+      // updating the posting dropdown and container
+      newPostingApplicantData: [],
+      postingSelected: 'All',
+
+      // update and interact with the modal (when we refactor this code)
+      // modalType: 'New Posting',
+      // modalToDeploy: '',
+
+      // pushing data to the database
       formObject: {
-        postingName: 'a',
-        industry: '',
-        annualRevenue: null,
-        employees: null,
-        location: '',
-        dealLead: '',
-        title: '',
-        relatedApplicantName: '',
-        relatedApplicantEmail: '',
-        relatedApplicantTitle: '',
-        relatedApplicantPhone: ''
+        // add applicant
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        linked_in: '',
+        resume_link: '',
+        recruiter_notes: '',
+
+        // add posting
+        positionTitle: '',
+        jobDescription: '',
+        salaryRange: '',
+        qualifications: '',
+        hiringManager: '',
+        additionalNotes: '',
+        isFilled: false,
+
+        // add applicant to posting
+        applicantId: '',
+        postingId: '',
+        applicantStage: 'Sourcing',
+        isRejected: false,
+        hiringManager_notes: '',
+
       }
     }
     this._onChangeHandler = this._onChangeHandler.bind(this);
@@ -44,9 +69,13 @@ class Dashboard extends Component {
     this._postingSelectedHandler = this._postingSelectedHandler.bind(this);
   }
 
+
+// FORM FUNCTIONS
+
   _onFormChangeHandler(event) {
-    const input = event.posting.name;
-    const value = event.posting.value;
+    const input = event.target.name;
+    let value = event.target.value;
+
     this.setState(prevState => ({
         formObject: {
           ...prevState.formObject,
@@ -55,16 +84,115 @@ class Dashboard extends Component {
     }))
   }
 
-  _onFormSubmission(){
+  _onFormSubmission(event){
     const data = this.state.formObject;
-    axios.post(`${url}/posting`, data)
-    .then(function (response) {
-      console.log(response);
-    })
+    const model = event.target.id
+    this._closeModal(event)
+    axios.post(`${url}/posting/${model}`, data)
+    .then(response => response.data)
+      .then(
+        (res) => {
+          // RESETS THE DASHBOARD WITH NEW DATA
+          if(model === "posting") {
+            this.setState({
+              postingData: [
+                ...this.state.postingData,
+                res
+              ],
+            })
+          }
+          if(model === "applicant") {
+            this.setState({
+              applicantData: [
+                ...this.state.applicantData,
+                res
+              ]
+            })
+          }
+          if(model === "applicanttoposting") {
+            this.setState({
+              postingApplicantData: [
+                ...this.state.postingApplicantData,
+                res
+              ],
+              newPostingApplicantData: [
+                ...this.state.postingApplicantData,
+                res
+              ]
+            })
+          }
+        },
+        (error) => {
+          this.setState({
+            error
+          })
+        }
+      )
     .catch(function (error) {
       console.log(error);
-    });
+    })
   }
+
+  _closeModal = (event) => {
+    const id = event.target.id
+    document.querySelector('body').setAttribute('style', 'position: ');
+    document.querySelector(`[data-modal-container-${id}]`).classList.add('hide');
+    this._resetState()
+}
+
+  _handlesAddApplicantToPosting = (type, key) => {
+    if (type === 'applicant'){
+      this.setState(prevState => ({
+        formObject: {
+          ...prevState.formObject,
+          applicantId: key
+        }
+      }))
+    }
+
+    if(type === 'posting') {
+      this.setState(prevState => ({
+        formObject: {
+          ...prevState.formObject,
+          postingId: key
+        }
+      }))
+    }
+  }
+
+  _resetState = () => {
+    this.setState({
+        formObject: {
+          // add applicant
+          firstName: '',
+          lastName: '',
+          email: '',
+          phone: '',
+          linked_in: '',
+          resume_link: '',
+          recruiter_notes: '',
+    
+          // add posting
+          positionTitle: '',
+          jobDescription: '',
+          salaryRange: '',
+          qualifications: '',
+          hiringManager: '',
+          additionalNotes: '',
+          isFilled: false,
+    
+          // add applicant to posting
+          applicantId: '',
+          postingId: '',
+          applicantStage: 'Sourcing',
+          isRejected: false,
+          hiringManager_notes: '',
+      }
+    })
+  }
+    
+
+// SEARCH BARS
 
   _onChangeHandler(searchTerm, callback) {
     const re = new RegExp('^' + searchTerm + '.*', 'gi');
@@ -79,7 +207,8 @@ class Dashboard extends Component {
   }
 
 
-  // NEED TO TALK TO CHRIS ON HOW TO FIX THE .FILTER IS NOT A FUNCTION
+// FOR UPDATING POSTING SELECTIONS ON THE MAIN DASHBOARD CONTAINER
+
   _postingSelectedHandler(event) {
 
     // figures out the posting that was filtered by
@@ -100,16 +229,17 @@ class Dashboard extends Component {
       newPostingApplicantData: newPostingApplicantData,
     })
   };
-  
 
+// API CALLS
   componentDidMount() {
     console.log('api request occurring')
-      axios.get(`${url}/postings`)
+      axios.get(`${url}/api/postings`)
         .then(res => res.data)
         .then(
           (postingRecords) => {
             this.setState({
-              postingData: postingRecords
+              postingData: postingRecords,
+              postingOptions: postingRecords
             });
           },
           (error) => {
@@ -119,12 +249,13 @@ class Dashboard extends Component {
           }
         )
 
-        axios.get(`${url}/applicants`)
+        axios.get(`${url}/api/applicants`)
         .then(res => res.data)
         .then(
           (applicantRecords) => {
             this.setState({
-              applicantData: applicantRecords
+              applicantData: applicantRecords,
+              applicantOptions: applicantRecords
             });
           },
           (error) => {
@@ -135,7 +266,7 @@ class Dashboard extends Component {
         )
 
 
-        axios.get(`${url}/postingApplicant`)
+        axios.get(`${url}/api/postingApplicant`)
         .then(res => res.data)
         .then(
           (postingApplicants) => {
@@ -154,10 +285,13 @@ class Dashboard extends Component {
     }
 
   render() {
+    const ComponentToRender = this.state.modalComponent
     return (
       <div className="App">
-          <Modal onFormChangeHandler={this._onFormChangeHandler} onFormSubmission={this._onFormSubmission} />
-          <Header postingSelectedHandler={this._postingSelectedHandler} postingRecords={this.state.postingData}  onChangeHandler={this._onChangeHandler} postingSelected={this.state.postingSelected} filteredList={this.state.filteredList}/>
+          <NewApplicant formObject={this.state.formObject} closeModal={this._closeModal} onFormChangeHandler={this._onFormChangeHandler} onFormSubmission={this._onFormSubmission} />
+          <NewPosting formObject={this.state.formObject} closeModal={this._closeModal} onFormChangeHandler={this._onFormChangeHandler} onFormSubmission={this._onFormSubmission} />
+          <AddApplicantToPosting handlesAddApplicantToPosting={this._handlesAddApplicantToPosting} postingRecords={this.state.postingData} applicantRecords={this.state.applicantData} formObject={this.state.formObject} closeModal={this._closeModal} onFormChangeHandler={this._onFormChangeHandler} onFormSubmission={this._onFormSubmission} />
+          <Header engagingTheModal={this._engagingTheModal} postingSelectedHandler={this._postingSelectedHandler} postingRecords={this.state.postingData}  onChangeHandler={this._onChangeHandler} postingSelected={this.state.postingSelected} filteredList={this.state.filteredList}/>
           <Container postingSelected={this.state.postingSelected} postingRecords={this.state.postingData} applicantRecords={this.state.applicantData} postingApplicantRecords={this.state.newPostingApplicantData} />
       </div>
     );
