@@ -1,5 +1,4 @@
 require('dotenv').config();
-
 const User = require('./table/user'),
 Posting = require('./table/Posting'),
 Applicant = require('./table/applicant'),
@@ -10,7 +9,7 @@ User.create({
     firstName: 'Tyler',
     lastName: 'Test',
     email: 'test@test.com',
-    password: 'test123'
+    password: '$2a$10$lsNvqFpYHUfUMb9pJDqh1uagi0YFS7hARDYMsfn1eo.yo35eCMLVa'
 }).then((user) => {
     return Posting.create({
                 userId: user.dataValues.id,
@@ -110,6 +109,7 @@ User.create({
                     postingId: 3,
                     applicantId: 3,
                     userId: user.dataValues.id,
+
                     applicantStage: 'Initial Interview',
                     isRejected: false,
                     hiringManager_notes: 'Hire them!'
