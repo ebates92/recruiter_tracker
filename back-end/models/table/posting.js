@@ -12,7 +12,7 @@ const Posting = sequelize.define('posting',{
         type: Sequelize.STRING, allowNull:true
     },
     salaryRange: {
-        type: Sequelize.STRING,allowNull:true
+        type: Sequelize.INTEGER,allowNull:true
     },
     qualifications:{
         type: Sequelize.STRING, allowNull: true

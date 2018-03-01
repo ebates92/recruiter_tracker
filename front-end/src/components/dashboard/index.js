@@ -5,7 +5,7 @@ import Modal from './modal';
 import Header from './header';
 import Container from './container';
 // import Postings from '../postingData.js';
-import Applicants from './applicantData.js';
+// import Applicants from './applicantData.js';
 // import {
 //   BrowserRouter as Router,
 //   Route
@@ -18,6 +18,10 @@ class Dashboard extends Component {
     super(props);
     this.state = {
       postingData: [],
+      applicantData: [],
+      postingApplicantData: [],
+      newPostingApplicantData: [],
+      postingSelected: 'All',
       error: null,
       filteredList: [],
       formObject: {
@@ -37,6 +41,7 @@ class Dashboard extends Component {
     this._onChangeHandler = this._onChangeHandler.bind(this);
     this._onFormChangeHandler = this._onFormChangeHandler.bind(this);
     this._onFormSubmission = this._onFormSubmission.bind(this);
+    this._postingSelectedHandler = this._postingSelectedHandler.bind(this);
   }
 
   _onFormChangeHandler(event) {
@@ -63,7 +68,7 @@ class Dashboard extends Component {
 
   _onChangeHandler(searchTerm, callback) {
     const re = new RegExp('^' + searchTerm + '.*', 'gi');
-    const companyApplicantArray = this.state.postingData.concat(Applicants);
+    const companyApplicantArray = this.state.postingData.concat(this.state.applicantData);
     let filteredList = companyApplicantArray.filter(record => record.name.match(re));
     // Return first 5 results
     filteredList = filteredList.slice(0, 5);
@@ -73,7 +78,32 @@ class Dashboard extends Component {
     callback(filteredList);
   }
 
+
+  // NEED TO TALK TO CHRIS ON HOW TO FIX THE .FILTER IS NOT A FUNCTION
+  _postingSelectedHandler(event) {
+
+    // figures out the posting that was filtered by
+    const newPostingData = this.state.postingData.filter((record) => record.positionTitle === event.target.innerHTML)
+    // modifies the posting applicant data that should be shared back to the container
+    const newPostingApplicantDataFunction = () => {
+      if (event.target.innerHTML === "All") {
+          return this.state.postingApplicantData
+      } else {
+        return this.state.postingApplicantData.filter((postingApplicantRecord) => postingApplicantRecord.postingId === newPostingData[0].id)
+      } 
+    }
+
+    const newPostingApplicantData = newPostingApplicantDataFunction();
+
+    this.setState({
+      postingSelected: event.target.innerHTML,
+      newPostingApplicantData: newPostingApplicantData,
+    })
+  };
+  
+
   componentDidMount() {
+    console.log('api request occurring')
       axios.get(`${url}/postings`)
         .then(res => res.data)
         .then(
@@ -103,14 +133,32 @@ class Dashboard extends Component {
             })
           }
         )
+
+
+        axios.get(`${url}/postingApplicant`)
+        .then(res => res.data)
+        .then(
+          (postingApplicants) => {
+            console.log(postingApplicants)
+            this.setState({
+              postingApplicantData: postingApplicants,
+              newPostingApplicantData: postingApplicants
+            });
+          },
+          (error) => {
+            this.setState({
+              error
+            })
+          }
+        )
     }
 
   render() {
     return (
       <div className="App">
           <Modal onFormChangeHandler={this._onFormChangeHandler} onFormSubmission={this._onFormSubmission} />
-          <Header records={this.state.postingData} applicantRecords={Applicants} onChangeHandler={this._onChangeHandler} filteredList={this.state.filteredList}/>
-          <Container records={this.state.postingData} />
+          <Header postingSelectedHandler={this._postingSelectedHandler} postingRecords={this.state.postingData}  onChangeHandler={this._onChangeHandler} postingSelected={this.state.postingSelected} filteredList={this.state.filteredList}/>
+          <Container postingSelected={this.state.postingSelected} postingRecords={this.state.postingData} applicantRecords={this.state.applicantData} postingApplicantRecords={this.state.newPostingApplicantData} />
       </div>
     );
   }

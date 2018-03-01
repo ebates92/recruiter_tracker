@@ -1,3 +1,4 @@
+
 const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
@@ -8,6 +9,7 @@ const cookieSession = require('cookie-session');
 const config = require('./config/config');
 const passport = require('passport');
 const isAuthorized = require('./auth');
+
 
 //  ROUTE FILES
 const auth = require('./routes/auth');
