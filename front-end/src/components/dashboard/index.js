@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 // import '../App.css';
 import axios from 'axios';
-import Modal from './modal';
 import Header from './header';
 import Container from './container';
 import NewPosting from './modal/Add_posting.js'

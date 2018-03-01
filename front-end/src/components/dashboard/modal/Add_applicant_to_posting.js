@@ -53,6 +53,11 @@ class AddApplicantToPosting extends Component {
             dropdownApplicant: DropdownComponent,
             applicantOptions: this.props.applicantRecords,
         })
+        document.querySelector('#form-search-container-applicant').addEventListener('mouseleave', (event) => {
+            this.setState({
+                dropdownApplicant: null
+            })
+        })
     }
 
     _onFocusForDropdownsPosting = (event) => {
@@ -60,30 +65,37 @@ class AddApplicantToPosting extends Component {
             dropdownPosting: DropdownComponent,
             postingOptions: this.props.postingRecords
         })
+        document.querySelector('#form-search-container-posting').addEventListener('mouseleave', (event) => {
+            this.setState({
+                dropdownPosting: null
+            })
+        })
     }
 
-    _onBlurForDropdowns = (event) => {
-        if(event.target.accept != 'no') {
-            this.setState({
-                dropdownApplicant: null,
-                dropdownPosting: null,
-                applicantOptions: this.props.applicantRecords,
-                postingOptions: this.props.postingRecords,
-            })
-        }
-    }
+    // _onBlurForDropdowns = (event) => {
+    //     if(event.target.accept != 'no') {
+    //         this.setState({
+    //             dropdownApplicant: null,
+    //             dropdownPosting: null,
+    //             applicantOptions: this.props.applicantRecords,
+    //             postingOptions: this.props.postingRecords,
+    //         })
+    //     }
+    // }
 
     _searchClickHandler = (event) => {
 
         if (event.target.id === 'applicant'){
             this.setState({
-                applicantSearch: event.target.innerHTML
+                applicantSearch: event.target.innerHTML,
+                dropdownApplicant: null
             })
         }
 
         if(event.target.id === 'posting') {
             this.setState({
-                postingSearch: event.target.innerHTML
+                postingSearch: event.target.innerHTML,
+                dropdownPosting: null
             })
         }
 
@@ -115,9 +127,9 @@ class AddApplicantToPosting extends Component {
                             <div className="col-left">
 
                                 <div className="ui-input"><span className="required"></span><span>Search for Applicant</span>
-                                    <div className='form-search-container' accept='no'>
+                                    <div className='form-search-container' id='form-search-container-applicant'>
                                         <div className="clearfix"></div>
-                                        <input type="text" name='applicant' value={this.state.applicantSearch} required accept='no' onFocus={this._onFocusForDropdownsApplicant} onChange={this._onChangeForDropdowns}/>
+                                        <input type="text" name='applicant' value={this.state.applicantSearch} required onFocus={this._onFocusForDropdownsApplicant} onChange={this._onChangeForDropdowns}/>
                                         <DropdownApplicant searchClickHandler={this._searchClickHandler} searchOptions={this.state.applicantOptions}/>
                                     </div>
                                 </div>
@@ -126,9 +138,9 @@ class AddApplicantToPosting extends Component {
                             <div className="col-right">
 
                                 <div className="ui-input"><span className="required"></span><span>Search for Posting</span>
-                                    <div className='form-search-container'>
+                                    <div className='form-search-container' id='form-search-container-posting'>
                                         <div className="clearfix"></div>
-                                        <input type="text" name='posting' value={this.state.postingSearch} required accept='no' onFocus={this._onFocusForDropdownsPosting} onBlur={this._onBlurForDropdowns} onChange={this._onChangeForDropdowns}/>
+                                        <input type="text" name='posting' value={this.state.postingSearch} required onFocus={this._onFocusForDropdownsPosting} onBlur={this._onBlurForDropdowns} onChange={this._onChangeForDropdowns}/>
                                         <DropdownPosting searchClickHandler={this._searchClickHandler} searchOptions={this.state.postingOptions}/>
                                     </div>
                                 </div>
