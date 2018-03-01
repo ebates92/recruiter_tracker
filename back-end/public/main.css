@@ -1,0 +1,562 @@
+html, body{
+    width:100%;
+    height:100%;
+    box-sizing: border-box;
+    font-size: 1rem;
+    margin: 0;
+    padding: 0;
+    font-family: 'Lato', sans-serif;
+  }
+  
+  *,*:before, *:after{
+    box-sizing: inherit;
+  }
+  
+  .header {
+    box-shadow: 0 7px 20px -5px rgba(0,0,0,0.2);
+    width: 100%;
+    height: 110px;
+  }
+  
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 25px 0;
+  }
+  
+  .header-top button {
+    width: 150px;
+    height: 40px;
+    background-color: #006fd2;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    outline: none;
+  }
+  
+  .filter-logo {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo {
+    padding-left: 20px;
+    padding-right: 10px;
+  }
+  
+  .filter h3, .filter h2 {
+    margin: 0px;
+    text-align: left;
+  }
+  
+  .searchbar-wrapper {
+    border: 1px solid #DDDBDA;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 35px;
+    width: 425px;
+    border-radius: 2px;
+    position: relative;
+  }
+  
+  .searchbar {
+    width: 75%;
+    display: flex;
+  }
+  
+  .searchbar input {
+    outline: none;
+    border: none;
+    width: 100%;
+    font-size: 15px;
+  }
+  
+  .searchbar-dropdown {
+    position: absolute;
+    left: -1px;
+    top: 33px;
+    width: 100.5%;
+    border: 1px solid rgb(221, 219, 218);
+    border-radius: 2px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 2px 7px rgba(0, 0, 0, .07);
+    z-index: 9999;
+  }
+  
+  .searchbar-dropdown ul {
+    list-style-type: none;
+    font-size: 1rem;
+    margin-bottom: 1px;
+  }
+  
+  .searchbar-dropdown li {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: -41px;
+    cursor: pointer;
+    padding: 10px 0;
+    width: 424px;
+  }
+  
+  .searchbar-dropdown li:hover {
+    background-color: rgb(243, 242, 242);
+  }
+  
+  .searchbar-dropdown img {
+    padding: 5px 5px 0 0;
+    margin-left: 15px;
+  }
+  
+  .global-actions-console {
+    display: flex;
+    justify-content: flex-end;
+    width: 150px;
+  }
+  
+  .global-action {
+    margin: 0 15px;
+    font-size: 30px;
+    height: 32px;
+    width: 32px;
+    cursor: pointer;
+  }
+  
+  .global-action img {
+    border-radius: 50%;
+  }
+  
+  #console-group {
+    padding-right: 25px;
+  }
+  
+  #console-group button {
+    background-color: #f3f2f2;
+  }
+  
+  .header-bottom {
+    display: flex;
+    padding-left: 15px;
+  }
+  
+  .listview-info {
+    display: flex;
+    width: 32%;
+    justify-content: space-around;
+  }
+  
+  .progressbar-wrapper {
+    display: flex;
+    margin-top: 15px;
+  }
+  
+  .status {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25%;
+    height: 32px;
+    background-color: #006fd2;
+    border-radius: 2px;
+    position: relative;
+    margin-left: 4px;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .status span {
+    display: block;
+  }
+  
+  .pipeline {
+    margin-left: 2px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+  }
+  
+  .approved {
+    margin-right: 2px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
+  
+  .pipeline:after, .researching:after, .pending:after {
+    content: '';
+    height: 0;
+    display: block;
+    border-color: transparent transparent transparent #006fd2;
+    border-width: 16px;
+    border-style: solid;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    z-index: 1;
+  }
+  
+  .researching:before, .pending:before, .approved:before {
+    content: '';
+    height: 0;
+    display: block;
+    border-color: transparent transparent transparent white;
+    border-width: 16px;
+    border-style: solid;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
+  .status-columns {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .status-col {
+    width: 25%;
+    border-left: 1px solid #dddddd;
+    border-right: 1px solid #dddddd;
+    min-height: 500px;
+  }
+  
+  .status-col h2 {
+    text-align: center;
+  }
+  
+  .record-card {
+    margin: 2% auto;
+    width: 75%;
+  }
+  
+  #card {
+    width: 85%;
+    display: block;
+    margin: 15px auto;
+    height: 190px;
+    text-decoration: none;
+    color: black;
+  }
+  
+  #card h3 {
+    text-align: center;
+    margin: 0;
+    padding: 5px;
+  }
+  
+  #card-content {
+    padding-top: 0;
+  }
+  
+  #card-content h4 {
+    margin: 15px auto;
+  }
+  
+  #card-content span {
+    font-weight: 400;
+  }
+  
+  .modal-overlay {
+    background-color: rgba(154, 152, 151, 0.5);
+    height: 720px;
+    width: 100%;
+    opacity: 1;
+    z-index: 9999;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  
+  .modal-container {
+    max-width: 840px;
+    min-width: 480px;
+    height: 100%;
+    padding: 50px 0;
+    margin: 0 auto;
+  }
+  
+  .modal-header {
+    background-color: white;
+    border-bottom: 2px solid rgb(221, 219, 218);
+    padding: 16px;
+    height: 60px;
+    text-align: center;
+  }
+  
+  .modal-header h2 {
+    margin: 0;
+    color: #575755;
+    font-size: 1.25rem;
+    font-weight: 300;
+  }
+  
+  .modal-body {
+    background-color: white;
+    height: 430px;
+    padding: 16px;
+    overflow: auto;
+  }
+  
+  .form-legend {
+    font-size: 1rem;
+    line-height: 1.875rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    background: #f3f2f2;
+    padding-left: 12px;
+    color: rgb(62, 62, 60);
+    margin-top: 0px;
+  }
+  
+  .add-applicant {
+    float: right;
+    margin-top: 7px;
+    margin-right: 15px;
+  }
+  
+  .ui-input {
+    width: 85%;
+    margin: 0 auto;
+  }
+  
+  .ui-input span {
+    display: block;
+    font-size: .75rem;
+    float: left;
+    color: rgb(62, 62, 60);
+  }
+  
+  .ui-input > input {
+    display: block;
+    min-height: 1.875rem;
+    border: 1px solid rgb(221, 219, 218);
+    border-radius: .25rem;
+    width: 100%;
+    padding: 0 1rem 0 .75rem;
+    line-height: 1.875rem;
+    margin-top: 3px;
+    margin-bottom: 10px;
+  }
+  
+  .required {
+    display: flex;
+    align-items: flex-start;
+    float: left;
+    padding-right: 2px;
+    font-weight: 700;
+    font-size: 0.75rem;
+    padding-left: 2px;
+  }
+  
+  .required svg {
+    font-size: 5px;
+    margin-top: 2px;
+    display: block;
+    color: rgb(194, 57, 52);
+  }
+  
+  .required:before {
+    display: none;
+    font-family: "Font Awesome 5 Solid";   
+    content: "\f069";
+  }
+  
+  .modal-footer {
+    background-color: rgb(243, 242, 242);
+    border-top: 2px solid rgb(221, 219, 218);
+    padding: 12px 16px;
+    height: 60px;
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .modal-footer button {
+    font-size: 13px;
+    width: 90px;
+    height: 33px;
+    margin: 0 8px;
+    background-color: white;
+    border: 1px solid rgb(221, 219, 218);
+    border-radius: 4px;
+    cursor: pointer;
+    outline: none;
+    color: #1c5197;
+  }
+  
+  .hide {
+    display: none;
+  }
+  
+  .col-left {
+    float: left;
+    width: 50%;
+  }
+  
+  .col-right {
+    float: right;
+    width: 50%;
+  }
+  
+  .clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+  
+  
+  
+  
+  /* LOGIN PAGE */
+  
+  
+  .login-page-container {
+    background-color: rgba(241, 237, 237, 1);
+    height: 100vh;
+    /* margin: 1.5rem;
+    margin-top: 2rem; */
+  }
+  
+  /* header section */
+  
+  .login-header {
+    display: flex;
+    justify-content: space-between;
+    /* align-content: center;
+    align-items: center; */
+    padding-bottom: 2rem;
+    background-color:rgba(15, 189, 15, 1);
+    padding: 1.5rem;
+    padding-top: 2rem;
+    font-weight: 600;
+    color: white;
+  }
+  
+  .login-company-name {
+    font-size: 2.5rem;
+    padding-top: 1rem;
+  }
+  
+  .login-options {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .login-options > div {
+    margin-bottom: .5rem;
+  
+  }
+  
+  .login-passport {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .login-passport > button {
+    width: 100%;
+    background-color: rgba(22, 216, 22, 1);
+    color: white;
+    border-radius: .3rem;
+    height: 1.4rem;
+    font-size: .9rem;
+  }
+  
+  .login-passport > button:hover {
+    background-color:rgba(15, 189, 15, 1);
+  }
+  
+  .login-title {
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+  }
+  
+  .login-email-password {
+    height: 1.4rem;
+    display:flex;
+    justify-content: center;
+    align-content: center;
+  }
+  
+  .login-email-password > input {
+    height: 1.2rem;
+    font-size: .7rem;
+    margin-left: .2rem;
+  }
+  
+  .login-email-password > button {
+    background-color: rgba(22, 216, 22, 1);
+    color: white;
+    border-radius: .3rem;
+    height: 1.3rem;
+    font-size: .8rem;
+    margin-left: .2rem;
+  }
+  
+  .login-email-password > button:hover {
+    background-color:rgba(15, 189, 15, 1);
+  }
+  
+  .forgot-password {
+    font-size: .7rem;
+    color: rgba(0, 0, 0, 0.557);
+  }
+  
+  /* lower section */
+  
+  .signup-email-password {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    margin-top: 6rem;
+    /* max-width: 450px;
+    margin-left: 25vw;
+    margin-right: 25vw; */
+  }
+  
+  .signup-form-intro {
+    font-size: 2.5rem;
+    padding-bottom: .5rem;
+  }
+  
+  .signup-form-subintro {
+    font-size: 1.3rem;
+    padding-bottom: 3rem;
+  }
+  
+  /* signup form */
+  
+  .signup-form {
+    font-size: 1.15rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    padding: 3rem;
+    border-radius: 1rem;
+    box-shadow: 0px 0px 10px 0px #888888;
+    width: 300px;
+  }
+  
+  .signup-form > label {
+    margin-bottom: .3rem;
+  }
+  
+  .signup-form > input {
+    margin-bottom: .8rem;
+    padding: .2rem;
+    width: 100%;
+  }
+  
+  .signup-form > button {
+    background-color:rgba(15, 189, 15, 1);
+    color: white;
+    border-radius: .3rem;
+    height: 2.3rem;
+    font-size: 1.3rem;
+    margin-left: .2rem;
+    margin-top: 1rem;
+  }
