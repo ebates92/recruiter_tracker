@@ -89,17 +89,51 @@ class Dashboard extends Component {
     const model = event.target.id
     this._closeModal(event)
     axios.post(`${url}/posting/${model}`, data)
-    .then(function (response) {
-      console.log(response);
-      this.forceUpdate();
-    })
+    .then(response => response.data)
+      .then(
+        (res) => {
+          // RESETS THE DASHBOARD WITH NEW DATA
+          if(model === "posting") {
+            this.setState({
+              postingData: [
+                ...this.state.postingData,
+                res
+              ],
+            })
+          }
+          if(model === "applicant") {
+            this.setState({
+              applicantData: [
+                ...this.state.applicantData,
+                res
+              ]
+            })
+          }
+          if(model === "applicanttoposting") {
+            this.setState({
+              postingApplicantData: [
+                ...this.state.postingApplicantData,
+                res
+              ],
+              newPostingApplicantData: [
+                ...this.state.postingApplicantData,
+                res
+              ]
+            })
+          }
+        },
+        (error) => {
+          this.setState({
+            error
+          })
+        }
+      )
     .catch(function (error) {
       console.log(error);
     })
   }
 
   _closeModal = (event) => {
-    console.log('yep')
     const id = event.target.id
     document.querySelector('body').setAttribute('style', 'position: ');
     document.querySelector(`[data-modal-container-${id}]`).classList.add('hide');

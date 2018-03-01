@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 
     render() {
         return (
-            <div className="modal-overlay hide" data-modal-container-newposting>
+            <div className="modal-overlay hide" data-modal-container-posting>
                 <div className="modal-container">
                     <div className="modal-header"><h2>New Posting</h2></div>
                     <div className="modal-body">
@@ -48,9 +48,9 @@ import React, { Component } from 'react';
                         </form>
                     </div>
                     <div className="modal-footer">
-                        <button id='newposting' onClick={this.props.closeModal}>Cancel</button>
+                        <button id='posting' onClick={this.props.closeModal}>Cancel</button>
                         {/* <button>Save & New</button> */}
-                        <button type="submit" id='newposting' onClick={this.props.onFormSubmission}>Save</button>
+                        <button type="submit" id='posting' onClick={this.props.onFormSubmission}>Save</button>
                     </div>
                 </div>
             </div>

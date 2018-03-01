@@ -14,8 +14,9 @@ router.all('*', (req, res, next) => {
 )
 
 // CONNECT TO POSTGRES POSTING TABLE
-router.route('/newposting')
+router.route('/posting')
     .post((req, res) => {
+        console.log('getting here')
         Posting.create({
             positionTitle: req.body.positionTitle,
             jobDescription: req.body.jobDescription,
@@ -32,7 +33,7 @@ router.route('/newposting')
     })
 
 // CONNECT TO POSTGRES APPLICANTS TABLE
-router.route('/newapplicant')
+router.route('/applicant')
     .post((req,res) => {
         Applicant.create({
             firstName: req.body.firstName,
@@ -47,7 +48,7 @@ router.route('/newapplicant')
     })
 
 // CONNECT TO POSTGRES POSTINGAPPLICANT TABLE
-router.route('/addapplicanttoposting')
+router.route('/applicanttoposting')
     .post((req, res) => {
         PostingApplicant.create({
             applicantId: req.body.applicantId,

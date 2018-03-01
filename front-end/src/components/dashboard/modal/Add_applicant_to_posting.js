@@ -107,7 +107,7 @@ class AddApplicantToPosting extends Component {
         const DropdownPosting = this.state.dropdownPosting || Nothing;
 
         return (
-            <div className="modal-overlay hide" data-modal-container-addapplicanttoposting>
+            <div className="modal-overlay hide" data-modal-container-applicanttoposting>
                 <div className="modal-container" onClick={this._onBlurForDropdowns}>
                     <div className="modal-header"><h2>Add Applicant to Posting</h2></div>
                     <div className="modal-body">
@@ -160,9 +160,9 @@ class AddApplicantToPosting extends Component {
                         </form>
                     </div>
                     <div className="modal-footer">
-                        <button id='addapplicanttoposting' onClick={this._closeModal}>Cancel</button>
+                        <button id='applicanttoposting' onClick={this._closeModal}>Cancel</button>
                         {/* <button>Save & New</button> */}
-                        <button type="submit" id='addapplicanttoposting' onClick={this.props.onFormSubmission}>Save</button>
+                        <button type="submit" id='applicanttoposting' onClick={this.props.onFormSubmission}>Save</button>
                     </div>
                 </div>
             </div>
