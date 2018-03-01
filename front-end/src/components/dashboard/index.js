@@ -55,8 +55,8 @@ class Dashboard extends Component {
         isFilled: false,
 
         // add applicant to posting
-        applicant: '',
-        posting: '',
+        applicantId: '',
+        postingId: '',
         applicantStage: 'Sourcing',
         isRejected: false,
         hiringManager_notes: '',
@@ -98,11 +98,32 @@ class Dashboard extends Component {
   }
 
   _closeModal = (event) => {
+    console.log('yep')
     const id = event.target.id
     document.querySelector('body').setAttribute('style', 'position: ');
     document.querySelector(`[data-modal-container-${id}]`).classList.add('hide');
     this._resetState()
 }
+
+  _handlesAddApplicantToPosting = (type, key) => {
+    if (type === 'applicant'){
+      this.setState(prevState => ({
+        formObject: {
+          ...prevState.formObject,
+          applicantId: key
+        }
+      }))
+    }
+
+    if(type === 'posting') {
+      this.setState(prevState => ({
+        formObject: {
+          ...prevState.formObject,
+          postingId: key
+        }
+      }))
+    }
+  }
 
   _resetState = () => {
     this.setState({
@@ -234,7 +255,7 @@ class Dashboard extends Component {
       <div className="App">
           <NewApplicant formObject={this.state.formObject} closeModal={this._closeModal} onFormChangeHandler={this._onFormChangeHandler} onFormSubmission={this._onFormSubmission} />
           <NewPosting formObject={this.state.formObject} closeModal={this._closeModal} onFormChangeHandler={this._onFormChangeHandler} onFormSubmission={this._onFormSubmission} />
-          <AddApplicantToPosting postingRecords={this.state.postingData} applicantRecords={this.state.applicantData} formObject={this.state.formObject} closeModal={this._closeModal} onFormChangeHandler={this._onFormChangeHandler} onFormSubmission={this._onFormSubmission} />
+          <AddApplicantToPosting handlesAddApplicantToPosting={this._handlesAddApplicantToPosting} postingRecords={this.state.postingData} applicantRecords={this.state.applicantData} formObject={this.state.formObject} closeModal={this._closeModal} onFormChangeHandler={this._onFormChangeHandler} onFormSubmission={this._onFormSubmission} />
           <Header engagingTheModal={this._engagingTheModal} postingSelectedHandler={this._postingSelectedHandler} postingRecords={this.state.postingData}  onChangeHandler={this._onChangeHandler} postingSelected={this.state.postingSelected} filteredList={this.state.filteredList}/>
           <Container postingSelected={this.state.postingSelected} postingRecords={this.state.postingData} applicantRecords={this.state.applicantData} postingApplicantRecords={this.state.newPostingApplicantData} />
       </div>

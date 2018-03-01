@@ -50,8 +50,8 @@ router.route('/newapplicant')
 router.route('/addapplicanttoposting')
     .post((req, res) => {
         PostingApplicant.create({
-            applicantId: req.body.applicant.id,
-            postingId: req.body.posting.id,
+            applicantId: req.body.applicantId,
+            postingId: req.body.postingId,
             userId: 1,
             applicantStage: req.body.applicantStage,
             isRejected: req.body.isRejected,

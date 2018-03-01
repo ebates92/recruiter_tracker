@@ -11,6 +11,8 @@ class AddApplicantToPosting extends Component {
              dropdownPosting: null,
              applicantOptions: this.props.applicantRecords,
              postingOptions: this.props.postingRecords,
+             applicantSearch: '',
+             postingSearch: '',
          }
      }
 
@@ -32,6 +34,7 @@ class AddApplicantToPosting extends Component {
           let applicantOptions = this.props.applicantRecords.filter((applicant) => applicant.firstName.concat(applicant.lastName).match(expression));
           this.setState({
                 applicantOptions,
+                applicantSearch: event.target.value
             })
         }
     
@@ -39,6 +42,7 @@ class AddApplicantToPosting extends Component {
           let postingOptions = this.props.postingRecords.filter((posting) => posting.positionTitle.match(expression))
           this.setState({
                 postingOptions,
+                postingSearch: event.target.value
             })
         }
 
@@ -58,13 +62,42 @@ class AddApplicantToPosting extends Component {
         })
     }
 
-    _onBlurForDropdowns = (event) => {
+    // _onBlurForDropdowns = (event) => {
+    //     this.setState({
+    //         dropdownApplicant: null,
+    //         dropdownPosting: null,
+    //         applicantOptions: this.props.applicantRecords,
+    //         postingOptions: this.props.postingRecords,
+    //     })
+    // }
+
+    _searchClickHandler = (event) => {
+
+        if (event.target.id === 'applicant'){
+            this.setState({
+                applicantSearch: event.target.innerHTML
+            })
+        }
+
+        if(event.target.id === 'posting') {
+            this.setState({
+                applicantSearch: event.target.innerHTML
+            })
+        }
+
+        this.props.handlesAddApplicantToPosting(event.target.id, event.target.accessKey)
+    }
+
+    _closeModal = (event) => {
         this.setState({
-            dropdownApplicant: null,
-            dropdownPosting: null,
+            applicantSearch: '',
+            postingSearch: '',
             applicantOptions: this.props.applicantRecords,
             postingOptions: this.props.postingRecords,
         })
+        const id = event.target.id
+        document.querySelector('body').setAttribute('style', 'position: ');
+        document.querySelector(`[data-modal-container-${id}]`).classList.add('hide');
     }
 
     render() {
@@ -79,24 +112,29 @@ class AddApplicantToPosting extends Component {
                         <form>
                             <div className="col-left">
 
-                                <div className="ui-input"><span className="required"></span><span>Search for Applicant</span>
+                            <div className="ui-input"><span className="required"></span><span>Search for Applicant</span>
+                            <div className='form-search-container' >
                                 <div className="clearfix"></div>
-                                <input type="text" name='applicant' required onFocus={this._onFocusForDropdownsApplicant} onBlur={this._onBlurForDropdowns} onChange={this._onChangeForDropdowns}/>
-                                <DropdownApplicant searchOptions={this.state.applicantOptions}/>
-                                </div>
+                                <input type="text" name='applicant' value={this.state.applicantSearch} required onFocus={this._onFocusForDropdownsApplicant} onChange={this._onChangeForDropdowns}/>
+                                <DropdownApplicant searchClickHandler={this._searchClickHandler} searchOptions={this.state.applicantOptions}/>
+                            </div>
+                        </div>
 
                             </div>
                             <div className="col-right">
 
                                 <div className="ui-input"><span className="required"></span><span>Search for Posting</span>
-                                <div className="clearfix"></div>
-                                <input type="text" name='posting' required onFocus={this._onFocusForDropdownsPosting} onBlur={this._onBlurForDropdowns} onChange={this._onChangeForDropdowns}/>
-                                <DropdownPosting searchOptions={this.state.postingOptions}/>
+                                    <div className='form-search-container'>
+                                        <div className="clearfix"></div>
+                                        <input type="text" name='posting' value={this.state.postingSearch} required onFocus={this._onFocusForDropdownsPosting} onBlur={this._onBlurForDropdowns} onChange={this._onChangeForDropdowns}/>
+                                        <DropdownPosting searchClickHandler={this._searchClickHandler} searchOptions={this.state.postingOptions}/>
+                                    </div>
                                 </div>
 
                             </div>
+                            <div className='buffer'></div>
                             <div className="clearfix"></div>
-                            <h3>Additional Details</h3>
+                            <h3 className="subheader-apptopost">Additional Details</h3>
 
                             <div className="col-left">
 
@@ -120,7 +158,7 @@ class AddApplicantToPosting extends Component {
                         </form>
                     </div>
                     <div className="modal-footer">
-                        <button id='addapplicanttoposting' onClick={this.props.closeModal}>Cancel</button>
+                        <button id='addapplicanttoposting' onClick={this._closeModal}>Cancel</button>
                         {/* <button>Save & New</button> */}
                         <button type="submit" id='addapplicanttoposting' onClick={this.props.onFormSubmission}>Save</button>
                     </div>
