@@ -3,6 +3,16 @@ const router = express.Router();
 const _ = require('lodash');
 const User = require('../models/table/user');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const config = require('../config/config')
+  
+  const generateAuthToken = (user) => {
+      const userId = user.dataValues.id;
+      const access = 'auth';
+      const token = jwt.sign({id: userId, access}, config.secret);
+      const userRecord = {id: userId, token};
+      return userRecord;
+    }
 
 
 router.post('/', (req, res, next) => {
@@ -21,8 +31,12 @@ router.post('/', (req, res, next) => {
             email,
             password: hash,
           })
-          .then((user) => { 
-              res.status(201).send({"userCreated":"True"});
+          .then((user) => {
+            return generateAuthToken(user);
+          })
+          .then((userRecord) => {
+            res.cookie('session', userRecord.token);
+            res.send();
           })
           .catch(err => {
               res.send(err);
