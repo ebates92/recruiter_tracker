@@ -36,6 +36,7 @@ class SettingsDropdown extends Component {
                 </div>
                 <div className='form-dropdowns' onClick={this.props.settingsClickHandler}>Profile</div>
                 <div className='form-dropdowns' onClick={this.props.settingsClickHandler}>Calendly Link</div>
+                <div className='form-dropdowns' onClick={this.props.settingsClickHandler}>Logout</div>
             </div>
         )
     }
