@@ -4,7 +4,10 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-const hbs = require('handlebars');
+const cookieSession = require('cookie-session');
+const config = require('./config/config');
+const passport = require('passport');
+const isAuthorized = require('./auth');
 
 //  ROUTE FILES
 const auth = require('./routes/auth');
@@ -23,10 +26,21 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(cookieSession({
+  maxAge: 24 * 60 * 60 * 1000,
+  keys: [config.session.cookieKey]
+}));
+
+//Initialize passport
+app.use(passport.initialize());
+app.use(passport.session());
+
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 
 // ROUTES
+app.use(isAuthorized);
 app.use('/signup', signup);
 app.use('/auth', auth);
 app.use('/api', api);
