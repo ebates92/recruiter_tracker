@@ -12,7 +12,7 @@ const Record = (props) => {
             const buttonStyle = {width: '100px', height: '50px', fontSize: '.9rem', padding: '.3rem', marginLeft: 'auto', marginRight: 'auto'};
       
           const card = applicantRecord.length > 0 ? (
-            <a href="/" className="ui card" id="card" accessKey={record.id} key={record.id} onClick={props.applicantSelectedHandler}>
+            <div className="ui card" id="card" accessKey={applicantRecord[0].id} key={record.id} onClick={props.applicantSelectedHandler}>
               <h3>{applicantRecord[0].firstName}</h3>
               <div className="content" id="card-content">
                 <h4><em><span> {positionRecord[0].positionTitle}</span></em></h4>
@@ -24,7 +24,7 @@ const Record = (props) => {
                   <button class="ui green basic button" id={applicantRecord[0].id} style={buttonStyle} onClick={this.unhide}>Schedule Meeting</button>
                 </div>
               </div>
-            </a>) : null;
+            </div>) : null;
             
             return card
             })

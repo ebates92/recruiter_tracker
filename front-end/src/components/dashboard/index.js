@@ -6,6 +6,7 @@ import Container from './container';
 import NewPosting from './modal/Add_posting.js'
 import NewApplicant from './modal/Add_applicant.js'
 import AddApplicantToPosting from './modal/Add_applicant_to_posting.js'
+import ApplicantComponent from './modal/Applicant_Component'
 // import Postings from '../postingData.js';
 // import Applicants from './applicantData.js';
 // import {
@@ -14,6 +15,7 @@ import AddApplicantToPosting from './modal/Add_applicant_to_posting.js'
 // } from 'react-router-dom';
 const url = 'http://localhost:3000';
 
+const Nothing = () => <span></span>;
 
 class Dashboard extends Component {
   constructor(props) {
@@ -24,6 +26,11 @@ class Dashboard extends Component {
       postingApplicantData: [],
       error: null,
       filteredList: [],
+
+      // update applicant selected
+      currentApplicant: '',
+      currentApplicantsPostings: '',
+      applicantComponent: null,
 
       // updating the posting dropdown and container
       newPostingApplicantData: [],
@@ -139,6 +146,13 @@ class Dashboard extends Component {
     this._resetState()
 }
 
+_closeModalCorrectly = (event) => {
+  this.setState({
+    currentApplicant: '',
+    applicantComponent: null,
+  })
+}
+
   _handlesAddApplicantToPosting = (type, key) => {
     if (type === 'applicant'){
       this.setState(prevState => ({
@@ -191,11 +205,21 @@ class Dashboard extends Component {
   }
     
 
-// SEARCH BARS
+// SEARCH BAR
 
   _applicantSelectedHandler = (event) => {
     const applicant = this.state.applicantData.filter((applicant) => {
       return (applicant.id === parseInt(event.currentTarget.accessKey))
+    })
+
+    const currentApplicantsPostings = this.state.postingApplicantData.filter((postingApplicant) => {
+      return (postingApplicant.applicantId === parseInt(event.currentTarget.accessKey))
+    })
+
+    this.setState({
+      currentApplicant: applicant,
+      applicantComponent: ApplicantComponent,
+      currentApplicantsPostings
     })
   }
 
@@ -278,12 +302,14 @@ class Dashboard extends Component {
     }
 
   render() {
-    const ComponentToRender = this.state.modalComponent
+    const ApplicantComponent = this.state.applicantComponent || Nothing;
+
     return (
       <div className="App">
           <NewApplicant formObject={this.state.formObject} closeModal={this._closeModal} onFormChangeHandler={this._onFormChangeHandler} onFormSubmission={this._onFormSubmission} />
           <NewPosting formObject={this.state.formObject} closeModal={this._closeModal} onFormChangeHandler={this._onFormChangeHandler} onFormSubmission={this._onFormSubmission} />
           <AddApplicantToPosting handlesAddApplicantToPosting={this._handlesAddApplicantToPosting} postingRecords={this.state.postingData} applicantRecords={this.state.applicantData} formObject={this.state.formObject} closeModal={this._closeModal} onFormChangeHandler={this._onFormChangeHandler} onFormSubmission={this._onFormSubmission} />
+          <ApplicantComponent postingRecords={this.state.postingData} currentApplicantsPostings={this.state.currentApplicantsPostings} currentApplicant={this.state.currentApplicant} closeModalCorrectly={this._closeModalCorrectly}/>
           <Header engagingTheModal={this._engagingTheModal} postingSelectedHandler={this._postingSelectedHandler} applicantSelectedHandler={this._applicantSelectedHandler} applicantRecords={this.state.applicantData} postingRecords={this.state.postingData} postingSelected={this.state.postingSelected} />
           <Container applicantSelectedHandler={this._applicantSelectedHandler} postingSelected={this.state.postingSelected} postingRecords={this.state.postingData} applicantRecords={this.state.applicantData} postingApplicantRecords={this.state.newPostingApplicantData} />
       </div>
