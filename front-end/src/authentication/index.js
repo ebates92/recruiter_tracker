@@ -6,7 +6,7 @@
 // provides back methods that can be used globally
 //  the callback is used to set certain other parameters such as redirect props in the login component
 const Authentication = {
-    isAuthenticated: false,
+    isAuthenticated: true,
     authenticate(email, password, cb) {
         
         fetch('http://localhost:3000/auth', {

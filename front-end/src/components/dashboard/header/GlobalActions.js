@@ -1,21 +1,48 @@
 import React, {Component} from 'react';
-// import NewPosting from '../modal/Add_posting.js'
-// import NewApplicant from '../modal/Add_applicant.js'
-// import AddApplicantToPosting from '../modal/Add_applicant_to_posting.js'
+import DropdownSettingsComponent from '../dropdowns/settings'
+
+const Nothing = () => <span></span>
 
 class GlobalActions extends Component {
-    // constructor(props) {
-    //     super(props);
-    // }
+    constructor(props) {
+        super(props);
+        this.state = {
+            dropdownSettings: null
+        }
+    }
+
+
+    _settingsClickHandler = () => {
+        if (this.state.dropdownSettings === null) {
+            this.setState({
+                dropdownSettings: DropdownSettingsComponent
+            })
+            document.querySelector('.settings-container').addEventListener('mouseleave', (event) => {
+                this.setState({
+                    dropdownSettings: null
+                })
+            })
+        } else {
+            this.setState({
+                dropdownSettings: null
+            })
+        }
+
+    }
 
     render() {
+        const DropdownSettings = this.state.dropdownSettings || Nothing;
+
         const buttonStyle = {width: '100px', fontSize: '13px', padding: '0px'};
         return <div className="global-actions-console">
             <div class="ui buttons" id="console-group">
                 <button class="ui green basic button" id='posting' style={buttonStyle} onClick={this.unhide}>New Posting</button>
                 <button class="ui green basic button" id='applicant' style={buttonStyle} onClick={this.unhide}>New Applicant</button>
                 <button class="ui green basic button" id='applicanttoposting' style={buttonStyle} onClick={this.unhide}>Add Applicant to Posting</button>
-                <button class="ui green basic button" style={buttonStyle}>Settings</button>
+                <div className="settings-container">
+                    <button class="ui green basic button" id='removeleftstyling' onClick={this._settingsClickHandler} style={buttonStyle}>Settings</button>
+                    <DropdownSettings settingsClickHandler={this._settingsClickHandler} />
+                </div>
             </div>
         </div>
     }
