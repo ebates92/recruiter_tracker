@@ -7,7 +7,7 @@ const Container = (props) => {
             <div className="container">
               <ProgressBarWrapper />
               <div className="status-columns">
-                <RecordColumn postingSelected={props.postingSelected} postingRecords={props.postingRecords} applicantRecords={props.applicantRecords} postingApplicantRecords={props.postingApplicantRecords} />
+                <RecordColumn applicantSelectedHandler={props.applicantSelectedHandler} postingSelected={props.postingSelected} postingRecords={props.postingRecords} applicantRecords={props.applicantRecords} postingApplicantRecords={props.postingApplicantRecords} />
               </div>
             </div>
           ); 
