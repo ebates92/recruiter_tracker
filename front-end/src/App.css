@@ -235,11 +235,22 @@ input {
 
 #card {
   width: 85%;
-  display: block;
+  /* display: grid;
+  grid-template-rows: .2fr, .8fr; */
   margin: 15px auto;
-  height: 190px;
+  height: 175px;
   text-decoration: none;
   color: black;
+}
+
+.align-schedule-button {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  grid-row-start: 2;
 }
 
 #card h3 {
@@ -250,10 +261,18 @@ input {
 
 #card-content {
   padding-top: 0;
+  display: grid;
+  grid-template-rows: 4.5rem 3rem;
+  height: 100%;
+  margin: auto;
+  padding-top: 0;
+  padding-bottom: 1rem;
 }
 
 #card-content h4 {
   margin: 15px auto;
+  grid-row-start: 1;
+  text-align: center;
 }
 
 #card-content span {

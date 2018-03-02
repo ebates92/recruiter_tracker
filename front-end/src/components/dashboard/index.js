@@ -290,7 +290,7 @@ class Dashboard extends Component {
           <NewApplicant formObject={this.state.formObject} closeModal={this._closeModal} onFormChangeHandler={this._onFormChangeHandler} onFormSubmission={this._onFormSubmission} />
           <NewPosting formObject={this.state.formObject} closeModal={this._closeModal} onFormChangeHandler={this._onFormChangeHandler} onFormSubmission={this._onFormSubmission} />
           <AddApplicantToPosting handlesAddApplicantToPosting={this._handlesAddApplicantToPosting} postingRecords={this.state.postingData} applicantRecords={this.state.applicantData} formObject={this.state.formObject} closeModal={this._closeModal} onFormChangeHandler={this._onFormChangeHandler} onFormSubmission={this._onFormSubmission} />
-          <Header engagingTheModal={this._engagingTheModal} postingSelectedHandler={this._postingSelectedHandler} postingRecords={this.state.postingData}  onChangeHandler={this._onChangeHandler} postingSelected={this.state.postingSelected} filteredList={this.state.filteredList}/>
+          <Header engagingTheModal={this._engagingTheModal} postingSelectedHandler={this._postingSelectedHandler} applicantRecords={this.state.applicantData} postingRecords={this.state.postingData} postingSelected={this.state.postingSelected} />
           <Container postingSelected={this.state.postingSelected} postingRecords={this.state.postingData} applicantRecords={this.state.applicantData} postingApplicantRecords={this.state.newPostingApplicantData} />
       </div>
     );
