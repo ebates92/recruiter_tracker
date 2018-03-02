@@ -54,10 +54,12 @@ class SearchBar extends Component {
             mainSearch: event.target.innerHTML,
             dropdownMainSearch: null
         })
+        // will filter the dashboard to show these position records
         if (event.target.id === 'posting') {
             this.props.postingSelectedHandler(event)
+        // will open the applicant record
         } else if ( event.target.id === 'applicant') {
-            return null;
+            this.props.applicantSelectedHandler(event);
         }
         
     }

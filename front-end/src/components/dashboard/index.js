@@ -62,7 +62,7 @@ class Dashboard extends Component {
 
       }
     }
-    this._onChangeHandler = this._onChangeHandler.bind(this);
+  
     this._onFormChangeHandler = this._onFormChangeHandler.bind(this);
     this._onFormSubmission = this._onFormSubmission.bind(this);
     this._postingSelectedHandler = this._postingSelectedHandler.bind(this);
@@ -193,16 +193,10 @@ class Dashboard extends Component {
 
 // SEARCH BARS
 
-  _onChangeHandler(searchTerm, callback) {
-    const re = new RegExp('^' + searchTerm + '.*', 'gi');
-    const companyApplicantArray = this.state.postingData.concat(this.state.applicantData);
-    let filteredList = companyApplicantArray.filter(record => record.name.match(re));
-    // Return first 5 results
-    filteredList = filteredList.slice(0, 5);
-    this.setState({
-      filteredList
+  _applicantSelectedHandler = (event) => {
+    const applicant = this.state.applicantData.filter((applicant) => {
+      return (applicant.id === parseInt(event.currentTarget.accessKey))
     })
-    callback(filteredList);
   }
 
 
@@ -290,8 +284,8 @@ class Dashboard extends Component {
           <NewApplicant formObject={this.state.formObject} closeModal={this._closeModal} onFormChangeHandler={this._onFormChangeHandler} onFormSubmission={this._onFormSubmission} />
           <NewPosting formObject={this.state.formObject} closeModal={this._closeModal} onFormChangeHandler={this._onFormChangeHandler} onFormSubmission={this._onFormSubmission} />
           <AddApplicantToPosting handlesAddApplicantToPosting={this._handlesAddApplicantToPosting} postingRecords={this.state.postingData} applicantRecords={this.state.applicantData} formObject={this.state.formObject} closeModal={this._closeModal} onFormChangeHandler={this._onFormChangeHandler} onFormSubmission={this._onFormSubmission} />
-          <Header engagingTheModal={this._engagingTheModal} postingSelectedHandler={this._postingSelectedHandler} applicantRecords={this.state.applicantData} postingRecords={this.state.postingData} postingSelected={this.state.postingSelected} />
-          <Container postingSelected={this.state.postingSelected} postingRecords={this.state.postingData} applicantRecords={this.state.applicantData} postingApplicantRecords={this.state.newPostingApplicantData} />
+          <Header engagingTheModal={this._engagingTheModal} postingSelectedHandler={this._postingSelectedHandler} applicantSelectedHandler={this._applicantSelectedHandler} applicantRecords={this.state.applicantData} postingRecords={this.state.postingData} postingSelected={this.state.postingSelected} />
+          <Container applicantSelectedHandler={this._applicantSelectedHandler} postingSelected={this.state.postingSelected} postingRecords={this.state.postingData} applicantRecords={this.state.applicantData} postingApplicantRecords={this.state.newPostingApplicantData} />
       </div>
     );
   }
