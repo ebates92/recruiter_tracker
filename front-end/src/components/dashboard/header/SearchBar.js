@@ -30,31 +30,8 @@ class SearchBar extends Component {
             postingOptions: this.props.postingRecords,
             applicantOptions: this.props.applicantRecords,
         })
-        document.querySelector('.whole-searchbar').addEventListener('mouseleave', (event) => {
-            this.setState({
-                dropdownMainSearch: null,
-                mainSearch: ''
-            })
-            document.querySelector('.whole-searchbar').addEventListener('mouseenter', (event) => {
-                this.setState({
-                    dropdownMainSearch: DropdownMainSearchComponent,
-                    postingOptions: this.props.postingRecords,
-                    applicantOptions: this.props.applicantRecords,
-                })
-            })
-        })
+        document.querySelector('.whole-searchbar').addEventListener('mouseleave', this._mouseLeave)
     }
-
-    _onBlurForDropdowns = (event) => {
-        document.querySelector('.whole-searchbar').removeEventListener('mouseenter', (event) => {
-            this.setState({
-                dropdownMainSearch: DropdownMainSearchComponent,
-                postingOptions: this.props.postingRecords,
-                applicantOptions: this.props.applicantRecords,
-            })
-        })
-    }
-
 
     _onChangeForDropdowns = (event) => {
         
@@ -74,10 +51,43 @@ class SearchBar extends Component {
 
     _onClickSearchDropdown = (event) => {
         this.setState({
-            searchTerm: event.target.innerHTML,
+            mainSearch: event.target.innerHTML,
             dropdownMainSearch: null
         })
+        if (event.target.id === 'posting') {
+            this.props.postingSelectedHandler(event)
+        } else if ( event.target.id === 'applicant') {
+            return null;
+        }
+        
     }
+
+
+    // FOR UX OF DROPDOWN STAYING OPEN OR CLOSED
+        _mouseEnter = (event) => {
+            console.log('about to set mouse enter state')
+            this.setState({
+                dropdownMainSearch: DropdownMainSearchComponent,
+                postingOptions: this.props.postingRecords,
+                applicantOptions: this.props.applicantRecords,
+            })
+        }
+
+        _mouseLeave = (event) => {
+            this.setState({
+                dropdownMainSearch: null,
+                mainSearch: ''
+            })
+            console.log('about to add mouseenter')
+            document.querySelector('.whole-searchbar').addEventListener('mouseenter', this._mouseEnter, false)
+        }
+
+        _onBlurForDropdowns = (event) => {
+            console.log('about to remove mouseenter')
+            document.querySelector('.whole-searchbar').removeEventListener('mouseenter', this._mouseEnter, false)
+            document.querySelector('.whole-searchbar').removeEventListener('mouseleave', this._mouseLeave, false)
+        }
+
 
     render() {
         const DropdownMainSearch = this.state.dropdownMainSearch || Nothing;
@@ -88,7 +98,7 @@ class SearchBar extends Component {
                 <div className='whole-searchbar'>
                     <div className="searchbar-wrapper">
                         <div className="searchbar">
-                            <input type="text" value={this.state.searchTerm} placeholder="Search for Posting or Applicant..." onChange={this._onChangeForDropdowns} onFocus={this._onFocusForDropdowns} onBlur={this._onBlurForDropdowns}/>
+                            <input type="text" value={this.state.searchTerm} placeholder="Search for Posting or Applicant..." onChange={this._onChangeForDropdowns} onClick={this._onFocusForDropdowns} onBlur={this._onBlurForDropdowns}/>
                         </div>
                         <div className='search-icon' style={divStyle}><i className="fas fa-search" style={iconStyle}></i></div> 
                     </div>

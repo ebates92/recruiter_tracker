@@ -9,7 +9,7 @@ const Header = (props) => {
         <header className="header">
             <div className="header-top">
                 <Filter postingSelectedHandler={props.postingSelectedHandler} postingSelected={props.postingSelected} postingRecords={props.postingRecords}/>
-                <SearchBar postingRecords={props.postingRecords} applicantRecords={props.applicantRecords} />
+                <SearchBar postingSelectedHandler={props.postingSelectedHandler} postingRecords={props.postingRecords} applicantRecords={props.applicantRecords} />
                 <GlobalActions engagingTheModal={props.engagingTheModal}/>
             </div>
             <div className="header-bottom">
