@@ -12,14 +12,12 @@ router.all('*', (req, res, next) => {
     next();
     }
 )
-
 // CONNECT TO POSTGRES POSTING TABLE
 router.route('/postings')
     .get((req, res) => {
         Posting.findAll({
-            where:{userId: 1}
+            where:{userId: res.locals.user.dataValues.id}
         }).then((postings) => {
-            console.log(postings)
             res.json(postings);
         })
     })
@@ -28,15 +26,14 @@ router.route('/postings')
 router.route('/applicants')
     .get((req,res) => {
         Applicant.findAll({
-            where:{userId: 1}
+            where:{userId: res.locals.user.dataValues.id}
         }).then((applicants) => res.json(applicants))
     })
-
 // CONNECT TO POSTGRES POSTINGAPPLICANT TABLE
 router.route('/postingapplicant')
     .get((req, res) => {
         PostingApplicant.findAll({
-            where:{userId: 1}
+            where:{userId: res.locals.user.dataValues.id}
         }).then((postingapplicant) => res.json(postingapplicant))
     })
 

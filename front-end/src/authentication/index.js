@@ -1,6 +1,4 @@
 // import React from 'react';
-
-
 // when isAuthenticated = true it will render the dashboard page
 // need to ask Chris what this is exactly (why doesn't this need to be a class since it contains methdos?)
 // provides back methods that can be used globally
