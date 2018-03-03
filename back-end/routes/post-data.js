@@ -23,7 +23,7 @@ router.route('/posting')
             qualifications: req.body.qualifications,
             hiringManager: req.body.hiringManager,
             additionalNotes: req.body.additionalNotes,
-            isFilled: req.body.is,
+            isFilled: req.body.isFilled,
             userId: 1,
         }).then((postings) => {
             console.log(postings)

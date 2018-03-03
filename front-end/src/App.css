@@ -720,43 +720,53 @@ input {
   padding-bottom: .3rem;
 }
 
-/* .searchbar-dropdown {
-  position: absolute;
-  left: -1px;
-  top: 33px;
-  width: 100.5%;
-  border: 1px solid rgb(221, 219, 218);
-  border-radius: 2px;
-  background-color: rgb(255, 255, 255);
-  box-shadow: 0 2px 7px rgba(0, 0, 0, .07);
-  z-index: 9999;
-} */
-
 .search-icon {
     padding-right: 1rem;
   }
 
-/* .searchbar-dropdown ul {
-  list-style-type: none;
-  font-size: 1rem;
-  margin-bottom: 1px;
+
+/* APPLICANT PROFILE */
+
+.applicant-component-body {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
 }
 
-.searchbar-dropdown li {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  margin-left: -41px;
-  cursor: pointer;
-  padding: 10px 0;
-  width: 424px;
+.applicant-component-left-side {
+  grid-column-start: 1;
 }
 
-.searchbar-dropdown li:hover {
-  background-color: rgb(243, 242, 242);
+.applicant-component-right-side {
+  grid-column-start: 2;
 }
 
-.searchbar-dropdown img {
-  padding: 5px 5px 0 0;
-  margin-left: 15px;
-} */
+.applicant-component-information-container {
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+  margin-top: .2rem;
+  padding: .8rem;
+  box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
+}
+
+.applicant-component-section-title {
+  font-size: 1.35rem;
+  font-weight: 550;
+  margin-top: .3rem;
+  padding-bottom: .7rem;
+}
+
+.applicant-component-information {
+  padding-left: .5rem;
+}
+
+.applicant-component-datafield {
+  padding-bottom: .6rem;
+}
+
+.applicant-component-right-side > div {
+  background-image: url('./resume-image.png');
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 2px 3px 0 #d4d4d5, 0 0 0 7px rgba(22, 216, 22, 0.349);
+}
