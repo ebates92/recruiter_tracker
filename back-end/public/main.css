@@ -412,7 +412,7 @@ html, body{
   
   .login-page-container {
     background-color: rgba(241, 237, 237, 1);
-    height: 100vh;
+    height: 100%;
     /* margin: 1.5rem;
     margin-top: 2rem; */
   }
@@ -450,7 +450,8 @@ html, body{
   .login-passport {
     width: 100%;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    /* grid-template-columns: 1fr 1fr; */
+
   }
   
   .login-passport > button {
@@ -510,7 +511,9 @@ html, body{
     justify-content: center;
     align-content: center;
     align-items: center;
-    margin-top: 6rem;
+    margin-top: 10vh;
+    height: 100%;
+    margin-bottom: 10vh;
     /* max-width: 450px;
     margin-left: 25vw;
     margin-right: 25vw; */

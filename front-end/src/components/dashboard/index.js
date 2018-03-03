@@ -54,7 +54,7 @@ class Dashboard extends Component {
         // add posting
         positionTitle: '',
         jobDescription: '',
-        salaryRange: '',
+        salaryRange: 0,
         qualifications: '',
         hiringManager: '',
         additionalNotes: '',

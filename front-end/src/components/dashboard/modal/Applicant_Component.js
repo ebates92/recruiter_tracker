@@ -8,21 +8,27 @@ import PostingsApplied from './Postings_applied'
         return (
             <div className="modal-overlay" data-modal-container-applicantcomponent>
                 <div className="modal-container">
-                    <div className="modal-header"><h2>{this.props.currentApplicant[0].firstName} {this.props.currentApplicant[0].lastName}</h2></div>
-                    <div className="modal-body">
+                    <div className="modal-header"><h2><strong>{this.props.currentApplicant[0].firstName} {this.props.currentApplicant[0].lastName}</strong></h2></div>
+                    <div className="modal-body applicant-component-body">
                         <div className='applicant-component-left-side'>
-                            <div>
-                                <div>{this.props.currentApplicant[0].email}</div>
-                                <div>{this.props.currentApplicant[0].phone}</div>
-                                <div><a href='{this.props.currentApplicant[0].linked_in}'>{this.props.currentApplicant[0].linked_in}</a></div>
-                                <div>{this.props.currentApplicant[0].recruiter_notes}</div>
+                            <div className='applicant-component-section-title'>Personal Information</div>
+                            <div className='applicant-component-information-container'>
+                                <div className='applicant-component-information'>
+                                    <div className="applicant-component-datafield"><strong>{this.props.currentApplicant[0].firstName} {this.props.currentApplicant[0].lastName}</strong></div>
+                                    <div className="applicant-component-datafield">{this.props.currentApplicant[0].email}</div>
+                                    <div className="applicant-component-datafield">{this.props.currentApplicant[0].phone}</div>
+                                    <div className="applicant-component-datafield"><a href='{this.props.currentApplicant[0].linked_in}'>{this.props.currentApplicant[0].linked_in}</a></div>
+                                    <div className="applicant-component-datafield">{this.props.currentApplicant[0].recruiter_notes}</div>
+                                </div>
                             </div>
                             <div>
+                                <div className='applicant-component-section-title'>Relevant Postings</div>
                                 <PostingsApplied postingRecords={this.props.postingRecords} currentApplicantsPostings={this.props.currentApplicantsPostings}/>
                             </div>
                         </div>
                         <div className='applicant-component-right-side'>
-                            <div>CANVAS TO GO HERE</div>
+                            <div></div>
+                            {/* <img src="./resume-image.png" alt="basic resume"/> */}
                         </div>
                     
                     </div>

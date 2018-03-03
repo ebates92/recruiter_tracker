@@ -7,12 +7,13 @@ const PostingsApplied = (props) => {
         const postingId = applicantPosting.postingId
 
         return (
-            <div>
-                <div>TEST</div>
-                <div>{props.postingRecords[postingId].positionTitle}</div>
-                <div>{applicantPosting.applicantStage}</div>
-                <div>{applicantPosting.isRejected}</div>
-                <div>{applicantPosting.hiringManager_notes}</div>
+            <div className='relevant-postings-container applicant-component-information-container'>
+                <div className='applicant-component-information'>
+                    <div className="applicant-component-datafield">Title:  <strong>{props.postingRecords[postingId].positionTitle}</strong></div>
+                    <div className="applicant-component-datafield">Stage:  <strong>{applicantPosting.applicantStage}</strong></div>
+                    <div className="applicant-component-datafield">Hiring manager notes:  <strong>{applicantPosting.hiringManager_notes}</strong></div>
+                    {/* <div className="applicant-component-datafield">{applicantPosting.isRejected}</div> */}
+                </div>
             </div>
         )
     })
