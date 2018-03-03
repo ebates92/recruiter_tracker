@@ -1,11 +1,9 @@
-
-
+require('dotenv').config()
 
 //  ROUTE FILES
-var api = require('./routes/api');
 var postData = require('./routes/post-data')
-
 const express = require('express');
+const app = express();
 const path = require('path');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
@@ -22,7 +20,7 @@ const auth = require('./routes/auth');
 const api = require('./routes/api');
 const dashboard = require('./routes/dashboard');
 const signup = require('./routes/signup');
-const app = express();
+
 
 // // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -74,9 +72,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.send(res.locals.error);
 });
-
-app.listen(3000, () => {
-  console.log("App running on port 3000")
-})
 
 module.exports = app;

@@ -16,7 +16,6 @@ router.all('*', (req, res, next) => {
 // CONNECT TO POSTGRES POSTING TABLE
 router.route('/posting')
     .post((req, res) => {
-        console.log('getting here')
         Posting.create({
             positionTitle: req.body.positionTitle,
             jobDescription: req.body.jobDescription,

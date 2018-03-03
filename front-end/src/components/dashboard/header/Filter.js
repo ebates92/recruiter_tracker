@@ -31,6 +31,11 @@ class Filter extends Component {
     postingSelectHandler = () => {
         const cssStyle = (this.state.postingDropdown === 'no-posting-dropdown') ? 'yes-posting-dropdown' : 'no-posting-dropdown';
         this.setState({postingDropdown: cssStyle})
+        document.querySelector('.posting-dropdown-title').addEventListener('mouseleave', (event) => {
+            this.setState({
+                postingDropdown: 'no-posting-dropdown'
+            })
+        })
     }
 }
 

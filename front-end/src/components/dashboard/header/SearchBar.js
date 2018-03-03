@@ -1,59 +1,114 @@
 import React, {Component} from 'react';
 import postingLogo from './posting_logo.png';
 import applicantLogo from './applicant_logo.png';
+import DropdownMainSearchComponent from '../dropdowns'
+
+const Nothing = () => <span></span>;
 
 class SearchBar extends Component {
     constructor(props){
         super(props);
         this.state = {
+            dropdownMainSearch: null,
             searchTerm: '',
-            inputFocus: false,
-            onChangeHandler: this.props.onChangeHandler,
-            filteredList: this.props.defaultRecords
+            applicantOptions: this.props.applicantRecords,
+            postingOptions: this.props.postingRecords,
+            // filteredList: this.props.defaultRecords
         }
-        this.searchHandler = this.searchHandler.bind(this);
-        this.clickHandler = this.clickHandler.bind(this);
     }
 
+    componentWillReceiveProps () {
+        this.setState({
+           applicantOptions: this.props.applicantRecords,
+           postingOptions: this.props.postingRecords,
+        })
+    }
+
+    _onFocusForDropdowns = (event) => {
+        this.setState({
+            dropdownMainSearch: DropdownMainSearchComponent,
+            postingOptions: this.props.postingRecords,
+            applicantOptions: this.props.applicantRecords,
+        })
+        document.querySelector('.whole-searchbar').addEventListener('mouseleave', this._mouseLeave)
+    }
+
+    _onChangeForDropdowns = (event) => {
+        
+                // for when searching
+                const searchTerm = event.target.value;
+                const expression = new RegExp('^' + searchTerm + '.*', 'gi');
+            
+                // associating applicant to posting
+                  let applicantOptions = this.props.applicantRecords.filter((applicant) => applicant.firstName.concat(applicant.lastName).match(expression));
+                  let postingOptions = this.props.postingRecords.filter((posting) => posting.positionTitle.match(expression))
+                  this.setState({
+                        applicantOptions,
+                        postingOptions,
+                        searchTerm: event.target.value
+                    })
+                }
+
+    _onClickSearchDropdown = (event) => {
+        this.setState({
+            mainSearch: event.target.innerHTML,
+            dropdownMainSearch: null
+        })
+        // will filter the dashboard to show these position records
+        if (event.target.id === 'posting') {
+            this.props.postingSelectedHandler(event)
+        // will open the applicant record
+        } else if ( event.target.id === 'applicant') {
+            this.props.applicantSelectedHandler(event);
+        }
+        
+    }
+
+
+    // FOR UX OF DROPDOWN STAYING OPEN OR CLOSED
+        _mouseEnter = (event) => {
+            console.log('about to set mouse enter state')
+            this.setState({
+                dropdownMainSearch: DropdownMainSearchComponent,
+                postingOptions: this.props.postingRecords,
+                applicantOptions: this.props.applicantRecords,
+            })
+        }
+
+        _mouseLeave = (event) => {
+            this.setState({
+                dropdownMainSearch: null,
+                mainSearch: ''
+            })
+            console.log('about to add mouseenter')
+            document.querySelector('.whole-searchbar').addEventListener('mouseenter', this._mouseEnter, false)
+        }
+
+        _onBlurForDropdowns = (event) => {
+            console.log('about to remove mouseenter')
+            document.querySelector('.whole-searchbar').removeEventListener('mouseenter', this._mouseEnter, false)
+            document.querySelector('.whole-searchbar').removeEventListener('mouseleave', this._mouseLeave, false)
+        }
+
+
     render() {
+        const DropdownMainSearch = this.state.dropdownMainSearch || Nothing;
         const listItemInfoStyle = {margin: '0px', paddingBottom: '3px'};
         const iconStyle = {fontSize: '.8125rem', color: '#b0adab'};
         const divStyle = {paddingBottom: '3px'};
-        const listItems = this.state.filteredList.map((record, i) => <li key={i}><div><img alt="objectType" src={record.objectType !=='Posting' ? applicantLogo : postingLogo} width="36px" height="36px" /></div> 
-        <div><h4 style={listItemInfoStyle}>{record.name}</h4><h6 style={listItemInfoStyle}>{record.objectType}</h6></div></li>)
-        return <div className="searchbar-wrapper">
-                <div className="searchbar">
-                    <input type="text" placeholder="Search for Posting or Applicant..." onFocus={this.clickHandler} onBlur={this.clickHandler} onChange={this.searchHandler} />
-                </div>
-                <div style={divStyle}><i className="fas fa-search" style={iconStyle}></i></div>
-                <div className="searchbar-dropdown hide" data-dropdown>
-                <ul>
-                    {listItems}
-                </ul>
+        return (
+                <div className='whole-searchbar'>
+                    <div className="searchbar-wrapper">
+                        <div className="searchbar">
+                            <input type="text" value={this.state.searchTerm} placeholder="Search for Posting or Applicant..." onChange={this._onChangeForDropdowns} onClick={this._onFocusForDropdowns} onBlur={this._onBlurForDropdowns}/>
+                        </div>
+                        <div className='search-icon' style={divStyle}><i className="fas fa-search" style={iconStyle}></i></div> 
                     </div>
+                    <DropdownMainSearch onClickSearchDropdown={this._onClickSearchDropdown} applicantOptions={this.state.applicantOptions} postingOptions={this.state.postingOptions}/>
                 </div>
+        )
     }
 
-    // Display dropdown menu if searchbar in focus
-    clickHandler(event) {
-        const e = document.querySelector('[data-dropdown]');
-        event.type === 'focus' ? e.classList.remove('hide')
-                               : e.classList.add('hide');
-    }
-
-    // Update SearchBar state when input value changes
-    searchHandler(event) {
-        const e = document.querySelector('[data-dropdown]');
-        const input = event.posting.value;
-        this.state.onChangeHandler(input, (filteredList) => {
-            // If search results empty, hide dropdown menu
-            filteredList.length > 0 ? e.classList.remove('hide')
-                                    : e.classList.add('hide');
-            this.setState({
-                filteredList
-            })
-        })
-    }
 }
 
 export default SearchBar;
