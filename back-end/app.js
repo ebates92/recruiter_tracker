@@ -1,3 +1,5 @@
+
+
 require('dotenv').config()
 
 //  ROUTE FILES
@@ -13,8 +15,6 @@ const cookieSession = require('cookie-session');
 const config = require('./config/config');
 const passport = require('passport');
 const isAuthorized = require('./auth');
-
-
 //  ROUTE FILES
 const auth = require('./routes/auth');
 const api = require('./routes/api');
@@ -42,11 +42,14 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'build')));
 
 
 // ROUTES
 app.use(isAuthorized);
+app.use('/login', (req, res) => {
+  res.sendFile(__dirname + '/build/login.html');
+});
 app.use('/signup', signup);
 app.use('/auth', auth);
 app.use('/api', api);
@@ -72,5 +75,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.send(res.locals.error);
 });
+
+app.listen(3000);
 
 module.exports = app;

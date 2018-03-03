@@ -28,7 +28,8 @@ module.exports = isAuthorized = (req, res, next) => {
         }
     })
     .then((user) => {
-        res.locals.user = user;
+        console.log(user);
+        res.locals.id = user.dataValues.id;
         next();
     })
     .catch((err) => {
