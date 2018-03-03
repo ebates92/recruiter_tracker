@@ -16,6 +16,7 @@ router.all('*', (req, res, next) => {
 // CONNECT TO POSTGRES POSTING TABLE
 router.route('/posting')
     .post((req, res) => {
+        
         Posting.create({
             positionTitle: req.body.positionTitle,
             jobDescription: req.body.jobDescription,
@@ -24,7 +25,7 @@ router.route('/posting')
             hiringManager: req.body.hiringManager,
             additionalNotes: req.body.additionalNotes,
             isFilled: req.body.is,
-            userId: 1,
+            userId: res.locals.id
         }).then((postings) => {
             console.log(postings)
             res.json(postings);
@@ -42,7 +43,7 @@ router.route('/applicant')
             linked_in: req.body.linked_in,
             resume_link: req.body.resume_link,
             recruiter_notes: req.body.recruiter_notes,
-            userId: 1,
+            userId: res.locals.id,
         }).then((applicants) => res.json(applicants))
     })
 
@@ -52,7 +53,7 @@ router.route('/applicanttoposting')
         PostingApplicant.create({
             applicantId: req.body.applicantId,
             postingId: req.body.postingId,
-            userId: 1,
+            userId: res.locals.id,
             applicantStage: req.body.applicantStage,
             isRejected: req.body.isRejected,
             hiringManager_notes: req.body.hiringManager_notes,
