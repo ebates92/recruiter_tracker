@@ -24,13 +24,8 @@ router.route('/posting')
             qualifications: req.body.qualifications,
             hiringManager: req.body.hiringManager,
             additionalNotes: req.body.additionalNotes,
-<<<<<<< HEAD
-            isFilled: req.body.isFilled,
-            userId: 1,
-=======
             isFilled: req.body.is,
             userId: res.locals.id
->>>>>>> tcampb/build
         }).then((postings) => {
             console.log(postings)
             res.json(postings);
