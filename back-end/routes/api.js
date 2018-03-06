@@ -37,5 +37,13 @@ router.route('/postingapplicant')
         }).then((postingapplicant) => res.json(postingapplicant))
     })
 
+// CONNECT TO POSTGRES USER TABLE
+router.route('/user')
+.get((req, res) => {
+    PostingApplicant.findOne({
+        where:{userId: res.locals.id}
+    }).then((user) => res.json(user))
+})
+
 
 module.exports = router;
