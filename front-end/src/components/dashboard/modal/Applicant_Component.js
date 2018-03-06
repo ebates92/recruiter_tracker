@@ -35,7 +35,7 @@ import PostingsApplied from './Postings_applied'
                     <div className="modal-footer">
                         <button id='applicantcomponent' onClick={this.props.closeModalCorrectly}>Cancel</button>
                         {/* <button>Save & New</button> */}
-                        {/* <button type="submit" id='posting' onClick={this.props.onFormSubmission}>Save</button> */}
+                        {/* {<button type="submit" id='posting' onClick={this.props.onFormSubmission}>Save</button>} */}
                     </div>
                 </div>
             </div>

@@ -7,6 +7,7 @@ import NewPosting from './modal/Add_posting.js'
 import NewApplicant from './modal/Add_applicant.js'
 import AddApplicantToPosting from './modal/Add_applicant_to_posting.js'
 import ApplicantComponent from './modal/Applicant_Component'
+import CalendlyModal from './modal/Calendly'
 // import Postings from '../postingData.js';
 // import Applicants from './applicantData.js';
 // import {
@@ -35,6 +36,10 @@ class Dashboard extends Component {
       // updating the posting dropdown and container
       newPostingApplicantData: [],
       postingSelected: 'All',
+
+      // FOR SETTINGS SECTION
+      userData: '',
+      calendlyModal: null,
 
       // update and interact with the modal (when we refactor this code)
       // modalType: 'New Posting',
@@ -66,6 +71,9 @@ class Dashboard extends Component {
         applicantStage: 'Sourcing',
         isRejected: false,
         hiringManager_notes: '',
+
+        // edit or add user data
+        calendly_url: '',
 
       }
     }
@@ -127,6 +135,11 @@ class Dashboard extends Component {
               ]
             })
           }
+          if(model === "user-calendly") {
+            this.setState({
+              userData: res
+            })
+          }
         },
         (error) => {
           this.setState({
@@ -150,6 +163,7 @@ _closeModalCorrectly = (event) => {
   this.setState({
     currentApplicant: '',
     applicantComponent: null,
+    calendlyModal: null,
   })
 }
 
@@ -200,6 +214,9 @@ _closeModalCorrectly = (event) => {
           applicantStage: 'Sourcing',
           isRejected: false,
           hiringManager_notes: '',
+
+          // edit or add user data
+          calendly_url: ''
       }
     })
   }
@@ -246,6 +263,14 @@ _closeModalCorrectly = (event) => {
       newPostingApplicantData: newPostingApplicantData,
     })
   };
+
+  // SETTINGS MODALS
+
+  _calendly_urlClickHandler = (event) => {
+    this.setState({
+        calendlyModal: CalendlyModal
+    })
+}
 
 // API CALLS
   componentDidMount() {
@@ -299,10 +324,28 @@ _closeModalCorrectly = (event) => {
             })
           }
         )
+
+        axios.get(`${url}/api/user`)
+        .then(res => res.data)
+        .then(
+          (userData) => {
+            this.setState({
+                userData,
+            });
+          },
+          (error) => {
+            this.setState({
+              error
+            })
+          }
+        )
     }
+
+
 
   render() {
     const ApplicantComponent = this.state.applicantComponent || Nothing;
+    const CalendlyModal = this.state.calendlyModal || Nothing;
 
     return (
       <div className="App">
@@ -310,7 +353,8 @@ _closeModalCorrectly = (event) => {
           <NewPosting formObject={this.state.formObject} closeModal={this._closeModal} onFormChangeHandler={this._onFormChangeHandler} onFormSubmission={this._onFormSubmission} />
           <AddApplicantToPosting handlesAddApplicantToPosting={this._handlesAddApplicantToPosting} postingRecords={this.state.postingData} applicantRecords={this.state.applicantData} formObject={this.state.formObject} closeModal={this._closeModal} onFormChangeHandler={this._onFormChangeHandler} onFormSubmission={this._onFormSubmission} />
           <ApplicantComponent postingRecords={this.state.postingData} currentApplicantsPostings={this.state.currentApplicantsPostings} currentApplicant={this.state.currentApplicant} closeModalCorrectly={this._closeModalCorrectly}/>
-          <Header engagingTheModal={this._engagingTheModal} postingSelectedHandler={this._postingSelectedHandler} applicantSelectedHandler={this._applicantSelectedHandler} applicantRecords={this.state.applicantData} postingRecords={this.state.postingData} postingSelected={this.state.postingSelected} />
+          <CalendlyModal onFormChangeHandler={this._onFormChangeHandler} onFormSubmission={this._onFormSubmission} calendly_url={this.state.formObject.calendly_url} closeModalCorrectly={this._closeModalCorrectly}/>
+          <Header userData={this.state.userData} calendly_urlClickHandler={this._calendly_urlClickHandler} engagingTheModal={this._engagingTheModal} postingSelectedHandler={this._postingSelectedHandler} applicantSelectedHandler={this._applicantSelectedHandler} applicantRecords={this.state.applicantData} postingRecords={this.state.postingData} postingSelected={this.state.postingSelected} />
           <Container applicantSelectedHandler={this._applicantSelectedHandler} postingSelected={this.state.postingSelected} postingRecords={this.state.postingData} applicantRecords={this.state.applicantData} postingApplicantRecords={this.state.newPostingApplicantData} />
       </div>
     );
