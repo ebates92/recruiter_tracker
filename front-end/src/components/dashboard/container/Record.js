@@ -1,46 +1,44 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { DragSource } from 'react-dnd';
 
-
-const Record = (props) => {
-      
-
-      const recordCardsComponents = () => {
-        if (props.postingApplicantRecords.length > 0) {
-          return (props.postingApplicantRecords.map((record) => {
-            const applicantRecord = props.applicantRecords.filter((applicant) => applicant.id === record.applicantId);
-            const positionRecord = props.postingRecords.filter((posting) => posting.id === record.postingId)
-            const buttonStyle = {width: '100px', height: '50px', fontSize: '.9rem', padding: '.3rem', marginLeft: 'auto', marginRight: 'auto'};
-      
-          const card = applicantRecord.length > 0 ? (
-            <div className="ui card" id="card" accessKey={applicantRecord[0].id} key={record.id} onClick={props.applicantSelectedHandler}>
-              <h3>{applicantRecord[0].firstName}</h3>
-              <div className="content" id="card-content">
-                <h4><em><span> {positionRecord[0].positionTitle}</span></em></h4>
-                {/* <h4><strong>Email</strong><span> {applicantRecord[0].email}</span></h4>
-                <h4><strong>Phone:</strong><span> {applicantRecord[0].phone}</span></h4> */}
-                {/* <h4><strong>Recruiter Notes:</strong><span> {applicantRecord[0].recruiter_notes}</span></h4> */}
-                {/* <h4><strong><a href={applicantRecord[0].resume_link}>Resume</a></strong></h4> */}
-                <div className='align-schedule-button'>
-                  <button class="ui green basic button" id={applicantRecord[0].id} style={buttonStyle} onClick={this.unhide}>Schedule Meeting</button>
-                </div>
-              </div>
-            </div>) : null;
-            
-            return card
-            })
-          )
-        } else {
-          return null
-        }
-      }
-      
-    const recordCards = recordCardsComponents()
-
-    return (
-      <React.Fragment>
-        {recordCards}
-      </React.Fragment>
-    )
+  
+const recordSource = {
+  beginDrag() {
+    return {}
+  },
 }
 
-export default Record;
+function collect(connect, monitor) {
+	return {
+		connectDragSource: connect.dragSource(),
+		connectDragPreview: connect.dragPreview(),
+		isDragging: monitor.isDragging(),
+	}
+}
+
+class Record extends Component {
+
+  render() {
+    const { connectDragSource, isDragging } = this.props;
+
+    const card = this.props.applicantRecord.length > 0 ? (
+      <div className="ui card" id="card" accessKey={this.props.applicantRecord[0].id} key={this.props.record.id} onClick={this.props.applicantSelectedHandler}>
+        <h3>{this.props.applicantRecord[0].firstName}</h3>
+        <div className="content" id="card-content">
+          <h4><em><span> {this.props.positionRecord[0].positionTitle}</span></em></h4>
+          <div className='align-schedule-button'>
+            <button class="ui green basic button" id={this.props.applicantRecord[0].id} style={this.props.buttonStyle} onClick={this.props.unhide}>Schedule Meeting</button>
+          </div>
+        </div>
+      </div>) : null;
+
+    return connectDragSource(
+      <div>
+        {card}
+      </div>
+      )
+  }
+}
+
+
+export default DragSource('record', recordSource, collect) (Record);
