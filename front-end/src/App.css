@@ -6,10 +6,19 @@ html, body{
   margin: 0;
   padding: 0;
   font-family: 'Lato', sans-serif;
+  overflow: hidden;
 }
 
 *,*:before, *:after{
   box-sizing: inherit;
+}
+
+#root {
+  height: 100%;
+}
+
+.App {
+  height: 100%;
 }
 
 .header {
@@ -159,6 +168,7 @@ input {
 .status-columns {
   display: flex;
   justify-content: space-around;
+  height: 100%;
 }
 
 .status-col {
@@ -232,7 +242,7 @@ input {
 
 .modal-overlay {
   background-color: rgba(154, 152, 151, 0.5);
-  height: 720px;
+  height: 100%;
   width: 100%;
   opacity: 1;
   z-index: 10;
@@ -241,14 +251,19 @@ input {
   bottom: 0;
   left: 0;
   right: 0;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
 }
 
 .modal-container {
   max-width: 840px;
   min-width: 480px;
-  height: 100%;
+  /* height: 100%;
   padding: 50px 0;
-  margin: 0 auto;
+  margin: 0 auto; */
+
 }
 
 .modal-header {

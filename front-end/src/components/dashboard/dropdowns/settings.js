@@ -7,8 +7,8 @@ class SettingsDropdown extends Component {
     
     logoutSession = () => {
         axios.post(`${url}/auth/logout`)
-        // .then(res => location.replace('http://localhost:3000/login'))
-        // .catch(e => console.log("Already logged out."));
+        .then(res => window.location.replace('/login'))
+        .catch(e => console.log("Already logged out."));
     }
 
     render() {
@@ -19,7 +19,7 @@ class SettingsDropdown extends Component {
                     <div>{this.props.userData.email}</div>
                     <div>link: {this.props.userData.calendly_url}</div>
                 </div>
-                <div className='form-dropdowns'>Profile</div>
+                {/* <div className='form-dropdowns'>Profile</div> */}
                 <div className='form-dropdowns' onClick={this.props.calendly_urlClickHandler}>Calendly Link</div>
                 <div className='form-dropdowns'onClick={this.logoutSession}>Logout</div>
             </div>
