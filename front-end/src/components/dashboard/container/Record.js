@@ -3,7 +3,8 @@ import { DragSource } from 'react-dnd';
 
   
 const recordSource = {
-  beginDrag() {
+  beginDrag(props) {
+    props.applicantPostingMovedHandler(props.record.id)
     return {}
   },
 }

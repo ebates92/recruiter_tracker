@@ -2,19 +2,19 @@ import React from 'react';
 import { DragSource } from 'react-dnd';
 import Record from './Record'
   
-const recordSource = {
-  beginDrag() {
-    return {}
-  },
-}
+// const recordSource = {
+//   beginDrag(props) {
+//     console.log(props)
+//   },
+// }
 
-function collect(connect, monitor) {
-	return {
-		connectDragSource: connect.dragSource(),
-		connectDragPreview: connect.dragPreview(),
-		isDragging: monitor.isDragging(),
-	}
-}
+// function collect(connect, monitor) {
+// 	return {
+// 		connectDragSource: connect.dragSource(),
+// 		connectDragPreview: connect.dragPreview(),
+// 		isDragging: monitor.isDragging(),
+// 	}
+// }
 
 const Records = (props) => {
 
@@ -25,7 +25,7 @@ const Records = (props) => {
             const positionRecord = props.postingRecords.filter((posting) => posting.id === record.postingId)
             const buttonStyle = {width: '100px', height: '50px', fontSize: '.9rem', padding: '.3rem', marginLeft: 'auto', marginRight: 'auto'};
             
-            return <Record applicantSelectedHandler={props.applicantSelectedHandler} record={record} applicantRecord={applicantRecord} positionRecord={positionRecord} buttonStyle={buttonStyle}/>
+            return <Record applicantPostingMovedHandler={props.applicantPostingMovedHandler} applicantSelectedHandler={props.applicantSelectedHandler} record={record} applicantRecord={applicantRecord} positionRecord={positionRecord} buttonStyle={buttonStyle}/>
             }))
         } else {
           return null

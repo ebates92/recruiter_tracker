@@ -11,7 +11,7 @@ class Container extends Component {
       <div className="container">
         <ProgressBarWrapper />
         <div className="status-columns">
-          <RecordColumn applicantSelectedHandler={this.props.applicantSelectedHandler} postingSelected={this.props.postingSelected} postingRecords={this.props.postingRecords} applicantRecords={this.props.applicantRecords} postingApplicantRecords={this.props.postingApplicantRecords} />
+          <RecordColumn movedCardStageHandler={this.props.movedCardStageHandler} applicantPostingMovedHandler={this.props.applicantPostingMovedHandler} applicantSelectedHandler={this.props.applicantSelectedHandler} postingSelected={this.props.postingSelected} postingRecords={this.props.postingRecords} applicantRecords={this.props.applicantRecords} postingApplicantRecords={this.props.postingApplicantRecords} />
         </div>
       </div>
     ); 

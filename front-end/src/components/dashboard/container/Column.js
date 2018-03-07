@@ -5,13 +5,15 @@ import PropTypes from 'prop-types';
 // FOR DROP TARGET WIRING
 
 const columnTarget = {
-  canDrop(props) {
-    return null
-  },
+  // canDrop(props) {
+  //   console.log(props)
+  // },
 
   drop(props) {
     // now do an update function to node application
-    console.log('just dropped a duce')
+    console.log(props.columnType)
+    props.movedCardStageHandler(props.columnType)
+
   }
 }
 
@@ -19,7 +21,7 @@ const collect = (connect, monitor) => {
   return {
 		connectDropTarget: connect.dropTarget(),
 		isOver: monitor.isOver(),
-		canDrop: monitor.canDrop(),
+    canDrop: monitor.canDrop(),
 	}
 }
 
