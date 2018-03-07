@@ -3,6 +3,7 @@ const router = express.Router();
 const Posting = require('../models/table/posting');
 const Applicant = require('../models/table/applicant');
 const PostingApplicant = require('../models/table/postingApplicant');
+const User = require('../models/table/user');
 
 // this fixes cross origin errors. CORS resource sharing.
 router.all('*', (req, res, next) => {
@@ -12,10 +13,16 @@ router.all('*', (req, res, next) => {
     next();
     }
 )
+
+
+
+// TURN OFF FOR FRONT END TESTING!!!!*************************
+
 // CONNECT TO POSTGRES POSTING TABLE
 router.route('/postings')
     .get((req, res) => {
         Posting.findAll({
+            // where:{userId: 1}
             where:{userId: res.locals.id}
         }).then((postings) => {
             res.json(postings);
@@ -26,6 +33,7 @@ router.route('/postings')
 router.route('/applicants')
     .get((req,res) => {
         Applicant.findAll({
+            // where:{userId: 1}
             where:{userId: res.locals.id}
         }).then((applicants) => res.json(applicants))
     })
@@ -33,6 +41,7 @@ router.route('/applicants')
 router.route('/postingapplicant')
     .get((req, res) => {
         PostingApplicant.findAll({
+            // where:{userId: 1}
             where:{userId: res.locals.id}
         }).then((postingapplicant) => res.json(postingapplicant))
     })
@@ -40,8 +49,9 @@ router.route('/postingapplicant')
 // CONNECT TO POSTGRES USER TABLE
 router.route('/user')
 .get((req, res) => {
-    PostingApplicant.findOne({
-        where:{userId: res.locals.id}
+    User.findOne({
+        // where:{userId: 1}
+        where:{id: res.locals.id}
     }).then((user) => res.json(user))
 })
 

@@ -76,6 +76,8 @@ class Dashboard extends Component {
         // edit or add user data
         calendly_url: '',
 
+        // moving the applicant records on the dashboard
+        applicantPostingMoved: ''
       }
     }
   
@@ -226,19 +228,23 @@ _closeModalCorrectly = (event) => {
 // SEARCH BAR
 
   _applicantSelectedHandler = (event) => {
-    const applicant = this.state.applicantData.filter((applicant) => {
-      return (applicant.id === parseInt(event.currentTarget.accessKey))
-    })
+    if (event.target.className === 'ui green basic button') {
+      return null
+    } else {
+      const applicant = this.state.applicantData.filter((applicant) => {
+        return (applicant.id === parseInt(event.currentTarget.accessKey))
+      })
 
-    const currentApplicantsPostings = this.state.postingApplicantData.filter((postingApplicant) => {
-      return (postingApplicant.applicantId === parseInt(event.currentTarget.accessKey))
-    })
+      const currentApplicantsPostings = this.state.postingApplicantData.filter((postingApplicant) => {
+        return (postingApplicant.applicantId === parseInt(event.currentTarget.accessKey))
+      })
 
-    this.setState({
-      currentApplicant: applicant,
-      applicantComponent: ApplicantComponent,
-      currentApplicantsPostings
-    })
+      this.setState({
+        currentApplicant: applicant,
+        applicantComponent: ApplicantComponent,
+        currentApplicantsPostings
+      })
+    }
   }
 
 
@@ -272,6 +278,34 @@ _closeModalCorrectly = (event) => {
         calendlyModal: CalendlyModal
     })
 }
+
+// MOVING THE DASHBOARD RECORDS TO DIFFERENT COLUMNS
+
+_applicantPostingMovedHandler = (id) => {
+  this.setState(prevState => ({
+    formObject: {
+      applicantPostingMoved: id
+    }
+  }))
+}
+
+_movedCardStageHandler = (stage) => {
+  const data = {
+    postingApplicantId: this.state.formObject.applicantPostingMoved,
+    stage: stage
+  };
+  axios.post(`${url}/posting/moved-card`, data)
+  .then(response => response.data)
+    .then(
+      (res) => {
+        // RESETS THE DASHBOARD WITH NEW DATA
+          this.setState({
+            postingApplicantData: res,
+            newPostingApplicantData: res
+          })
+    })
+}
+
 
 // API CALLS
   componentDidMount() {
@@ -357,7 +391,7 @@ _closeModalCorrectly = (event) => {
           <CalendlyModal onFormChangeHandler={this._onFormChangeHandler} onFormSubmission={this._onFormSubmission} calendly_url={this.state.formObject.calendly_url} closeModalCorrectly={this._closeModalCorrectly}/>
           <ScheduleMeeting calendlyLink={this.state.calendly_url} />
           <Header userData={this.state.userData} calendly_urlClickHandler={this._calendly_urlClickHandler} engagingTheModal={this._engagingTheModal} postingSelectedHandler={this._postingSelectedHandler} applicantSelectedHandler={this._applicantSelectedHandler} applicantRecords={this.state.applicantData} postingRecords={this.state.postingData} postingSelected={this.state.postingSelected} />
-          <Container applicantSelectedHandler={this._applicantSelectedHandler} postingSelected={this.state.postingSelected} postingRecords={this.state.postingData} applicantRecords={this.state.applicantData} postingApplicantRecords={this.state.newPostingApplicantData} />
+          <Container movedCardStageHandler={this._movedCardStageHandler} applicantPostingMovedHandler={this._applicantPostingMovedHandler} applicantSelectedHandler={this._applicantSelectedHandler} postingSelected={this.state.postingSelected} postingRecords={this.state.postingData} applicantRecords={this.state.applicantData} postingApplicantRecords={this.state.newPostingApplicantData} />
       </div>
     );
   }
