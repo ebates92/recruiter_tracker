@@ -183,6 +183,12 @@ input {
   color: black;
 }
 
+#card:hover {
+  top: -4px;
+  transition-duration: .7s;
+  transition-timing-function: linear;
+}
+
 .align-schedule-button {
   width: 100%;
   display: flex;
