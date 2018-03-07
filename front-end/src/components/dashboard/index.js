@@ -277,14 +277,16 @@ _closeModalCorrectly = (event) => {
 // MOVING THE DASHBOARD RECORDS TO DIFFERENT COLUMNS
 
 _applicantPostingMovedHandler = (id) => {
-  this.setState({
-    applicantPostingMoved: id
-  })
+  this.setState(prevState => ({
+    formObject: {
+      applicantPostingMoved: id
+    }
+  }))
 }
 
-_movedCardStageHandler(stage){
+_movedCardStageHandler = (stage) => {
   const data = {
-    postingApplicantId: this.state.applicantPostingMoved,
+    postingApplicantId: this.state.formObject.applicantPostingMoved,
     stage: stage
   };
   axios.post(`${url}/posting/moved-card`, data)
@@ -293,12 +295,10 @@ _movedCardStageHandler(stage){
       (res) => {
         // RESETS THE DASHBOARD WITH NEW DATA
           this.setState({
-            postingData: [
-              ...this.state.postingData,
-              res
-            ],
+            postingApplicantData: res,
+            newPostingApplicantData: res
           })
-        })
+    })
 }
 
 
