@@ -3,6 +3,7 @@ const router = express.Router();
 const Posting = require('../models/table/posting');
 const Applicant = require('../models/table/applicant');
 const PostingApplicant = require('../models/table/postingApplicant');
+const User = require('../models/table/user');
 
 // this fixes cross origin errors. CORS resource sharing.
 router.all('*', (req, res, next) => {
@@ -48,9 +49,9 @@ router.route('/postingapplicant')
 // CONNECT TO POSTGRES USER TABLE
 router.route('/user')
 .get((req, res) => {
-    PostingApplicant.findOne({
+    User.findOne({
         // where:{userId: 1}
-        where:{userId: res.locals.id}
+        where:{id: res.locals.id}
     }).then((user) => res.json(user))
 })
 

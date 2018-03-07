@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         const password = document.querySelector('[data-password]').value;
         const data = JSON.stringify({firstName, lastName, email, password});
         fetch('http://localhost:3000/signup', {headers: {'content-type': 'application/json'}, method: 'POST', body: data, credentials: 'include'})
-               .then(res => window.location.replace('http://localhost:3000/dashboard'))
+               .then(res => location.replace('http://localhost:3000/dashboard'))
                .catch(e => console.log("Invalid username / password"));
     });
 });
