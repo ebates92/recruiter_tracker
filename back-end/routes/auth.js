@@ -51,6 +51,12 @@ router.get('/google', passport.authenticate('google', {
    })
   })
 
+  // Handle Logout
 
+  .post('/logout', (req,res) => {
+    // res.send('logging out')
+    res.clearCookie('session')
+    res.send('http://localhost:3000/login')
+  })
 
 module.exports = router;

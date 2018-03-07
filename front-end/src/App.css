@@ -89,7 +89,7 @@ input {
 .listview-info {
   display: flex;
   width: 32%;
-  justify-content: space-around;
+  justify-content: flex-start;
 }
 
 .progressbar-wrapper {
@@ -152,6 +152,10 @@ input {
   left: 0;
 }
 
+.container {
+  height: 100%
+}
+
 .status-columns {
   display: flex;
   justify-content: space-around;
@@ -162,6 +166,7 @@ input {
   border-left: 1px solid #dddddd;
   border-right: 1px solid #dddddd;
   min-height: 500px;
+  height: 100%;
 }
 
 .status-col h2 {
@@ -774,5 +779,5 @@ input {
   background-size: cover;
   width: 100%;
   height: 100%;
-  box-shadow: 0 2px 3px 0 #d4d4d5, 0 0 0 7px rgba(22, 216, 22, 0.349);
+  box-shadow: 0 2px 3px 0 #d4d4d5, 0 0 0 7px rgba(224, 224, 224, 0.349);
 }
