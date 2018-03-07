@@ -8,6 +8,7 @@ import NewApplicant from './modal/Add_applicant.js'
 import AddApplicantToPosting from './modal/Add_applicant_to_posting.js'
 import ApplicantComponent from './modal/Applicant_Component'
 import CalendlyModal from './modal/Calendly'
+import ScheduleMeeting from './modal/Schedule';
 // import Postings from '../postingData.js';
 // import Applicants from './applicantData.js';
 // import {
@@ -354,6 +355,7 @@ _closeModalCorrectly = (event) => {
           <AddApplicantToPosting handlesAddApplicantToPosting={this._handlesAddApplicantToPosting} postingRecords={this.state.postingData} applicantRecords={this.state.applicantData} formObject={this.state.formObject} closeModal={this._closeModal} onFormChangeHandler={this._onFormChangeHandler} onFormSubmission={this._onFormSubmission} />
           <ApplicantComponent postingRecords={this.state.postingData} currentApplicantsPostings={this.state.currentApplicantsPostings} currentApplicant={this.state.currentApplicant} closeModalCorrectly={this._closeModalCorrectly}/>
           <CalendlyModal onFormChangeHandler={this._onFormChangeHandler} onFormSubmission={this._onFormSubmission} calendly_url={this.state.formObject.calendly_url} closeModalCorrectly={this._closeModalCorrectly}/>
+          <ScheduleMeeting calendlyLink={this.state.calendly_url} />
           <Header userData={this.state.userData} calendly_urlClickHandler={this._calendly_urlClickHandler} engagingTheModal={this._engagingTheModal} postingSelectedHandler={this._postingSelectedHandler} applicantSelectedHandler={this._applicantSelectedHandler} applicantRecords={this.state.applicantData} postingRecords={this.state.postingData} postingSelected={this.state.postingSelected} />
           <Container applicantSelectedHandler={this._applicantSelectedHandler} postingSelected={this.state.postingSelected} postingRecords={this.state.postingData} applicantRecords={this.state.applicantData} postingApplicantRecords={this.state.newPostingApplicantData} />
       </div>
