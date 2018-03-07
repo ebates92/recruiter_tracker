@@ -72,4 +72,20 @@ router.route('/user-calendly')
     })
 
 
+// UPDATE TO POSTGRES POSTING APPLICANT TABLE
+router.route('/moved-card')
+    .post((req, res) => {
+        PostingApplicant.update({
+            applicantStage: req.body.stage
+        }, {
+            where: {id: req.body.postingApplicantId}
+        }).then((postingUpdate) => {
+            PostingApplicant.findAll({
+                where:{userId: 1}
+                // where:{userId: res.locals.id}
+            }).then((postingapplicant) => res.json(postingapplicant))
+        })
+    })
+
+
 module.exports = router;

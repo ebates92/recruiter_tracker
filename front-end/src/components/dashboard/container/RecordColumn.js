@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Record from './Record.js';
+import Records from './Records.js';
+import Column from './Column.js';
 
 class RecordColumn extends Component {
   constructor(props) {
@@ -10,36 +11,37 @@ class RecordColumn extends Component {
   }
 
   render () {
+
     return (
       <React.Fragment>
-      {/* Sourcing */}
-      <div className="status-col">
-      <Record applicantSelectedHandler={this.props.applicantSelectedHandler} postingApplicantRecords={this.props.postingApplicantRecords.filter((record) => record.applicantStage === 'Sourcing')} postingRecords={this.props.postingRecords} applicantRecords={this.props.applicantRecords} />
-      </div>
-      {/* Screening */}
-      <div className="status-col">
-      <Record applicantSelectedHandler={this.props.applicantSelectedHandler} postingApplicantRecords={this.props.postingApplicantRecords.filter((record) => record.applicantStage === 'Screening')} postingRecords={this.props.postingRecords} applicantRecords={this.props.applicantRecords} />
-      </div>
-      {/* Initial Interview */}
-      <div className="status-col">
-      <Record applicantSelectedHandler={this.props.applicantSelectedHandler} postingApplicantRecords={this.props.postingApplicantRecords.filter((record) => record.applicantStage === 'Initial Interview')} postingRecords={this.props.postingRecords} applicantRecords={this.props.applicantRecords} />
-      </div>
-      {/* Final Interview */}
-      <div className="status-col">
-      <Record applicantSelectedHandler={this.props.applicantSelectedHandler} postingApplicantRecords={this.props.postingApplicantRecords.filter((record) => record.applicantStage === 'Final Interview')} postingRecords={this.props.postingRecords} applicantRecords={this.props.applicantRecords} />
-      </div>
-      {/* Verification */}
-      <div className="status-col">
-      <Record applicantSelectedHandler={this.props.applicantSelectedHandler} postingApplicantRecords={this.props.postingApplicantRecords.filter((record) => record.applicantStage === 'Verification')} postingRecords={this.props.postingRecords} applicantRecords={this.props.applicantRecords} />
-      </div>
-      {/* Offer */}
-      <div className="status-col">
-      <Record applicantSelectedHandler={this.props.applicantSelectedHandler} postingApplicantRecords={this.props.postingApplicantRecords.filter((record) => record.applicantStage === 'Offer')} postingRecords={this.props.postingRecords} applicantRecords={this.props.applicantRecords} />
-      </div>
-      {/* Complete */}
-      <div className="status-col">
-      <Record applicantSelectedHandler={this.props.applicantSelectedHandler} postingApplicantRecords={this.props.postingApplicantRecords.filter((record) => record.applicantStage === 'Complete')} postingRecords={this.props.postingRecords} applicantRecords={this.props.applicantRecords} />
-      </div>
+        {/* Sourcing */}
+        <Column columnType='Sourcing' movedCardStageHandler={this.props.movedCardStageHandler}>
+          <Records applicantPostingMovedHandler={this.props.applicantPostingMovedHandler} applicantSelectedHandler={this.props.applicantSelectedHandler} postingApplicantRecords={this.props.postingApplicantRecords.filter((record) => record.applicantStage === 'Sourcing')} postingRecords={this.props.postingRecords} applicantRecords={this.props.applicantRecords} />
+        </Column>
+        {/* Screening */}
+        <Column columnType='Screening' movedCardStageHandler={this.props.movedCardStageHandler}>
+          <Records applicantPostingMovedHandler={this.props.applicantPostingMovedHandler} applicantSelectedHandler={this.props.applicantSelectedHandler} postingApplicantRecords={this.props.postingApplicantRecords.filter((record) => record.applicantStage === 'Screening')} postingRecords={this.props.postingRecords} applicantRecords={this.props.applicantRecords} />
+        </Column >
+        {/* Initial Interview */}
+        <Column columnType='Initial Interview' movedCardStageHandler={this.props.movedCardStageHandler}>
+          <Records applicantPostingMovedHandler={this.props.applicantPostingMovedHandler} applicantSelectedHandler={this.props.applicantSelectedHandler} postingApplicantRecords={this.props.postingApplicantRecords.filter((record) => record.applicantStage === 'Initial Interview')} postingRecords={this.props.postingRecords} applicantRecords={this.props.applicantRecords} />
+        </Column>
+        {/* Final Interview */}
+        <Column columnType='Final Interview' movedCardStageHandler={this.props.movedCardStageHandler}>
+          <Records applicantPostingMovedHandler={this.props.applicantPostingMovedHandler} applicantSelectedHandler={this.props.applicantSelectedHandler} postingApplicantRecords={this.props.postingApplicantRecords.filter((record) => record.applicantStage === 'Final Interview')} postingRecords={this.props.postingRecords} applicantRecords={this.props.applicantRecords} />
+        </Column>
+        {/* Verification */}
+        <Column columnType='Verification' movedCardStageHandler={this.props.movedCardStageHandler}>
+          <Records applicantPostingMovedHandler={this.props.applicantPostingMovedHandler} applicantSelectedHandler={this.props.applicantSelectedHandler} postingApplicantRecords={this.props.postingApplicantRecords.filter((record) => record.applicantStage === 'Verification')} postingRecords={this.props.postingRecords} applicantRecords={this.props.applicantRecords} />
+        </Column>
+        {/* Offer */}
+        <Column columnType='Offer' movedCardStageHandler={this.props.movedCardStageHandler}>
+          <Records applicantPostingMovedHandler={this.props.applicantPostingMovedHandler} applicantSelectedHandler={this.props.applicantSelectedHandler} postingApplicantRecords={this.props.postingApplicantRecords.filter((record) => record.applicantStage === 'Offer')} postingRecords={this.props.postingRecords} applicantRecords={this.props.applicantRecords} />
+        </Column>
+        {/* Complete */}
+        <Column columnType='Complete' movedCardStageHandler={this.props.movedCardStageHandler}>
+          <Records applicantPostingMovedHandler={this.props.applicantPostingMovedHandler} applicantSelectedHandler={this.props.applicantSelectedHandler} postingApplicantRecords={this.props.postingApplicantRecords.filter((record) => record.applicantStage === 'Complete')} postingRecords={this.props.postingRecords} applicantRecords={this.props.applicantRecords} />
+        </Column>
       </React.Fragment>
     );
   }
