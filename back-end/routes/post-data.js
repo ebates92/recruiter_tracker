@@ -81,8 +81,8 @@ router.route('/moved-card')
             where: {id: req.body.postingApplicantId}
         }).then((postingUpdate) => {
             PostingApplicant.findAll({
-                where:{userId: 1}
-                // where:{userId: res.locals.id}
+                // where:{userId: 1}
+                where:{userId: res.locals.id}
             }).then((postingapplicant) => res.json(postingapplicant))
         })
     })
