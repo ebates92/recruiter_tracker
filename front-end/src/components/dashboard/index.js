@@ -227,19 +227,23 @@ _closeModalCorrectly = (event) => {
 // SEARCH BAR
 
   _applicantSelectedHandler = (event) => {
-    const applicant = this.state.applicantData.filter((applicant) => {
-      return (applicant.id === parseInt(event.currentTarget.accessKey))
-    })
+    if (event.target.className === 'ui green basic button') {
+      return null
+    } else {
+      const applicant = this.state.applicantData.filter((applicant) => {
+        return (applicant.id === parseInt(event.currentTarget.accessKey))
+      })
 
-    const currentApplicantsPostings = this.state.postingApplicantData.filter((postingApplicant) => {
-      return (postingApplicant.applicantId === parseInt(event.currentTarget.accessKey))
-    })
+      const currentApplicantsPostings = this.state.postingApplicantData.filter((postingApplicant) => {
+        return (postingApplicant.applicantId === parseInt(event.currentTarget.accessKey))
+      })
 
-    this.setState({
-      currentApplicant: applicant,
-      applicantComponent: ApplicantComponent,
-      currentApplicantsPostings
-    })
+      this.setState({
+        currentApplicant: applicant,
+        applicantComponent: ApplicantComponent,
+        currentApplicantsPostings
+      })
+    }
   }
 
 
