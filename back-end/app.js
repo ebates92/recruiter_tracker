@@ -49,7 +49,7 @@ app.use(express.static(path.join(__dirname, 'build')));
 
 // TURN OFF FOR FRONT END TESTING!!!!*************************
 app.use('/login', (req, res) => {
-  res.sendFile(__dirname + '/build/login.html');
+  res.sendFile(__dirname + '/login.html');
 });
 app.use('/signup', signup);
 app.use('/auth', bodyParser.json(), auth);
@@ -78,6 +78,6 @@ app.use(function(err, req, res, next) {
   res.send(res.locals.error);
 });
 
-app.listen(3000);
+// app.listen(3000);
 
 module.exports = app;
