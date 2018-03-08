@@ -259,11 +259,23 @@ input {
 
 .modal-container {
   max-width: 840px;
-  min-width: 480px;
+  min-width: 815px;
   /* height: 100%;
   padding: 50px 0;
   margin: 0 auto; */
 
+}
+
+.schedule-meeting-container {
+  max-width: 950px;
+  min-width: 480px;
+  height: 100%;
+  margin: 0 auto;
+}
+
+#schedule {
+  padding: 0px;
+  height: 515px;
 }
 
 .modal-header {

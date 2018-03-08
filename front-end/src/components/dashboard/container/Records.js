@@ -25,7 +25,7 @@ const Records = (props) => {
             const positionRecord = props.postingRecords.filter((posting) => posting.id === record.postingId)
             const buttonStyle = {width: '100px', height: '50px', fontSize: '.9rem', padding: '.3rem', marginLeft: 'auto', marginRight: 'auto'};
             
-            return <Record applicantPostingMovedHandler={props.applicantPostingMovedHandler} applicantSelectedHandler={props.applicantSelectedHandler} record={record} applicantRecord={applicantRecord} positionRecord={positionRecord} buttonStyle={buttonStyle}/>
+            return <Record calendly_url={props.calendly_url} userData={props.userData} calendlyMeetingHandler={props.calendlyMeetingHandler} applicantPostingMovedHandler={props.applicantPostingMovedHandler} applicantSelectedHandler={props.applicantSelectedHandler} record={record} applicantRecord={applicantRecord} positionRecord={positionRecord} buttonStyle={buttonStyle}/>
             }))
         } else {
           return null
