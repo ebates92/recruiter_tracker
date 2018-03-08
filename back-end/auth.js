@@ -33,6 +33,7 @@ module.exports = isAuthorized = (req, res, next) => {
         next();
     })
     .catch((err) => {
-        res.redirect('/login');
+        // res.redirect('/login');
+        console.log(e)
   })
 }

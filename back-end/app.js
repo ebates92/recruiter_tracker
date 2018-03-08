@@ -49,11 +49,11 @@ app.use(express.static(path.join(__dirname, 'build')));
 
 // TURN OFF FOR FRONT END TESTING!!!!*************************
 app.use('/login', (req, res) => {
-  res.sendFile(__dirname + '/login.html');
+  res.sendFile(__dirname + '/build/login.html');
 });
 app.use('/signup', signup);
 app.use('/auth', bodyParser.json(), auth);
-// app.use(isAuthorized);
+app.use(isAuthorized);
 app.use('/api', isAuthorized, api);
 app.use('/posting', isAuthorized, postData);
 app.use('/dashboard', isAuthorized, dashboard);
