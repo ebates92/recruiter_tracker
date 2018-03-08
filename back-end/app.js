@@ -48,15 +48,15 @@ app.use(express.static(path.join(__dirname, 'build')));
 // ROUTES
 
 // TURN OFF FOR FRONT END TESTING!!!!*************************
-// app.use('/login', (req, res) => {
-//   res.sendFile(__dirname + '/build/login.html');
-// });
-// app.use('/signup', signup);
+app.use('/login', (req, res) => {
+  res.sendFile(__dirname + '/login.html');
+});
+app.use('/signup', signup);
+app.use('/auth', bodyParser.json(), auth);
 // app.use(isAuthorized);
-// app.use('/auth', auth);
-app.use('/api', api);
-app.use('/posting', postData);
-app.use('/dashboard', dashboard);
+app.use('/api', isAuthorized, api);
+app.use('/posting', isAuthorized, postData);
+app.use('/dashboard', isAuthorized, dashboard);
 
 
 
