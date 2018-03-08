@@ -6,6 +6,7 @@ const config = require('../config/config.json');
 const _ = require('lodash');
 const jwt = require('jsonwebtoken');
 const passport = require('../config/passport-setup');
+const bodyParser = require('body-parser');
 
 const verifyPassword = (password, user) => {
   return bcrypt.compare(password, user.dataValues.password).then((res) => {

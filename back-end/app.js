@@ -52,11 +52,11 @@ app.use('/login', (req, res) => {
   res.sendFile(__dirname + '/build/login.html');
 });
 app.use('/signup', signup);
-app.use(isAuthorized);
-app.use('/auth', auth);
-app.use('/api', api);
-app.use('/posting', postData);
-app.use('/dashboard', dashboard);
+app.use('/auth', bodyParser.json(), auth);
+// app.use(isAuthorized);
+app.use('/api', isAuthorized, api);
+app.use('/posting', isAuthorized, postData);
+app.use('/dashboard', isAuthorized, dashboard);
 
 
 
@@ -78,6 +78,6 @@ app.use(function(err, req, res, next) {
   res.send(res.locals.error);
 });
 
-// app.listen(3000);
+app.listen(3000);
 
 module.exports = app;
