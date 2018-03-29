@@ -396,14 +396,62 @@ _calendlyMeetingHandler = () => {
 
     return (
       <div className="App">
-          <NewApplicant formObject={this.state.formObject} closeModal={this._closeModal} onFormChangeHandler={this._onFormChangeHandler} onFormSubmission={this._onFormSubmission} />
-          <NewPosting formObject={this.state.formObject} closeModal={this._closeModal} onFormChangeHandler={this._onFormChangeHandler} onFormSubmission={this._onFormSubmission} />
-          <AddApplicantToPosting handlesAddApplicantToPosting={this._handlesAddApplicantToPosting} postingRecords={this.state.postingData} applicantRecords={this.state.applicantData} formObject={this.state.formObject} closeModal={this._closeModal} onFormChangeHandler={this._onFormChangeHandler} onFormSubmission={this._onFormSubmission} />
-          <ApplicantComponent postingRecords={this.state.postingData} currentApplicantsPostings={this.state.currentApplicantsPostings} currentApplicant={this.state.currentApplicant} closeModalCorrectly={this._closeModalCorrectly}/>
-          <CalendlyModal onFormChangeHandler={this._onFormChangeHandler} onFormSubmission={this._onFormSubmission} calendly_url={this.state.formObject.calendly_url} closeModalCorrectly={this._closeModalCorrectly}/>
+          <NewApplicant 
+            formObject={this.state.formObject}
+            closeModal={this._closeModal}
+            onFormChangeHandler={this._onFormChangeHandler}
+            onFormSubmission={this._onFormSubmission} />
+
+          <NewPosting formObject={this.state.formObject}
+            closeModal={this._closeModal}
+            onFormChangeHandler={this._onFormChangeHandler}
+            onFormSubmission={this._onFormSubmission} />
+
+          <AddApplicantToPosting
+            handlesAddApplicantToPosting={this._handlesAddApplicantToPosting}
+            postingRecords={this.state.postingData}
+            applicantRecords={this.state.applicantData}
+            formObject={this.state.formObject}
+            closeModal={this._closeModal}
+            onFormChangeHandler={this._onFormChangeHandler}
+            onFormSubmission={this._onFormSubmission} />
+
+          <ApplicantComponent
+            postingRecords={this.state.postingData}
+            currentApplicantsPostings={this.state.currentApplicantsPostings}
+            currentApplicant={this.state.currentApplicant}
+            closeModalCorrectly={this._closeModalCorrectly}/>
+
+          <CalendlyModal
+            onFormChangeHandler={this._onFormChangeHandler}
+            onFormSubmission={this._onFormSubmission}
+            calendly_url={this.state.formObject.calendly_url}
+            closeModalCorrectly={this._closeModalCorrectly}/>
+
           {/* <ScheduleMeeting calendlyLink={this.state.calendly_url} closeModalCorrectly={this._closeModalCorrectly} /> */}
-          <Header userData={this.state.userData} calendly_urlClickHandler={this._calendly_urlClickHandler} engagingTheModal={this._engagingTheModal} postingSelectedHandler={this._postingSelectedHandler} applicantSelectedHandler={this._applicantSelectedHandler} applicantRecords={this.state.applicantData} postingRecords={this.state.postingData} postingSelected={this.state.postingSelected} />
-          <Container calendly_url={this.state.calendly_url} userData={this.state.userData} calendlyMeetingHandler={this._calendlyMeetingHandler} movedCardStageHandler={this._movedCardStageHandler} applicantPostingMovedHandler={this._applicantPostingMovedHandler} applicantSelectedHandler={this._applicantSelectedHandler} postingSelected={this.state.postingSelected} postingRecords={this.state.postingData} applicantRecords={this.state.applicantData} postingApplicantRecords={this.state.newPostingApplicantData} />
+
+          <Header 
+            userData={this.state.userData}
+            calendly_urlClickHandler={this._calendly_urlClickHandler}
+            engagingTheModal={this._engagingTheModal}
+            postingSelectedHandler={this._postingSelectedHandler}
+            applicantSelectedHandler={this._applicantSelectedHandler}
+            applicantRecords={this.state.applicantData}
+            postingRecords={this.state.postingData}
+            postingSelected={this.state.postingSelected} />
+
+          <Container
+            calendly_url={this.state.calendly_url}
+            userData={this.state.userData}
+            calendlyMeetingHandler={this._calendlyMeetingHandler}
+            movedCardStageHandler={this._movedCardStageHandler}
+            applicantPostingMovedHandler={this._applicantPostingMovedHandler}
+            applicantSelectedHandler={this._applicantSelectedHandler}
+            postingSelected={this.state.postingSelected}
+            postingRecords={this.state.postingData}
+            applicantRecords={this.state.applicantData}
+            postingApplicantRecords={this.state.newPostingApplicantData} />
+            
       </div>
     );
   }
