@@ -4,6 +4,8 @@ import RecordColumn from './RecordColumn.js';
 import HTML5Backend from 'react-dnd-html5-backend';
 import { DragDropContext } from 'react-dnd';
 
+// DOESN'T NEED REDUX
+
 // @DragDropContext(HTML5Backend)
 class Container extends Component {
   render() {

@@ -1,44 +1,46 @@
-import React from 'react';
-import { DragSource } from 'react-dnd';
-import Record from './Record'
-  
-// const recordSource = {
-//   beginDrag(props) {
-//     console.log(props)
-//   },
-// }
+import React, { Component } from 'react';
+import Record from './Record';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'react';
 
-// function collect(connect, monitor) {
-// 	return {
-// 		connectDragSource: connect.dragSource(),
-// 		connectDragPreview: connect.dragPreview(),
-// 		isDragging: monitor.isDragging(),
-// 	}
-// }
+class Records extends Component {
+// const Records = (props) => {
 
-const Records = (props) => {
-
-      const recordCardsComponents = () => {
-        if (props.postingApplicantRecords.length > 0) {
-          return (props.postingApplicantRecords.map((record) => {
-            const applicantRecord = props.applicantRecords.filter((applicant) => applicant.id === record.applicantId);
-            const positionRecord = props.postingRecords.filter((posting) => posting.id === record.postingId)
+      recordCardsComponents = () => {
+        if (this.props.postingApplicantRecords.length > 0) {
+          return (this.props.postingApplicantRecords.map((record) => {
+            const applicantRecord = this.props.applicantRecords.filter((applicant) => applicant.id === record.applicantId);
+            const positionRecord = this.props.postingRecords.filter((posting) => posting.id === record.postingId)
             const buttonStyle = {width: '100px', height: '50px', fontSize: '.9rem', padding: '.3rem', marginLeft: 'auto', marginRight: 'auto'};
             
-            return <Record calendly_url={props.calendly_url} userData={props.userData} calendlyMeetingHandler={props.calendlyMeetingHandler} applicantPostingMovedHandler={props.applicantPostingMovedHandler} applicantSelectedHandler={props.applicantSelectedHandler} record={record} applicantRecord={applicantRecord} positionRecord={positionRecord} buttonStyle={buttonStyle}/>
+            return <Record calendly_url={this.props.calendly_url} userData={this.props.userData} calendlyMeetingHandler={this.props.calendlyMeetingHandler} applicantPostingMovedHandler={this.props.applicantPostingMovedHandler} applicantSelectedHandler={this.props.applicantSelectedHandler} record={record} applicantRecord={applicantRecord} positionRecord={positionRecord} buttonStyle={buttonStyle}/>
             }))
         } else {
           return null
         }
       }
       
-    const recordCards = recordCardsComponents()
-
-    return (
-      <React.Fragment>
-        {recordCards}
-      </React.Fragment>
-    )
+    render () {
+      const recordCards = recordCardsComponents()
+      return (
+        <React.Fragment>
+          {recordCards}
+        </React.Fragment>
+      )
+    }
 }
 
+// REDUX APPLICATION STATE (COMBINED REDUCERS)
+function mapStateToProps(state) {
+  return {
+
+  }
+}
+
+// REDUX EVENT HANDLERS (ACTIONS)
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({},dispatch)
+}
+
+// export default connect(mapStateToProps,mapDispatchToProps)(Records)
 export default Records;

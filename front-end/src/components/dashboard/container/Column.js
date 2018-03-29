@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { DropTarget } from 'react-dnd';
 import PropTypes from 'prop-types';
 
+// DOES NOT NEED REDUX
+
 // FOR DROP TARGET WIRING
 
 const columnTarget = {
@@ -11,7 +13,6 @@ const columnTarget = {
 
   drop(props) {
     // now do an update function to node application
-    console.log(props.columnType)
     props.movedCardStageHandler(props.columnType)
 
   }

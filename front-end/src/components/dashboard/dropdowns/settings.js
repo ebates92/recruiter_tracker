@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
 const url = 'http://localhost:3000';
 
 class SettingsDropdown extends Component {
@@ -25,7 +28,19 @@ class SettingsDropdown extends Component {
             </div>
         )
     }
-
 }
 
+// REDUX APPLICATION STATE (COMBINED REDUCERS)
+function mapStateToProps(state) {
+    return {
+
+    }
+}
+
+// REDUX EVENT HANDLERS (ACTIONS)
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({},dispatch)
+}
+
+// export default connect(mapStateToProps,mapDispatchToProps)(SettingsDropdown);
 export default SettingsDropdown;

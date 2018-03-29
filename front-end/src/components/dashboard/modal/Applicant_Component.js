@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PostingsApplied from './Postings_applied'
 // import ModalTypes from './Modal-types.js';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
  class ApplicantComponent extends Component {
 
@@ -43,4 +45,17 @@ import PostingsApplied from './Postings_applied'
     }
 }
 
+// REDUX APPLICATION STATE (COMBINED REDUCERS)
+function mapStateToProps(state) {
+    return {
+
+    }
+}
+
+// REDUX EVENT HANDLERS (ACTIONS)
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({},dispatch)
+}
+
+// export default connect(mapStateToProps,mapDispatchToProps)(ApplicantComponent);
 export default ApplicantComponent;

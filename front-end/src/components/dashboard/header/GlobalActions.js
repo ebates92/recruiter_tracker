@@ -1,5 +1,10 @@
 import React, {Component} from 'react';
-import DropdownSettingsComponent from '../dropdowns/settings'
+import DropdownSettingsComponent from '../dropdowns/settings';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+// WILL NEED TO REWIRE TO REDUX DUE TO POPOUT MODALS. NEED TO FIX THE OTHERS THAT ARE USING CSS DISPLAY: NONE.
+
 
 const Nothing = () => <span></span>
 
@@ -55,4 +60,17 @@ class GlobalActions extends Component {
 
 }
 
+// REDUX APPLICATION STATE (COMBINED REDUCERS)
+function mapStateToProps(state) {
+    return {
+
+    }
+}
+
+// REDUX EVENT HANDLERS (ACTIONS)
+function mapDispatchToProps(dispatch) {
+    bindActionCreators({},dispatch)
+}
+
+// export default connect(mapStateToProps,mapDispatchToProps)(GlobalActions);
 export default GlobalActions; 

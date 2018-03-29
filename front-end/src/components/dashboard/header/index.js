@@ -4,6 +4,8 @@ import SearchBar from './SearchBar';
 import GlobalActions from './GlobalActions';
 import RollUpSummary from './RollUpSummary';
 
+// NO NEED FOR REDUX
+
 const Header = (props) => {
     return (
         <header className="header">

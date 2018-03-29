@@ -1,5 +1,7 @@
 import React from 'react';
 
+// CAN JUST LEVERAGE DATA FROM PARENT COMPONENT. NO NEED FOR REDUX.
+
 const PostingsApplied = (props) => {
 
     const PostingsAppliedArray = props.currentApplicantsPostings.map((applicantPosting) => {

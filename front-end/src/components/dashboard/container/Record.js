@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { DragSource } from 'react-dnd';
 
-  
+// LIKELY WILL STILL NEED TO PASS STATE TO RECORDS AS REACT DND MODIFIES REACT COMPONENT ALREADY
+
+// REACT DND FUNCTIONS
 const recordSource = {
   beginDrag(props) {
     props.applicantPostingMovedHandler(props.record.id)
@@ -9,6 +11,7 @@ const recordSource = {
   },
 }
 
+// REACT DND FUNCTIONS
 function collect(connect, monitor) {
 	return {
 		connectDragSource: connect.dragSource(),

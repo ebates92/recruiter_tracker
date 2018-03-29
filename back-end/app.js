@@ -53,10 +53,16 @@ app.use('/login', (req, res) => {
 });
 app.use('/signup', signup);
 app.use('/auth', bodyParser.json(), auth);
-app.use(isAuthorized);
-app.use('/api', isAuthorized, api);
-app.use('/posting', isAuthorized, postData);
-app.use('/dashboard', isAuthorized, dashboard);
+
+// TURN ON WHEN DEPLOYING!
+// app.use(isAuthorized);
+// app.use('/api', isAuthorized, api);
+// app.use('/posting', isAuthorized, postData);
+// app.use('/dashboard', isAuthorized, dashboard);
+
+app.use('/api', api);
+app.use('/posting', postData);
+app.use('/dashboard', dashboard);
 
 
 

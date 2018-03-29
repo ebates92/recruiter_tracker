@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Records from './Records.js';
 import Column from './Column.js';
 
+// DOESN'T NEED REDUX STATE
+
 class RecordColumn extends Component {
   constructor(props) {
     super(props);

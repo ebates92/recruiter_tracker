@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import DropdownComponent from '../dropdowns'
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 const Nothing = () => <span></span>;
 
@@ -182,4 +184,17 @@ class AddApplicantToPosting extends Component {
     }
 }
 
+// REDUX APPLICATION STATE (COMBINED REDUCERS)
+function mapStateToProps(state) {
+    return {
+
+    }
+}
+
+// REDUX EVENT HANDLERS (ACTIONS)
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({},dispatch)
+}
+
+// export default connect(mapStateToProps,mapDispatchToProps)(AddApplicantToPosting);
 export default AddApplicantToPosting;

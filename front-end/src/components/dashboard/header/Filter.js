@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import logo from './logo.png';
-import DropdownPostings from './Dropdown_postings'
+import DropdownPostings from './Dropdown_postings';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 class Filter extends Component {
     constructor(props) {
@@ -39,4 +41,17 @@ class Filter extends Component {
     }
 }
 
+// REDUX APPLICATION STATE (COMBINED REDUCERS)
+function mapStateToProps(state) {
+    return {
+
+    }
+}
+
+// REDUX EVENT HANDLERS (ACTIONS)
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({},dispatch)
+}
+
+// export default connect(mapStateToProps,mapDispatchToProps)(Filter)
 export default Filter;

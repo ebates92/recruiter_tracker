@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import postingLogo from './posting_logo.png';
 import applicantLogo from './applicant_logo.png';
 import DropdownMainSearchComponent from '../dropdowns'
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'react';
 
 const Nothing = () => <span></span>;
 
@@ -108,7 +110,19 @@ class SearchBar extends Component {
                 </div>
         )
     }
-
 }
 
+// REDUX APPLICATION STATE (COMBINED REDUCERS)
+function mapStateToProps(state) {
+    return {
+
+    }
+}
+
+// REDUX EVENT HANDLERS (ACTIONS)
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({},dispatch)
+}
+
+// export default connect(addStatToProps,addDispatchToProps)(SearchBar)
 export default SearchBar;
