@@ -13,7 +13,15 @@ class Records extends Component {
             const positionRecord = this.props.postingRecords.filter((posting) => posting.id === record.postingId)
             const buttonStyle = {width: '100px', height: '50px', fontSize: '.9rem', padding: '.3rem', marginLeft: 'auto', marginRight: 'auto'};
             
-            return <Record calendly_url={this.props.calendly_url} userData={this.props.userData} calendlyMeetingHandler={this.props.calendlyMeetingHandler} applicantPostingMovedHandler={this.props.applicantPostingMovedHandler} applicantSelectedHandler={this.props.applicantSelectedHandler} record={record} applicantRecord={applicantRecord} positionRecord={positionRecord} buttonStyle={buttonStyle}/>
+            return <Record
+                      calendly_url={this.props.calendly_url}
+                      userData={this.props.userData} 
+                      calendlyMeetingHandler={this.props.calendlyMeetingHandler} 
+                      applicantPostingMovedHandler={this.props.applicantPostingMovedHandler} 
+                      applicantSelectedHandler={this.props.applicantSelectedHandler} 
+                      record={record} applicantRecord={applicantRecord} 
+                      positionRecord={positionRecord} 
+                      buttonStyle={buttonStyle} />
             }))
         } else {
           return null
@@ -21,7 +29,7 @@ class Records extends Component {
       }
       
     render () {
-      const recordCards = recordCardsComponents()
+      const recordCards = this.recordCardsComponents()
       return (
         <React.Fragment>
           {recordCards}

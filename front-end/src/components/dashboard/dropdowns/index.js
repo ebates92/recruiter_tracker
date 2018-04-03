@@ -4,27 +4,27 @@ import { bindActionCreators } from 'redux';
 
 // PRETTY SURE ON SECOND LOOK THIS DOESN'T NEED REDUX
 
-class Dropsdowns extends Component {
-// const Dropdowns = (props) => {
+// class Dropdowns extends Component {
+const Dropdowns = (props) => {
 
-    dropdownContainers = () => {
+    const dropdownContainers = () => {
 
         // FOR APPLICANT TO POSTING FORM
-        if (this.props.searchOptions) {
+        if (props.searchOptions) {
 
              //  FOR APPLICANT SEARCH IN FORM
-            if (this.props.searchOptions[0].firstName) {
-                return this.props.searchOptions.map((option) => <div onClick={this.props.searchClickHandler} className='form-dropdowns' id='applicant' accessKey={option.id} key={option.id}>{option.firstName} {option.lastName}</div>);
+            if (props.searchOptions[0].firstName) {
+                return props.searchOptions.map((option) => <div onClick={props.searchClickHandler} className='form-dropdowns' id='applicant' accessKey={option.id} key={option.id}>{option.firstName} {option.lastName}</div>);
 
             // FOR POSTING SEARCH IN FORM
-            } else if (this.props.searchOptions[0].positionTitle) {
-                return this.props.searchOptions.map((option) => <div onClick={this.props.searchClickHandler} className='form-dropdowns' id='posting' accessKey={option.id} key={option.id}>{option.positionTitle}</div>);
+            } else if (props.searchOptions[0].positionTitle) {
+                return props.searchOptions.map((option) => <div onClick={props.searchClickHandler} className='form-dropdowns' id='posting' accessKey={option.id} key={option.id}>{option.positionTitle}</div>);
             }
 
         // FOR MAINSEARCH BAR
-        } else if (this.props.applicantOptions || this.props.postingOptions) {
-            const postingComponents = this.props.postingOptions.map((option) => <div onClick={this.props.onClickSearchDropdown} className='form-dropdowns search-dropdowns' id='posting' accessKey={option.id} key={option.id}>{option.positionTitle}</div>);
-            const applicantComponents = this.props.applicantOptions.map((option) => <div onClick={this.props.onClickSearchDropdown} className='form-dropdowns search-dropdowns' id='applicant' accessKey={option.id} key={option.id}>{option.firstName} {option.lastName}</div>);
+        } else if (props.applicantOptions || props.postingOptions) {
+            const postingComponents = props.postingOptions.map((option) => <div onClick={props.onClickSearchDropdown} className='form-dropdowns search-dropdowns' id='posting' accessKey={option.id} key={option.id}>{option.positionTitle}</div>);
+            const applicantComponents = props.applicantOptions.map((option) => <div onClick={props.onClickSearchDropdown} className='form-dropdowns search-dropdowns' id='applicant' accessKey={option.id} key={option.id}>{option.firstName} {option.lastName}</div>);
             const postingComponentsSlice = postingComponents.slice(0,5);
             const applicantComponentsSlice = applicantComponents.slice(0,5);
 
@@ -43,15 +43,15 @@ class Dropsdowns extends Component {
         } else {return null}
     }
 
-    render() {
-        let DropdownContainers = dropdownContainers()
+    // render() {
+        // let DropdownContainers = dropdownContainers()
         return (
             <div className='form-dropdown-container'>
-                {DropdownContainers}
+                {dropdownContainers}
             </div>
         )
     }    
-}
+// }
 
 // REDUX APPLICATION STATE (COMBINED REDUCERS)
 function mapStateToProps(state) {

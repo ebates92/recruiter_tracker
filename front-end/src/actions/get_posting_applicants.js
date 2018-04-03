@@ -1,5 +1,5 @@
 import axios from 'axios';
-import url from '../api_route';
+import { url } from '../api_route';
 
 export const FETCH_POSTING_APPLICANTS = 'FETCH_POSTING_APPLICANTS'
 

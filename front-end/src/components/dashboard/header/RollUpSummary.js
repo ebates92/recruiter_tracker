@@ -8,7 +8,7 @@ class RollUpSummary extends Component {
     render() {
         const iconStyle = {fontSize: '3px', display: 'block', alignSelf: 'center'};
             return <div className="listview-info">
-                    <div>{props.totalRecords} postings showing</div>
+                    <div>{this.props.totalRecords} postings showing</div>
                     {/* <i class="fas fa-circle" style={iconStyle}></i>
                     <div>Sorted by Placeholder</div> */}
                     {/* <i class="fas fa-circle" style={iconStyle}></i>
@@ -29,5 +29,5 @@ function mapDispatchToProps(dispatch) {
     bindActionCreators({},dispatch)
 }
 
-// export default connect(mapStateToProps,mapDispatchToProps)(RollUpSummary)
-export default RollUpSummary;
+export default connect(mapStateToProps,mapDispatchToProps)(RollUpSummary)
+// export default RollUpSummary;

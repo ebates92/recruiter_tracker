@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -6,15 +6,15 @@ class DropdownPostings extends Component {
 // const DropdownPostings = (props) => {
 
     render() {
-        const postingDivs = props.postingRecords.map((postingRecord) => {
+        const postingDivs = this.props.postingRecords.map((postingRecord) => {
             return (
-                <div onClick={props.postingSelectedHandler}>{postingRecord.positionTitle}</div>
+                <div onClick={this.props.postingSelectedHandler}>{postingRecord.positionTitle}</div>
             )
         })
 
         return (
             <React.Fragment>
-                <div onClick={props.postingSelectedHandler}>All</div>
+                <div onClick={this.props.postingSelectedHandler}>All</div>
                 {postingDivs}
             </React.Fragment>
         )

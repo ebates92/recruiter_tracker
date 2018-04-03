@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const URL = 'http://localhost:3000'
+import { url } from '../api_route';
 
 export const FETCH_APPLICANTS = 'FETCH_APPLICANTS'
 
