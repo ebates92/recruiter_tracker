@@ -40,15 +40,14 @@ class Records extends Component {
 
 // REDUX APPLICATION STATE (COMBINED REDUCERS)
 function mapStateToProps(state) {
-  return {
-
-  }
+  return null
 }
 
 // REDUX EVENT HANDLERS (ACTIONS)
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({},dispatch)
+  // return bindActionCreators({},dispatch)
+  return null
 }
 
-// export default connect(mapStateToProps,mapDispatchToProps)(Records)
-export default Records;
+export default connect(mapStateToProps,mapDispatchToProps)(Records)
+// export default Records;

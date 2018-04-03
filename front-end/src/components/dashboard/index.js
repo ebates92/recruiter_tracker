@@ -9,6 +9,9 @@ import AddApplicantToPosting from './modal/Add_applicant_to_posting.js'
 import ApplicantComponent from './modal/Applicant_Component'
 import CalendlyModal from './modal/Calendly'
 import ScheduleMeeting from './modal/Schedule';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux'
+import { fetchpostings } from '../../actions/get_postings.js'
 // import Postings from '../postingData.js';
 // import Applicants from './applicantData.js';
 // import {
@@ -385,6 +388,8 @@ _calendlyMeetingHandler = () => {
             })
           }
         )
+        fetchpostings()
+        
     }
 
 
@@ -457,4 +462,12 @@ _calendlyMeetingHandler = () => {
   }
 }
 
-export default Dashboard;
+function mapStateToProps(state) {
+  return null
+}
+
+function mapDispatchToProps(dispatch) {
+  bindActionCreators({fetchpostings: fetchpostings},dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
