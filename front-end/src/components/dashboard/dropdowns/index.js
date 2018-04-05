@@ -44,10 +44,11 @@ const Dropdowns = (props) => {
     }
 
     // render() {
-        // let DropdownContainers = dropdownContainers()
+        let DropdownContainers = dropdownContainers()
+
         return (
             <div className='form-dropdown-container'>
-                {dropdownContainers}
+                {DropdownContainers}
             </div>
         )
     }    

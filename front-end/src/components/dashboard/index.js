@@ -361,7 +361,6 @@ _calendlyMeetingHandler = () => {
         .then(res => res.data)
         .then(
           (postingApplicants) => {
-            console.log(postingApplicants)
             this.setState({
               postingApplicantData: postingApplicants,
               newPostingApplicantData: postingApplicants
@@ -467,7 +466,10 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  bindActionCreators({fetchpostings: fetchpostings},dispatch)
+  // return {actions: bindActionCreators({ fetchpostings }, dispatch)}
+  return {
+    fetchpostings: () => dispatch(fetchpostings())
+  }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+export default connect(null, mapDispatchToProps)(Dashboard);

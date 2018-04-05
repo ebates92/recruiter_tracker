@@ -70,6 +70,7 @@ class SearchBar extends Component {
     // FOR UX OF DROPDOWN STAYING OPEN OR CLOSED
         _mouseEnter = (event) => {
             console.log('about to set mouse enter state')
+            console.log("Posting Data",this.props.postingData)
             this.setState({
                 dropdownMainSearch: DropdownMainSearchComponent,
                 postingOptions: this.props.postingRecords,
@@ -114,15 +115,14 @@ class SearchBar extends Component {
 
 // REDUX APPLICATION STATE (COMBINED REDUCERS)
 function mapStateToProps(state) {
-    return {
-
-    }
+    return { postingData: state.postingRecords }
 }
 
 // REDUX EVENT HANDLERS (ACTIONS)
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({},dispatch)
+    // return bindActionCreators({},dispatch)
+    return null
 }
 
-// export default connect(addStatToProps,addDispatchToProps)(SearchBar)
-export default SearchBar;
+export default connect(mapStateToProps,mapDispatchToProps)(SearchBar)
+// export default SearchBar;
