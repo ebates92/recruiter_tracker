@@ -387,7 +387,7 @@ _calendlyMeetingHandler = () => {
             })
           }
         )
-        fetchpostings()
+        this.props.fetchpostings()
         
     }
 
@@ -461,11 +461,11 @@ _calendlyMeetingHandler = () => {
   }
 }
 
-function mapStateToProps(state) {
+let mapStateToProps = (state) => {
   return null
 }
 
-function mapDispatchToProps(dispatch) {
+let mapDispatchToProps = (dispatch) => {
   // return {actions: bindActionCreators({ fetchpostings }, dispatch)}
   return {
     fetchpostings: () => dispatch(fetchpostings())
