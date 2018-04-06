@@ -9,7 +9,9 @@ import RootReducer from './reducers';
 
 const createStoreWithMiddleware = applyMiddleware(promiseMiddleware)(createStore)
 
-let store = createStore(RootReducer);
+const ReduxDev = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+
+let store = createStore(RootReducer, ReduxDev);
 
 ReactDOM.render(<Provider store={store}>
                     <App />
