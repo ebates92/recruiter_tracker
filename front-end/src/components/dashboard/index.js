@@ -3,21 +3,21 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Header from './header';
 import Container from './container';
-import NewPosting from './modal/Add_posting.js'
-import NewApplicant from './modal/Add_applicant.js'
-import AddApplicantToPosting from './modal/Add_applicant_to_posting.js'
-import ApplicantComponent from './modal/Applicant_Component'
-import CalendlyModal from './modal/Calendly'
+import NewPosting from './modal/Add_posting.js';
+import NewApplicant from './modal/Add_applicant.js';
+import AddApplicantToPosting from './modal/Add_applicant_to_posting.js';
+import ApplicantComponent from './modal/Applicant_Component';
+import CalendlyModal from './modal/Calendly';
 import ScheduleMeeting from './modal/Schedule';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux'
-import { fetchpostings } from '../../actions/get_postings.js'
-// import Postings from '../postingData.js';
-// import Applicants from './applicantData.js';
-// import {
-//   BrowserRouter as Router,
-//   Route
-// } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+
+// ACTIONS IMPORTED
+import { fetchpostings } from '../../actions/get_postings.js';
+import { fetchapplicants } from '../../actions/get_applicants.js';
+import { fetchPostingApplicants } from '../../actions/get_posting_applicants.js';
+import { fetchuser } from '../../actions/get_user';
+
 const url = 'http://localhost:3000';
 
 const Nothing = () => <span></span>;
