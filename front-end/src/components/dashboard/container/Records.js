@@ -9,9 +9,12 @@ class Records extends Component {
     super(props);
   }
 
+  // Passed in the column type and needed to filter out the records that weren't relevant.  All of the [0] are because redux for some reason
+  // is putting the array inside the first [0] index tag.
       recordCardsComponents = () => {
-        if ((this.props.postingApplicantData != null) && (this.props.applicantData != null) && (this.props.postingData != null) && (this.props.userData != null)) {
-          return (this.props.postingApplicantData[0].map((record) => {
+        const postingApplicantDataFiltered = (this.props.postingApplicantData != null) ? this.props.postingApplicantData[0].filter((data) => data.applicantStage === this.props.columnType) : null
+        if ((postingApplicantDataFiltered != null) && (this.props.applicantData != null) && (this.props.postingData != null) && (this.props.userData != null)) {
+          return (postingApplicantDataFiltered.map((record) => {
             const applicantRecord = this.props.applicantData[0].filter((applicant) => applicant.id === record.applicantId);
             const positionRecord = this.props.postingData[0].filter((posting) => posting.id === record.postingId)
             const buttonStyle = {width: '100px', height: '50px', fontSize: '.9rem', padding: '.3rem', marginLeft: 'auto', marginRight: 'auto'};
