@@ -2,20 +2,24 @@ import React, { Component } from 'react';
 import Record from './Record';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'react';
+import rootReducer from '../../../reducers'
 
 class Records extends Component {
-// const Records = (props) => {
+  constructor(props) {
+    super(props);
+  }
 
       recordCardsComponents = () => {
-        if (this.props.postingApplicantRecords.length > 0) {
-          return (this.props.postingApplicantRecords.map((record) => {
-            const applicantRecord = this.props.applicantRecords.filter((applicant) => applicant.id === record.applicantId);
-            const positionRecord = this.props.postingRecords.filter((posting) => posting.id === record.postingId)
+        if ((this.props.postingApplicantData != null) && (this.props.applicantData != null) && (this.props.postingData != null) && (this.props.userData != null)) {
+          return (this.props.postingApplicantData[0].map((record) => {
+            const applicantRecord = this.props.applicantData[0].filter((applicant) => applicant.id === record.applicantId);
+            const positionRecord = this.props.postingData[0].filter((posting) => posting.id === record.postingId)
             const buttonStyle = {width: '100px', height: '50px', fontSize: '.9rem', padding: '.3rem', marginLeft: 'auto', marginRight: 'auto'};
-            
+            console.log('records',applicantRecord)
+
             return <Record
                       calendly_url={this.props.calendly_url}
-                      userData={this.props.userData} 
+                      userData={this.props.userData[0]} 
                       calendlyMeetingHandler={this.props.calendlyMeetingHandler} 
                       applicantPostingMovedHandler={this.props.applicantPostingMovedHandler} 
                       applicantSelectedHandler={this.props.applicantSelectedHandler} 
@@ -39,8 +43,13 @@ class Records extends Component {
 }
 
 // REDUX APPLICATION STATE (COMBINED REDUCERS)
-function mapStateToProps(state) {
-  return null
+function mapStateToProps({ postingData, applicantData, postingApplicantData, userData }) {
+  return {
+    postingData,
+    applicantData,
+    postingApplicantData,
+    userData
+  }
 }
 
 // REDUX EVENT HANDLERS (ACTIONS)
