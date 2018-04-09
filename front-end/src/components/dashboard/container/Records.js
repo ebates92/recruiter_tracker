@@ -13,7 +13,18 @@ class Records extends Component {
   // is putting the array inside the first [0] index tag.
       recordCardsComponents = () => {
         // to make sure that the axios promise completed
-        const postingApplicantDataFiltered = (this.props.postingApplicantData != null) ? this.props.postingApplicantData[0].filter((data) => data.applicantStage === this.props.columnType) : null
+        let postingApplicantDataFunction = () => {
+          if (this.props.postingApplicantData != null && this.props.selectedPosting != undefined) {
+            if (this.props.selectedPosting === 'All') {
+              return (this.props.postingApplicantData[0].filter((data) => data.applicantStage === this.props.columnType))
+            } else {
+              return (this.props.postingApplicantData[0].filter((data) => data.applicantStage === this.props.columnType)).filter((data) => data.postingId === parseInt(this.props.selectedPosting))
+            }
+          }
+        }
+
+        const postingApplicantDataFiltered = postingApplicantDataFunction()
+
         // to make sure that the axios promise completed and that there are actual records in these columns
         if ((postingApplicantDataFiltered != null) && (this.props.applicantData != null) && (this.props.postingData != null) && (this.props.userData != null)) {
           return (postingApplicantDataFiltered.map((record) => {
@@ -47,12 +58,13 @@ class Records extends Component {
 }
 
 // REDUX APPLICATION STATE (COMBINED REDUCERS)
-function mapStateToProps({ postingData, applicantData, postingApplicantData, userData }) {
+function mapStateToProps({ postingData, applicantData, postingApplicantData, userData, selectedPosting }) {
   return {
     postingData,
     applicantData,
     postingApplicantData,
-    userData
+    userData,
+    selectedPosting
   }
 }
 

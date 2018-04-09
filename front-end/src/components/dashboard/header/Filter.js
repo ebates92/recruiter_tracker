@@ -15,13 +15,16 @@ class Filter extends Component {
     }
 
     render() {
+        const postingTitle = (this.props.selectedPosting != 'All' && this.props.postingData != undefined) ? this.props.postingData.filter((data) => data.id === parseInt(this.props.selectedPosting)) : 'All'
+        console.log(parseInt(this.props.selectedPosting))
+        console.log(postingTitle)
         return <div className="filter-logo">
                     <div className="logo">
                         <img src={logo} height="32px" width="32px" alt="logo" />
                     </div>
                     <div className="filter">
                         <h3>Postings</h3>
-                        <h2 className='posting-dropdown-title' onClick={this.postingSelectHandler}>{this.props.postingSelected} <i class="fas fa-caret-down"></i>
+                        <h2 className='posting-dropdown-title' onClick={this.postingSelectHandler}>{postingTitle} <i class="fas fa-caret-down"></i>
                             <div className={this.state.postingDropdown}>
                                 <DropdownPostings postingSelectedHandler={this.props.postingSelectedHandler} />
                             </div>
@@ -42,9 +45,10 @@ class Filter extends Component {
 }
 
 // REDUX APPLICATION STATE (COMBINED REDUCERS)
-function mapStateToProps(state) {
+function mapStateToProps({ postingData, selectedPosting }) {
     return {
-
+        postingData,
+        selectedPosting
     }
 }
 
@@ -53,5 +57,5 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators({},dispatch)
 }
 
-// export default connect(mapStateToProps,mapDispatchToProps)(Filter)
-export default Filter;
+export default connect(mapStateToProps,mapDispatchToProps)(Filter)
+// export default Filter;

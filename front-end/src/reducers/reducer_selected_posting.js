@@ -1,5 +1,5 @@
 
-export default function (state = null, action) {
+export default function (state = 'All', action) {
     console.log(action)
     switch(action.type) {
         case 'SELECTED_posting':

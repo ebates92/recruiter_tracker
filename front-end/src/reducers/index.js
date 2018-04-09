@@ -12,7 +12,7 @@ const rootReducer = combineReducers({
     postingApplicantData: ReducerGetPostingApplicants,
     userData: ReducerGetUser,
     selectedApplicant: ReducerSelectedApplicant,
-    selectPosting: ReducerSelectedPosting
+    selectedPosting: ReducerSelectedPosting
 })
 
 export default rootReducer;

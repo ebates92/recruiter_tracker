@@ -25,7 +25,7 @@ class DropdownPostings extends Component {
 
         return (
             <React.Fragment>
-                <div accessKey='all' id='posting' onMouseDown={this.reduxActionInitiate}>All</div>
+                <div accessKey='All' id='posting' onMouseDown={this.reduxActionInitiate}>All</div>
                 {postingDivs}
             </React.Fragment>
         )
