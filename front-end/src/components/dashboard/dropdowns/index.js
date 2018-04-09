@@ -23,8 +23,8 @@ const Dropdowns = (props) => {
 
         // FOR MAINSEARCH BAR
         } else if (props.applicantOptions || props.postingOptions) {
-            const postingComponents = props.postingOptions.map((option) => <div onClick={props.onClickSearchDropdown} className='form-dropdowns search-dropdowns' id='posting' accessKey={option.id} key={option.id}>{option.positionTitle}</div>);
-            const applicantComponents = props.applicantOptions.map((option) => <div onClick={props.onClickSearchDropdown} className='form-dropdowns search-dropdowns' id='applicant' accessKey={option.id} key={option.id}>{option.firstName} {option.lastName}</div>);
+            const postingComponents = props.postingOptions.map((option) => <div onMouseDown={props.onClickSearchDropdown} className='form-dropdowns search-dropdowns' id='posting' accessKey={option.id} key={option.id}>{option.positionTitle}</div>);
+            const applicantComponents = props.applicantOptions.map((option) => <div onMouseDown={props.onClickSearchDropdown} className='form-dropdowns search-dropdowns' id='applicant' accessKey={option.id} key={option.id}>{option.firstName} {option.lastName}</div>);
             const postingComponentsSlice = postingComponents.slice(0,5);
             const applicantComponentsSlice = applicantComponents.slice(0,5);
 

@@ -4,6 +4,7 @@ import applicantLogo from './applicant_logo.png';
 import DropdownMainSearchComponent from '../dropdowns'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'react';
+import selectedTarget from '../../../actions/selected.js'
 
 const Nothing = () => <span></span>;
 
@@ -17,13 +18,6 @@ class SearchBar extends Component {
             postingOptions: '',
             // filteredList: this.props.defaultRecords
         }
-    }
-
-    componentWillReceiveProps () {
-        this.setState({
-           applicantOptions: this.props.applicantRecords,
-           postingOptions: this.props.postingRecords,
-        })
     }
 
     _onFocusForDropdowns = (event) => {
@@ -52,17 +46,29 @@ class SearchBar extends Component {
                 }
 
     _onClickSearchDropdown = (event) => {
-        this.setState({
-            mainSearch: event.target.innerHTML,
-            dropdownMainSearch: null
-        })
-        // will filter the dashboard to show these position records
-        if (event.target.id === 'posting') {
-            this.props.postingSelectedHandler(event)
-        // will open the applicant record
-        } else if ( event.target.id === 'applicant') {
-            this.props.applicantSelectedHandler(event);
-        }
+
+            this.setState({
+                dropdownMainSearch: null
+            })
+            this.props.selectedTarget(event)
+            // will filter the dashboard to show these position records
+            // const targetType = event.target.id
+            // const targetId = event.currentTarget.accessKey
+            // const targetData = (targetType === 'postings') ? (this.props.postingData[0]) : (this.props.applicantData[0])
+            // const dataTypeObject = targetData.filter((data) => {
+            //     return(data.id === parseInt(event.currentTarget.accessKey))
+            // })
+
+            // selectedTarget(targetType,targetId)
+        // }
+
+
+        // if (event.target.id === 'posting') {
+        //     this.props.postingSelectedHandler(event)
+        // // will open the applicant record
+        // } else if ( event.target.id === 'applicant') {
+        //     this.props.applicantSelectedHandler(event);
+        // }
         
     }
 
@@ -70,7 +76,7 @@ class SearchBar extends Component {
     // FOR UX OF DROPDOWN STAYING OPEN OR CLOSED
         _mouseEnter = (event) => {
             console.log('about to set mouse enter state')
-            console.log("Posting Data",this.props.postingData)
+
             this.setState({
                 dropdownMainSearch: DropdownMainSearchComponent,
                 postingOptions: this.props.postingData[0],
@@ -127,7 +133,9 @@ function mapStateToProps({ postingData, applicantData }) {
 // REDUX EVENT HANDLERS (ACTIONS)
 function mapDispatchToProps(dispatch) {
     // return bindActionCreators({},dispatch)
-    return null
+    return {
+        selectedTarget: (event) => dispatch(selectedTarget(event))
+    }
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(SearchBar)
