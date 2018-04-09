@@ -46,7 +46,7 @@ class GlobalActions extends Component {
                 <button class="ui green basic button" id='applicanttoposting' style={buttonStyle} onClick={this.unhide}>Add Applicant to Posting</button>
                 <div className="settings-container">
                     <button class="ui green basic button" id='removeleftstyling' onClick={this._settingsClickHandler} style={buttonStyle}>Settings</button>
-                    <DropdownSettings userData={this.props.userData} calendly_urlClickHandler={this.props.calendly_urlClickHandler} settingsClickHandler={this._settingsClickHandler} />
+                    <DropdownSettings calendly_urlClickHandler={this.props.calendly_urlClickHandler} settingsClickHandler={this._settingsClickHandler} />
                 </div>
             </div>
         </div>
@@ -61,7 +61,7 @@ class GlobalActions extends Component {
 }
 
 // REDUX APPLICATION STATE (COMBINED REDUCERS)
-function mapStateToProps(state) {
+function mapStateToProps({state}) {
     return {
 
     }

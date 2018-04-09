@@ -10,12 +10,12 @@ const Header = (props) => {
     return (
         <header className="header">
             <div className="header-top">
-                <Filter postingSelectedHandler={props.postingSelectedHandler} postingSelected={props.postingSelected} postingRecords={props.postingRecords}/>
-                <SearchBar applicantSelectedHandler={props.applicantSelectedHandler} postingSelectedHandler={props.postingSelectedHandler} postingRecords={props.postingRecords} applicantRecords={props.applicantRecords} />
-                <GlobalActions userData={props.userData} calendly_urlClickHandler={props.calendly_urlClickHandler} engagingTheModal={props.engagingTheModal}/>
+                <Filter postingSelectedHandler={props.postingSelectedHandler} postingSelected={props.postingSelected} />
+                <SearchBar applicantSelectedHandler={props.applicantSelectedHandler} postingSelectedHandler={props.postingSelectedHandler} />
+                <GlobalActions calendly_urlClickHandler={props.calendly_urlClickHandler} engagingTheModal={props.engagingTheModal}/>
             </div>
             <div className="header-bottom">
-                <RollUpSummary totalRecords={props.postingRecords.length}/>
+                <RollUpSummary />
             </div>
         </header>
     )

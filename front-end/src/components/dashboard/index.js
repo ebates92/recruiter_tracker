@@ -323,70 +323,70 @@ _calendlyMeetingHandler = () => {
 
 // API CALLS
   componentDidMount() {
-    console.log('api request occurring')
-      axios.get(`${url}/api/postings`)
-        .then(res => res.data)
-        .then(
-          (postingRecords) => {
-            this.setState({
-              postingData: postingRecords,
-              postingOptions: postingRecords
-            });
-          },
-          (error) => {
-            this.setState({
-              error
-            })
-          }
-        )
+    // console.log('api request occurring')
+    //   axios.get(`${url}/api/postings`)
+    //     .then(res => res.data)
+    //     .then(
+    //       (postingRecords) => {
+    //         this.setState({
+    //           postingData: postingRecords,
+    //           postingOptions: postingRecords
+    //         });
+    //       },
+    //       (error) => {
+    //         this.setState({
+    //           error
+    //         })
+    //       }
+    //     )
 
-        axios.get(`${url}/api/applicants`)
-        .then(res => res.data)
-        .then(
-          (applicantRecords) => {
-            this.setState({
-              applicantData: applicantRecords,
-              applicantOptions: applicantRecords
-            });
-          },
-          (error) => {
-            this.setState({
-              error
-            })
-          }
-        )
+    //     axios.get(`${url}/api/applicants`)
+    //     .then(res => res.data)
+    //     .then(
+    //       (applicantRecords) => {
+    //         this.setState({
+    //           applicantData: applicantRecords,
+    //           applicantOptions: applicantRecords
+    //         });
+    //       },
+    //       (error) => {
+    //         this.setState({
+    //           error
+    //         })
+    //       }
+    //     )
 
 
-        axios.get(`${url}/api/postingApplicant`)
-        .then(res => res.data)
-        .then(
-          (postingApplicants) => {
-            this.setState({
-              postingApplicantData: postingApplicants,
-              newPostingApplicantData: postingApplicants
-            });
-          },
-          (error) => {
-            this.setState({
-              error
-            })
-          }
-        )
+    //     axios.get(`${url}/api/postingApplicant`)
+    //     .then(res => res.data)
+    //     .then(
+    //       (postingApplicants) => {
+    //         this.setState({
+    //           postingApplicantData: postingApplicants,
+    //           newPostingApplicantData: postingApplicants
+    //         });
+    //       },
+    //       (error) => {
+    //         this.setState({
+    //           error
+    //         })
+    //       }
+    //     )
 
-        axios.get(`${url}/api/user`)
-        .then(res => res.data)
-        .then(
-          (userData) => {
-            this.setState({
-                userData,
-            });
-          },
-          (error) => {
-            this.setState({
-              error
-            })
-          }
-        )
+    //     axios.get(`${url}/api/user`)
+    //     .then(res => res.data)
+    //     .then(
+    //       (userData) => {
+    //         this.setState({
+    //             userData,
+    //         });
+    //       },
+    //       (error) => {
+    //         this.setState({
+    //           error
+    //         })
+    //       }
+    //     )
         this.props.fetchpostings()
         this.props.fetchapplicants()
         this.props.fetchPostingApplicants()
@@ -416,15 +416,12 @@ _calendlyMeetingHandler = () => {
 
           <AddApplicantToPosting
             handlesAddApplicantToPosting={this._handlesAddApplicantToPosting}
-            postingRecords={this.state.postingData}
-            applicantRecords={this.state.applicantData}
             formObject={this.state.formObject}
             closeModal={this._closeModal}
             onFormChangeHandler={this._onFormChangeHandler}
             onFormSubmission={this._onFormSubmission} />
 
           <ApplicantComponent
-            postingRecords={this.state.postingData}
             currentApplicantsPostings={this.state.currentApplicantsPostings}
             currentApplicant={this.state.currentApplicant}
             closeModalCorrectly={this._closeModalCorrectly}/>
@@ -438,26 +435,19 @@ _calendlyMeetingHandler = () => {
           {/* <ScheduleMeeting calendlyLink={this.state.calendly_url} closeModalCorrectly={this._closeModalCorrectly} /> */}
 
           <Header 
-            userData={this.state.userData}
             calendly_urlClickHandler={this._calendly_urlClickHandler}
             engagingTheModal={this._engagingTheModal}
             postingSelectedHandler={this._postingSelectedHandler}
             applicantSelectedHandler={this._applicantSelectedHandler}
-            applicantRecords={this.state.applicantData}
-            postingRecords={this.state.postingData}
             postingSelected={this.state.postingSelected} />
 
           <Container
             calendly_url={this.state.calendly_url}
-            userData={this.state.userData}
             calendlyMeetingHandler={this._calendlyMeetingHandler}
             movedCardStageHandler={this._movedCardStageHandler}
             applicantPostingMovedHandler={this._applicantPostingMovedHandler}
             applicantSelectedHandler={this._applicantSelectedHandler}
-            postingSelected={this.state.postingSelected}
-            postingRecords={this.state.postingData}
-            applicantRecords={this.state.applicantData}
-            postingApplicantRecords={this.state.newPostingApplicantData} />
+            postingSelected={this.state.postingSelected} />
             
       </div>
     );

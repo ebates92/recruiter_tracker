@@ -13,8 +13,8 @@ class SearchBar extends Component {
         this.state = {
             dropdownMainSearch: null,
             searchTerm: '',
-            applicantOptions: this.props.applicantRecords,
-            postingOptions: this.props.postingRecords,
+            applicantOptions: '',
+            postingOptions: '',
             // filteredList: this.props.defaultRecords
         }
     }
@@ -29,8 +29,8 @@ class SearchBar extends Component {
     _onFocusForDropdowns = (event) => {
         this.setState({
             dropdownMainSearch: DropdownMainSearchComponent,
-            postingOptions: this.props.postingRecords,
-            applicantOptions: this.props.applicantRecords,
+            postingOptions: this.props.postingData[0],
+            applicantOptions: this.props.applicantData[0],
         })
         document.querySelector('.whole-searchbar').addEventListener('mouseleave', this._mouseLeave)
     }
@@ -42,8 +42,8 @@ class SearchBar extends Component {
                 const expression = new RegExp('^' + searchTerm + '.*', 'gi');
             
                 // associating applicant to posting
-                  let applicantOptions = this.props.applicantRecords.filter((applicant) => applicant.firstName.concat(applicant.lastName).match(expression));
-                  let postingOptions = this.props.postingRecords.filter((posting) => posting.positionTitle.match(expression))
+                  let applicantOptions = this.props.applicantData[0].filter((applicant) => applicant.firstName.concat(applicant.lastName).match(expression));
+                  let postingOptions = this.props.postingData[0].filter((posting) => posting.positionTitle.match(expression))
                   this.setState({
                         applicantOptions,
                         postingOptions,
@@ -73,15 +73,14 @@ class SearchBar extends Component {
             console.log("Posting Data",this.props.postingData)
             this.setState({
                 dropdownMainSearch: DropdownMainSearchComponent,
-                postingOptions: this.props.postingRecords,
-                applicantOptions: this.props.applicantRecords,
+                postingOptions: this.props.postingData[0],
+                applicantOptions: this.props.applicantData[0],
             })
         }
 
         _mouseLeave = (event) => {
             this.setState({
                 dropdownMainSearch: null,
-                mainSearch: ''
             })
             console.log('about to add mouseenter')
             document.querySelector('.whole-searchbar').addEventListener('mouseenter', this._mouseEnter, false)
@@ -91,6 +90,10 @@ class SearchBar extends Component {
             console.log('about to remove mouseenter')
             document.querySelector('.whole-searchbar').removeEventListener('mouseenter', this._mouseEnter, false)
             document.querySelector('.whole-searchbar').removeEventListener('mouseleave', this._mouseLeave, false)
+            this.setState({
+                dropdownMainSearch: null,
+                searchTerm: ''
+            })
         }
 
 
@@ -114,8 +117,11 @@ class SearchBar extends Component {
 }
 
 // REDUX APPLICATION STATE (COMBINED REDUCERS)
-function mapStateToProps(state) {
-    return { postingData: state.postingRecords }
+function mapStateToProps({ postingData, applicantData }) {
+    return { 
+        postingData,
+        applicantData
+     }
 }
 
 // REDUX EVENT HANDLERS (ACTIONS)

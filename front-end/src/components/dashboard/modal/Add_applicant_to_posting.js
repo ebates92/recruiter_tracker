@@ -11,18 +11,11 @@ class AddApplicantToPosting extends Component {
          this.state = {
              dropdownApplicant: null,
              dropdownPosting: null,
-             applicantOptions: this.props.applicantRecords,
-             postingOptions: this.props.postingRecords,
+             applicantOptions: '',
+             postingOptions: '',
              applicantSearch: '',
              postingSearch: '',
          }
-     }
-
-     componentWillReceiveProps () {
-         this.setState({
-            applicantOptions: this.props.applicantRecords,
-            postingOptions: this.props.postingRecords,
-         })
      }
 
      _onChangeForDropdowns = (event) => {
@@ -33,7 +26,7 @@ class AddApplicantToPosting extends Component {
     
         // associating applicant to posting
         if (event.target.name === 'applicant') {
-          let applicantOptions = this.props.applicantRecords.filter((applicant) => applicant.firstName.concat(applicant.lastName).match(expression));
+          let applicantOptions = this.props.applicantData.filter((applicant) => applicant.firstName.concat(applicant.lastName).match(expression));
           this.setState({
                 applicantOptions,
                 applicantSearch: event.target.value
@@ -41,7 +34,7 @@ class AddApplicantToPosting extends Component {
         }
     
         if(event.target.name === 'posting') {
-          let postingOptions = this.props.postingRecords.filter((posting) => posting.positionTitle.match(expression))
+          let postingOptions = this.props.postingData.filter((posting) => posting.positionTitle.match(expression))
           this.setState({
                 postingOptions,
                 postingSearch: event.target.value
@@ -53,7 +46,7 @@ class AddApplicantToPosting extends Component {
     _onFocusForDropdownsApplicant = (event) => {
         this.setState({
             dropdownApplicant: DropdownComponent,
-            applicantOptions: this.props.applicantRecords,
+            applicantOptions: this.props.applicantData[0],
         })
         document.querySelector('#form-search-container-applicant').addEventListener('mouseleave', (event) => {
             this.setState({
@@ -65,7 +58,7 @@ class AddApplicantToPosting extends Component {
     _onFocusForDropdownsPosting = (event) => {
         this.setState({
             dropdownPosting: DropdownComponent,
-            postingOptions: this.props.postingRecords
+            postingOptions: this.props.postingData[0]
         })
         document.querySelector('#form-search-container-posting').addEventListener('mouseleave', (event) => {
             this.setState({
@@ -73,17 +66,6 @@ class AddApplicantToPosting extends Component {
             })
         })
     }
-
-    // _onBlurForDropdowns = (event) => {
-    //     if(event.target.accept != 'no') {
-    //         this.setState({
-    //             dropdownApplicant: null,
-    //             dropdownPosting: null,
-    //             applicantOptions: this.props.applicantRecords,
-    //             postingOptions: this.props.postingRecords,
-    //         })
-    //     }
-    // }
 
     _searchClickHandler = (event) => {
 
@@ -108,8 +90,8 @@ class AddApplicantToPosting extends Component {
         this.setState({
             applicantSearch: '',
             postingSearch: '',
-            applicantOptions: this.props.applicantRecords,
-            postingOptions: this.props.postingRecords,
+            applicantOptions: '',
+            postingOptions: '',
         })
         const id = event.target.id
         document.querySelector('body').setAttribute('style', 'position: ');
@@ -185,9 +167,10 @@ class AddApplicantToPosting extends Component {
 }
 
 // REDUX APPLICATION STATE (COMBINED REDUCERS)
-function mapStateToProps(state) {
+function mapStateToProps({ postingData, applicantData }) {
     return {
-
+        postingData,
+        applicantData
     }
 }
 
@@ -196,5 +179,5 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators({},dispatch)
 }
 
-// export default connect(mapStateToProps,mapDispatchToProps)(AddApplicantToPosting);
-export default AddApplicantToPosting;
+export default connect(mapStateToProps,mapDispatchToProps)(AddApplicantToPosting);
+// export default AddApplicantToPosting;

@@ -7,6 +7,12 @@ import { bindActionCreators } from 'redux';
 const url = 'http://localhost:3000';
 
 class SettingsDropdown extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+
+        }
+    }
     
     logoutSession = () => {
         axios.post(`${url}/auth/logout`)
@@ -15,25 +21,31 @@ class SettingsDropdown extends Component {
     }
 
     render() {
-
-        return (
+        console.log(this.props.userData)
+        const waitForUserData = (this.props.userData != undefined) ? (
             <div className='form-dropdown-container settings-dropdown-container'>
                 <div className="settings-user-data">
-                    <div>{this.props.userData.email}</div>
-                    <div>link: {this.props.userData.calendly_url}</div>
+                    <div>{this.props.userData[0].email}</div>
+                    <div>link: {this.props.userData[0].calendly_url}</div>
                 </div>
                 {/* <div className='form-dropdowns'>Profile</div> */}
                 <div className='form-dropdowns' onClick={this.props.calendly_urlClickHandler}>Calendly Link</div>
                 <div className='form-dropdowns'onClick={this.logoutSession}>Logout</div>
             </div>
+        ) : null
+
+        return (
+            <React.Fragment>
+                {waitForUserData}
+            </React.Fragment>
         )
     }
 }
 
 // REDUX APPLICATION STATE (COMBINED REDUCERS)
-function mapStateToProps(state) {
+function mapStateToProps({ userData }) {
     return {
-
+        userData
     }
 }
 
@@ -42,5 +54,5 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators({},dispatch)
 }
 
-// export default connect(mapStateToProps,mapDispatchToProps)(SettingsDropdown);
-export default SettingsDropdown;
+export default connect(mapStateToProps,mapDispatchToProps)(SettingsDropdown);
+// export default SettingsDropdown;

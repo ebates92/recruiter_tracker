@@ -5,10 +5,15 @@ import { bindActionCreators } from 'redux';
 
 class RollUpSummary extends Component {
 // const RollUpSummary = (props) => {
+    constructor(props) {
+        super(props)
+    }
+
     render() {
+        const totalRecords = (this.props.postingData != undefined) ? this.props.postingData[0].length : 0
         const iconStyle = {fontSize: '3px', display: 'block', alignSelf: 'center'};
             return <div className="listview-info">
-                    <div>{this.props.totalRecords} postings showing</div>
+                    <div>{totalRecords} postings showing</div>
                     {/* <i class="fas fa-circle" style={iconStyle}></i>
                     <div>Sorted by Placeholder</div> */}
                     {/* <i class="fas fa-circle" style={iconStyle}></i>
@@ -18,9 +23,9 @@ class RollUpSummary extends Component {
 }
 
 // REDUX APPLICATION STATE (COMBINED REDUCERS)
-function mapStateToProps(state) {
+function mapStateToProps({ postingData }) {
     return {
-
+        postingData
     }
 }
 

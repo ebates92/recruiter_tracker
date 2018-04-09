@@ -23,7 +23,6 @@ function collect(connect, monitor) {
 class Record extends Component {
 
   render() {
-    console.log(this.props.applicantRecord)
     const { connectDragSource, isDragging } = this.props;
     const calendlyLink = `${this.props.calendly_url}?name=${this.props.applicantRecord[0].firstName}`
     const emailData = `mailto:${this.props.applicantRecord[0].email}?subject=Interview for ${this.props.positionRecord[0].positionTitle} role&body=Hi ${this.props.applicantRecord[0].firstName},%0D%0A %0D%0A To schedule a meeting with me for the ${this.props.positionRecord[0].positionTitle} role, please paste this link into your web browser. %0D%0A %0D%0A ${calendlyLink} %0D%0A %0D%0A Thanks! %0D%0A ${this.props.userData.firstName} `

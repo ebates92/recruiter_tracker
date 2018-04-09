@@ -23,7 +23,7 @@ class Filter extends Component {
                         <h3>Postings</h3>
                         <h2 className='posting-dropdown-title' onClick={this.postingSelectHandler}>{this.props.postingSelected} <i class="fas fa-caret-down"></i>
                             <div className={this.state.postingDropdown}>
-                                <DropdownPostings postingSelectedHandler={this.props.postingSelectedHandler} postingRecords={this.props.postingRecords} />
+                                <DropdownPostings postingSelectedHandler={this.props.postingSelectedHandler} />
                             </div>
                         </h2>
                     </div>

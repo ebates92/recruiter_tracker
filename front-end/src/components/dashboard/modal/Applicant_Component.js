@@ -25,7 +25,7 @@ import { bindActionCreators } from 'redux';
                             </div>
                             <div>
                                 <div className='applicant-component-section-title'>Relevant Postings</div>
-                                <PostingsApplied postingRecords={this.props.postingRecords} currentApplicantsPostings={this.props.currentApplicantsPostings}/>
+                                <PostingsApplied postingRecords={this.props.postingData} currentApplicantsPostings={this.props.currentApplicantsPostings}/>
                             </div>
                         </div>
                         <div className='applicant-component-right-side'>
@@ -46,9 +46,9 @@ import { bindActionCreators } from 'redux';
 }
 
 // REDUX APPLICATION STATE (COMBINED REDUCERS)
-function mapStateToProps(state) {
+function mapStateToProps({ postingData }) {
     return {
-
+        postingData
     }
 }
 
@@ -57,5 +57,5 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators({},dispatch)
 }
 
-// export default connect(mapStateToProps,mapDispatchToProps)(ApplicantComponent);
-export default ApplicantComponent;
+export default connect(mapStateToProps,mapDispatchToProps)(ApplicantComponent);
+// export default ApplicantComponent;
