@@ -17,7 +17,7 @@ class DropdownPostings extends Component {
     }
 
     render() {
-        const postingDivs = (this.props.postingData != undefined) ? this.props.postingData[0].map((postingRecord) => {
+        const postingDivs = (this.props.postingData != undefined) ? this.props.postingData.map((postingRecord) => {
             return (
                 <div accessKey={postingRecord.id} id='posting' onMouseDown={this.reduxActionInitiate}>{postingRecord.positionTitle}</div>
             )

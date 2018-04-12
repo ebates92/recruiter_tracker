@@ -25,8 +25,8 @@ class SettingsDropdown extends Component {
         const waitForUserData = (this.props.userData != undefined) ? (
             <div className='form-dropdown-container settings-dropdown-container'>
                 <div className="settings-user-data">
-                    <div>{this.props.userData[0].email}</div>
-                    <div>link: {this.props.userData[0].calendly_url}</div>
+                    <div>{this.props.userData.email}</div>
+                    <div>link: {this.props.userData.calendly_url}</div>
                 </div>
                 {/* <div className='form-dropdowns'>Profile</div> */}
                 <div className='form-dropdowns' onClick={this.props.calendly_urlClickHandler}>Calendly Link</div>

@@ -46,7 +46,7 @@ class AddApplicantToPosting extends Component {
     _onFocusForDropdownsApplicant = (event) => {
         this.setState({
             dropdownApplicant: DropdownComponent,
-            applicantOptions: this.props.applicantData[0],
+            applicantOptions: this.props.applicantData,
         })
         document.querySelector('#form-search-container-applicant').addEventListener('mouseleave', (event) => {
             this.setState({
@@ -58,7 +58,7 @@ class AddApplicantToPosting extends Component {
     _onFocusForDropdownsPosting = (event) => {
         this.setState({
             dropdownPosting: DropdownComponent,
-            postingOptions: this.props.postingData[0]
+            postingOptions: this.props.postingData
         })
         document.querySelector('#form-search-container-posting').addEventListener('mouseleave', (event) => {
             this.setState({

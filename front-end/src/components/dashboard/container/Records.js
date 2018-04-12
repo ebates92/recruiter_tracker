@@ -12,29 +12,32 @@ class Records extends Component {
   // Passed in the column type and needed to filter out the records that weren't relevant.  All of the [0] are because redux for some reason
   // is putting the array inside the first [0] index tag.
       recordCardsComponents = () => {
-        // to make sure that the axios promise completed
+        // to make sure that the axios promise completed and to filter the records based on the position currently selected.
         let postingApplicantDataFunction = () => {
+          console.log('record', this.props.postingApplicantData)
+          console.log('record', this.props.selectedPosting)
           if (this.props.postingApplicantData != null && this.props.selectedPosting != undefined) {
             if (this.props.selectedPosting === 'All') {
-              return (this.props.postingApplicantData[0].filter((data) => data.applicantStage === this.props.columnType))
+              return (this.props.postingApplicantData.filter((data) => data.applicantStage === this.props.columnType))
             } else {
-              return (this.props.postingApplicantData[0].filter((data) => data.applicantStage === this.props.columnType)).filter((data) => data.postingId === parseInt(this.props.selectedPosting))
+              return (this.props.postingApplicantData.filter((data) => data.applicantStage === this.props.columnType)).filter((data) => data.postingId === parseInt(this.props.selectedPosting))
             }
           }
         }
 
         const postingApplicantDataFiltered = postingApplicantDataFunction()
+        console.log(postingApplicantDataFiltered)
 
         // to make sure that the axios promise completed and that there are actual records in these columns
         if ((postingApplicantDataFiltered != null) && (this.props.applicantData != null) && (this.props.postingData != null) && (this.props.userData != null)) {
           return (postingApplicantDataFiltered.map((record) => {
-            const applicantRecord = this.props.applicantData[0].filter((applicant) => applicant.id === record.applicantId);
-            const positionRecord = this.props.postingData[0].filter((posting) => posting.id === record.postingId)
+            const applicantRecord = this.props.applicantData.filter((applicant) => applicant.id === record.applicantId);
+            const positionRecord = this.props.postingData.filter((posting) => posting.id === record.postingId)
             const buttonStyle = {width: '100px', height: '50px', fontSize: '.9rem', padding: '.3rem', marginLeft: 'auto', marginRight: 'auto'};
 
             return <Record
                       calendly_url={this.props.calendly_url}
-                      userData={this.props.userData[0]} 
+                      userData={this.props.userData} 
                       calendlyMeetingHandler={this.props.calendlyMeetingHandler} 
                       applicantPostingMovedHandler={this.props.applicantPostingMovedHandler} 
                       applicantSelectedHandler={this.props.applicantSelectedHandler} 

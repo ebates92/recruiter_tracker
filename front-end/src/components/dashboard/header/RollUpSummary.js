@@ -10,7 +10,7 @@ class RollUpSummary extends Component {
     }
 
     render() {
-        const totalRecords = (this.props.postingData != undefined) ? this.props.postingData[0].length : 0
+        const totalRecords = (this.props.postingData != undefined) ? this.props.postingData.length : 0
         const iconStyle = {fontSize: '3px', display: 'block', alignSelf: 'center'};
             return <div className="listview-info">
                     <div>{totalRecords} postings showing</div>

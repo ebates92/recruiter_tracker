@@ -15,7 +15,7 @@ class Filter extends Component {
     }
 
     render() {
-        const postingTitle = (this.props.selectedPosting != 'All' && this.props.postingData != undefined) ? this.props.postingData.filter((data) => data.id === parseInt(this.props.selectedPosting)) : 'All'
+        const postingTitle = (this.props.selectedPosting != 'All' && this.props.postingData != undefined) ? this.props.postingData.filter((data) => data.id === parseInt(this.props.selectedPosting)) : {0:{positionTitle: 'All'}}
         console.log(parseInt(this.props.selectedPosting))
         console.log(postingTitle)
         return <div className="filter-logo">
@@ -24,7 +24,7 @@ class Filter extends Component {
                     </div>
                     <div className="filter">
                         <h3>Postings</h3>
-                        <h2 className='posting-dropdown-title' onClick={this.postingSelectHandler}>{postingTitle} <i class="fas fa-caret-down"></i>
+                        <h2 className='posting-dropdown-title' onClick={this.postingSelectHandler}>{postingTitle[0].positionTitle} <i class="fas fa-caret-down"></i>
                             <div className={this.state.postingDropdown}>
                                 <DropdownPostings postingSelectedHandler={this.props.postingSelectedHandler} />
                             </div>

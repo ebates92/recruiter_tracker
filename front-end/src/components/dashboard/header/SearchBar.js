@@ -23,8 +23,8 @@ class SearchBar extends Component {
     _onFocusForDropdowns = (event) => {
         this.setState({
             dropdownMainSearch: DropdownMainSearchComponent,
-            postingOptions: this.props.postingData[0],
-            applicantOptions: this.props.applicantData[0],
+            postingOptions: this.props.postingData,
+            applicantOptions: this.props.applicantData,
         })
         document.querySelector('.whole-searchbar').addEventListener('mouseleave', this._mouseLeave)
     }
@@ -79,8 +79,8 @@ class SearchBar extends Component {
 
             this.setState({
                 dropdownMainSearch: DropdownMainSearchComponent,
-                postingOptions: this.props.postingData[0],
-                applicantOptions: this.props.applicantData[0],
+                postingOptions: this.props.postingData,
+                applicantOptions: this.props.applicantData,
             })
         }
 

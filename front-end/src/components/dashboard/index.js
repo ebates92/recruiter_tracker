@@ -238,11 +238,11 @@ _closeModalCorrectly = (event) => {
     if (event.target.className === 'ui green basic button') {
       return null
     } else {
-      const applicant = this.state.applicantData[0].filter((applicant) => {
+      const applicant = this.state.applicantData.filter((applicant) => {
         return (applicant.id === parseInt(event.currentTarget.accessKey))
       })
 
-      const currentApplicantsPostings = this.state.postingApplicantData[0].filter((postingApplicant) => {
+      const currentApplicantsPostings = this.state.postingApplicantData.filter((postingApplicant) => {
         return (postingApplicant.applicantId === parseInt(event.currentTarget.accessKey))
       })
 
@@ -264,9 +264,9 @@ _closeModalCorrectly = (event) => {
     // modifies the posting applicant data that should be shared back to the container
     const newPostingApplicantDataFunction = () => {
       if (event.target.innerHTML === "All") {
-          return this.state.postingApplicantData[0]
+          return this.state.postingApplicantData
       } else {
-        return this.state.postingApplicantData[0].filter((postingApplicantRecord) => postingApplicantRecord.postingId === newPostingData[0].id)
+        return this.state.postingApplicantData.filter((postingApplicantRecord) => postingApplicantRecord.postingId === newPostingData[0].id)
       } 
     }
 
@@ -274,7 +274,7 @@ _closeModalCorrectly = (event) => {
 
     this.setState({
       postingSelected: event.target.innerHTML,
-      newPostingApplicantData: newPostingApplicantData[0],
+      newPostingApplicantData: newPostingApplicantData,
     })
   };
 
