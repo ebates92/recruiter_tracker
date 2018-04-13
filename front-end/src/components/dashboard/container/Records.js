@@ -3,6 +3,7 @@ import Record from './Record';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'react';
 import rootReducer from '../../../reducers'
+import selectedTarget from '../../../actions/selected.js'
 
 class Records extends Component {
   constructor(props) {
@@ -14,8 +15,6 @@ class Records extends Component {
       recordCardsComponents = () => {
         // to make sure that the axios promise completed and to filter the records based on the position currently selected.
         let postingApplicantDataFunction = () => {
-          console.log('record', this.props.postingApplicantData)
-          console.log('record', this.props.selectedPosting)
           if (this.props.postingApplicantData != null && this.props.selectedPosting != undefined) {
             if (this.props.selectedPosting === 'All') {
               return (this.props.postingApplicantData.filter((data) => data.applicantStage === this.props.columnType))
@@ -26,7 +25,6 @@ class Records extends Component {
         }
 
         const postingApplicantDataFiltered = postingApplicantDataFunction()
-        console.log(postingApplicantDataFiltered)
 
         // to make sure that the axios promise completed and that there are actual records in these columns
         if ((postingApplicantDataFiltered != null) && (this.props.applicantData != null) && (this.props.postingData != null) && (this.props.userData != null)) {
@@ -74,7 +72,9 @@ function mapStateToProps({ postingData, applicantData, postingApplicantData, use
 // REDUX EVENT HANDLERS (ACTIONS)
 function mapDispatchToProps(dispatch) {
   // return bindActionCreators({},dispatch)
-  return null
+  return {
+    selectedTarget: () => dispatch(selectedTarget())
+  }
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(Records)

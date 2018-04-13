@@ -16,8 +16,6 @@ class Filter extends Component {
 
     render() {
         const postingTitle = (this.props.selectedPosting != 'All' && this.props.postingData != undefined) ? this.props.postingData.filter((data) => data.id === parseInt(this.props.selectedPosting)) : {0:{positionTitle: 'All'}}
-        console.log(parseInt(this.props.selectedPosting))
-        console.log(postingTitle)
         return <div className="filter-logo">
                     <div className="logo">
                         <img src={logo} height="32px" width="32px" alt="logo" />

@@ -7,26 +7,28 @@ import { bindActionCreators } from 'redux';
  class ApplicantComponent extends Component {
 
     render() {
+        const currentApplicant = this.props.applicantData
+
         return (
             <div className="modal-overlay" data-modal-container-applicantcomponent>
                 <div className="modal-container">
-                    <div className="modal-header"><h2><strong>{this.props.currentApplicant[0].firstName} {this.props.currentApplicant[0].lastName}</strong></h2></div>
+                    <div className="modal-header"><h2><strong>{this.props.applicantData[0].firstName} {this.props.applicantData[0].lastName}</strong></h2></div>
                     <div className="modal-body applicant-component-body">
                         <div className='applicant-component-left-side'>
                             <div className='applicant-component-section-title'>Personal Information</div>
                             <div className='applicant-component-information-container'>
                                 <div className='applicant-component-information'>
-                                    <div className="applicant-component-datafield"><strong>{this.props.currentApplicant[0].firstName} {this.props.currentApplicant[0].lastName}</strong></div>
-                                    <div className="applicant-component-datafield">{this.props.currentApplicant[0].email}</div>
-                                    <div className="applicant-component-datafield">{this.props.currentApplicant[0].phone}</div>
-                                    <div className="applicant-component-datafield"><a href='{this.props.currentApplicant[0].linked_in}'>{this.props.currentApplicant[0].linked_in}</a></div>
-                                    <div className="applicant-component-datafield">{this.props.currentApplicant[0].recruiter_notes}</div>
+                                    <div className="applicant-component-datafield"><strong>{this.props.applicantData[0].firstName} {this.props.applicantData[0].lastName}</strong></div>
+                                    <div className="applicant-component-datafield">{this.props.applicantData[0].email}</div>
+                                    <div className="applicant-component-datafield">{this.props.applicantData[0].phone}</div>
+                                    <div className="applicant-component-datafield"><a href='{this.props.applicantData[0].linked_in}'>{this.props.applicantData[0].linked_in}</a></div>
+                                    <div className="applicant-component-datafield">{this.props.applicantData[0].recruiter_notes}</div>
                                 </div>
                             </div>
-                            <div>
+                            {/* <div>
                                 <div className='applicant-component-section-title'>Relevant Postings</div>
                                 <PostingsApplied postingRecords={this.props.postingData} currentApplicantsPostings={this.props.currentApplicantsPostings}/>
-                            </div>
+                            </div> */}
                         </div>
                         <div className='applicant-component-right-side'>
                             <div></div>
@@ -46,9 +48,11 @@ import { bindActionCreators } from 'redux';
 }
 
 // REDUX APPLICATION STATE (COMBINED REDUCERS)
-function mapStateToProps({ postingData }) {
+function mapStateToProps({ postingData, applicantData, selectedApplicant }) {
     return {
-        postingData
+        postingData,
+        applicantData,
+        selectedApplicant
     }
 }
 

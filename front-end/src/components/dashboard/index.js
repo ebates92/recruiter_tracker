@@ -17,6 +17,7 @@ import { fetchpostings } from '../../actions/get_postings.js';
 import { fetchapplicants } from '../../actions/get_applicants.js';
 import { fetchPostingApplicants } from '../../actions/get_posting_applicants.js';
 import { fetchuser } from '../../actions/get_user';
+import updateSelectedApplicant from '../../actions/selected.js'
 
 const url = 'http://localhost:3000';
 
@@ -35,7 +36,7 @@ class Dashboard extends Component {
       // update applicant selected
       currentApplicant: '',
       currentApplicantsPostings: '',
-      applicantComponent: null,
+      applicantComponent: ApplicantComponent,
 
       // updating the posting dropdown and container
       newPostingApplicantData: [],
@@ -89,7 +90,7 @@ class Dashboard extends Component {
   
     this._onFormChangeHandler = this._onFormChangeHandler.bind(this);
     this._onFormSubmission = this._onFormSubmission.bind(this);
-    this._postingSelectedHandler = this._postingSelectedHandler.bind(this);
+    // this._postingSelectedHandler = this._postingSelectedHandler.bind(this);
   }
 
 
@@ -169,9 +170,11 @@ class Dashboard extends Component {
 }
 
 _closeModalCorrectly = (event) => {
+  this.props.updateSelectedApplicant({
+    target: {id:'SELECTED_applicant'},
+    currentTarget: {accessKey: null}
+  })
   this.setState({
-    currentApplicant: '',
-    applicantComponent: null,
     calendlyModal: null,
     scheduleMeeting: null,
   })
@@ -255,29 +258,6 @@ _closeModalCorrectly = (event) => {
   }
 
 
-// FOR UPDATING POSTING SELECTIONS ON THE MAIN DASHBOARD CONTAINER
-
-  _postingSelectedHandler(event) {
-
-    // figures out the posting that was filtered by
-    const newPostingData = this.state.postingData.filter((record) => record.positionTitle === event.target.innerHTML)
-    // modifies the posting applicant data that should be shared back to the container
-    const newPostingApplicantDataFunction = () => {
-      if (event.target.innerHTML === "All") {
-          return this.state.postingApplicantData
-      } else {
-        return this.state.postingApplicantData.filter((postingApplicantRecord) => postingApplicantRecord.postingId === newPostingData[0].id)
-      } 
-    }
-
-    const newPostingApplicantData = newPostingApplicantDataFunction();
-
-    this.setState({
-      postingSelected: event.target.innerHTML,
-      newPostingApplicantData: newPostingApplicantData,
-    })
-  };
-
   // SETTINGS MODALS
 
   _calendly_urlClickHandler = (event) => {
@@ -323,70 +303,6 @@ _calendlyMeetingHandler = () => {
 
 // API CALLS
   componentDidMount() {
-    // console.log('api request occurring')
-    //   axios.get(`${url}/api/postings`)
-    //     .then(res => res.data)
-    //     .then(
-    //       (postingRecords) => {
-    //         this.setState({
-    //           postingData: postingRecords,
-    //           postingOptions: postingRecords
-    //         });
-    //       },
-    //       (error) => {
-    //         this.setState({
-    //           error
-    //         })
-    //       }
-    //     )
-
-    //     axios.get(`${url}/api/applicants`)
-    //     .then(res => res.data)
-    //     .then(
-    //       (applicantRecords) => {
-    //         this.setState({
-    //           applicantData: applicantRecords,
-    //           applicantOptions: applicantRecords
-    //         });
-    //       },
-    //       (error) => {
-    //         this.setState({
-    //           error
-    //         })
-    //       }
-    //     )
-
-
-    //     axios.get(`${url}/api/postingApplicant`)
-    //     .then(res => res.data)
-    //     .then(
-    //       (postingApplicants) => {
-    //         this.setState({
-    //           postingApplicantData: postingApplicants,
-    //           newPostingApplicantData: postingApplicants
-    //         });
-    //       },
-    //       (error) => {
-    //         this.setState({
-    //           error
-    //         })
-    //       }
-    //     )
-
-    //     axios.get(`${url}/api/user`)
-    //     .then(res => res.data)
-    //     .then(
-    //       (userData) => {
-    //         this.setState({
-    //             userData,
-    //         });
-    //       },
-    //       (error) => {
-    //         this.setState({
-    //           error
-    //         })
-    //       }
-    //     )
         this.props.fetchpostings()
         this.props.fetchapplicants()
         this.props.fetchPostingApplicants()
@@ -397,7 +313,9 @@ _calendlyMeetingHandler = () => {
 
 
   render() {
-    const ApplicantComponent = this.state.applicantComponent || Nothing;
+    console.log('rerender main dashboard', this.props.selectedApplicant)
+    const ApplicantComponent = (this.props.selectedApplicant != null) ? this.state.applicantComponent : Nothing;
+    console.log('should display', ApplicantComponent)
     const CalendlyModal = this.state.calendlyModal || Nothing;
     const ScheduleMeeting = this.state.scheduleMeeting || Nothing;
 
@@ -454,11 +372,12 @@ _calendlyMeetingHandler = () => {
   }
 }
 
-let mapStateToProps = ({ applicantData, postingData, postingApplicantData }) => {
+let mapStateToProps = ({ applicantData, postingData, postingApplicantData, selectedApplicant }) => {
   return {
     applicantData, 
     postingData, 
-    postingApplicantData
+    postingApplicantData,
+    selectedApplicant
   }
 }
 
@@ -468,8 +387,9 @@ let mapDispatchToProps = (dispatch) => {
     fetchpostings: () => dispatch(fetchpostings()),
     fetchapplicants: () => dispatch(fetchapplicants()),
     fetchPostingApplicants: () => dispatch(fetchPostingApplicants()),
-    fetchuser: () => dispatch(fetchuser())
+    fetchuser: () => dispatch(fetchuser()),
+    updateSelectedApplicant: () => dispatch(updateSelectedApplicant())
   }
 }
 
-export default connect(null, mapDispatchToProps)(Dashboard);
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
