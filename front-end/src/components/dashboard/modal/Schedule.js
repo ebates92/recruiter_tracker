@@ -2,20 +2,9 @@ import React, { Component } from 'react';
 // import axios from 'axios';
 // import ModalTypes from './Modal-types.js';
 
+// IS THIS STILL USED?
+
  class ScheduleMeeting extends Component {
-
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         calendlyLink: "https://calendly.com/tcampb31/test-1/03-06-2018?back=1",
-    //         applicantName: "",
-    //         applicantEmail: ""
-    //     }
-    // }
-
-    // _clickHandler = () => {
-    //     this.setState
-    // }
 
     render() {
         

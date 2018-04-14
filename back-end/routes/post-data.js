@@ -26,7 +26,8 @@ router.route('/posting')
             hiringManager: req.body.hiringManager,
             additionalNotes: req.body.additionalNotes,
             isFilled: req.body.is,
-            userId: res.locals.id
+            // userId: res.locals.id,
+            userId: 1
         }).then((postings) => {
             console.log(postings)
             res.json(postings);
@@ -44,7 +45,8 @@ router.route('/applicant')
             linked_in: req.body.linked_in,
             resume_link: req.body.resume_link,
             recruiter_notes: req.body.recruiter_notes,
-            userId: res.locals.id,
+            // userId: res.locals.id,
+            userId: 1,
         }).then((applicants) => res.json(applicants))
     })
 
@@ -54,7 +56,8 @@ router.route('/applicanttoposting')
         PostingApplicant.create({
             applicantId: req.body.applicantId,
             postingId: req.body.postingId,
-            userId: res.locals.id,
+            // userId: res.locals.id,
+            userId: 1,
             applicantStage: req.body.applicantStage,
             isRejected: req.body.isRejected,
             hiringManager_notes: req.body.hiringManager_notes,
@@ -67,7 +70,8 @@ router.route('/user-calendly')
         User.update({
             calendly_url: req.body.calendly_url
         }, {
-            where: {id: res.locals.id}
+            // where: {id: res.locals.id}
+            where: {id: 1}
         }).then((user) => res.json(user))
     })
 
@@ -81,8 +85,8 @@ router.route('/moved-card')
             where: {id: req.body.postingApplicantId}
         }).then((postingUpdate) => {
             PostingApplicant.findAll({
-                // where:{userId: 1}
-                where:{userId: res.locals.id}
+                where:{userId: 1}
+                // where:{userId: res.locals.id}
             }).then((postingapplicant) => res.json(postingapplicant))
         })
     })

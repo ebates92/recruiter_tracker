@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 // import ModalTypes from './Modal-types.js';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
  class NewApplicant extends Component {
 
@@ -58,5 +60,19 @@ import React, { Component } from 'react';
         )
     }
 }
+
+// REDUX APPLICATION STATE (COMBINED REDUCERS)
+function mapStateToProps(state) {
+    return {
+
+    }
+}
+
+// REDUX EVENT HANDLERS (ACTIONS)
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({},dispatch)
+}
+
+// export default connect(mapStateToProps,mapDispatchToProps)(NewApplicant);
 
 export default NewApplicant;

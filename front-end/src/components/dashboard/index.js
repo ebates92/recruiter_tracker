@@ -3,18 +3,22 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Header from './header';
 import Container from './container';
-import NewPosting from './modal/Add_posting.js'
-import NewApplicant from './modal/Add_applicant.js'
-import AddApplicantToPosting from './modal/Add_applicant_to_posting.js'
-import ApplicantComponent from './modal/Applicant_Component'
-import CalendlyModal from './modal/Calendly'
+import NewPosting from './modal/Add_posting.js';
+import NewApplicant from './modal/Add_applicant.js';
+import AddApplicantToPosting from './modal/Add_applicant_to_posting.js';
+import ApplicantComponent from './modal/Applicant_Component';
+import CalendlyModal from './modal/Calendly';
 import ScheduleMeeting from './modal/Schedule';
-// import Postings from '../postingData.js';
-// import Applicants from './applicantData.js';
-// import {
-//   BrowserRouter as Router,
-//   Route
-// } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+// ACTIONS IMPORTED
+import { fetchpostings } from '../../actions/get_postings.js';
+import { fetchapplicants } from '../../actions/get_applicants.js';
+import { fetchPostingApplicants } from '../../actions/get_posting_applicants.js';
+import { fetchuser } from '../../actions/get_user';
+import updateSelectedApplicant from '../../actions/selected.js'
+
 const url = 'http://localhost:3000';
 
 const Nothing = () => <span></span>;
@@ -23,16 +27,16 @@ class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      postingData: [],
-      applicantData: [],
-      postingApplicantData: [],
+      // postingData: [],
+      // applicantData: [],
+      // postingApplicantData: [],
       error: null,
       filteredList: [],
 
       // update applicant selected
       currentApplicant: '',
       currentApplicantsPostings: '',
-      applicantComponent: null,
+      applicantComponent: ApplicantComponent,
 
       // updating the posting dropdown and container
       newPostingApplicantData: [],
@@ -86,7 +90,7 @@ class Dashboard extends Component {
   
     this._onFormChangeHandler = this._onFormChangeHandler.bind(this);
     this._onFormSubmission = this._onFormSubmission.bind(this);
-    this._postingSelectedHandler = this._postingSelectedHandler.bind(this);
+    // this._postingSelectedHandler = this._postingSelectedHandler.bind(this);
   }
 
 
@@ -166,9 +170,11 @@ class Dashboard extends Component {
 }
 
 _closeModalCorrectly = (event) => {
+  this.props.updateSelectedApplicant({
+    target: {id:'SELECTED_applicant'},
+    currentTarget: {accessKey: null}
+  })
   this.setState({
-    currentApplicant: '',
-    applicantComponent: null,
     calendlyModal: null,
     scheduleMeeting: null,
   })
@@ -252,29 +258,6 @@ _closeModalCorrectly = (event) => {
   }
 
 
-// FOR UPDATING POSTING SELECTIONS ON THE MAIN DASHBOARD CONTAINER
-
-  _postingSelectedHandler(event) {
-
-    // figures out the posting that was filtered by
-    const newPostingData = this.state.postingData.filter((record) => record.positionTitle === event.target.innerHTML)
-    // modifies the posting applicant data that should be shared back to the container
-    const newPostingApplicantDataFunction = () => {
-      if (event.target.innerHTML === "All") {
-          return this.state.postingApplicantData
-      } else {
-        return this.state.postingApplicantData.filter((postingApplicantRecord) => postingApplicantRecord.postingId === newPostingData[0].id)
-      } 
-    }
-
-    const newPostingApplicantData = newPostingApplicantDataFunction();
-
-    this.setState({
-      postingSelected: event.target.innerHTML,
-      newPostingApplicantData: newPostingApplicantData,
-    })
-  };
-
   // SETTINGS MODALS
 
   _calendly_urlClickHandler = (event) => {
@@ -320,93 +303,93 @@ _calendlyMeetingHandler = () => {
 
 // API CALLS
   componentDidMount() {
-    console.log('api request occurring')
-      axios.get(`${url}/api/postings`)
-        .then(res => res.data)
-        .then(
-          (postingRecords) => {
-            this.setState({
-              postingData: postingRecords,
-              postingOptions: postingRecords
-            });
-          },
-          (error) => {
-            this.setState({
-              error
-            })
-          }
-        )
-
-        axios.get(`${url}/api/applicants`)
-        .then(res => res.data)
-        .then(
-          (applicantRecords) => {
-            this.setState({
-              applicantData: applicantRecords,
-              applicantOptions: applicantRecords
-            });
-          },
-          (error) => {
-            this.setState({
-              error
-            })
-          }
-        )
-
-
-        axios.get(`${url}/api/postingApplicant`)
-        .then(res => res.data)
-        .then(
-          (postingApplicants) => {
-            console.log(postingApplicants)
-            this.setState({
-              postingApplicantData: postingApplicants,
-              newPostingApplicantData: postingApplicants
-            });
-          },
-          (error) => {
-            this.setState({
-              error
-            })
-          }
-        )
-
-        axios.get(`${url}/api/user`)
-        .then(res => res.data)
-        .then(
-          (userData) => {
-            this.setState({
-                userData,
-            });
-          },
-          (error) => {
-            this.setState({
-              error
-            })
-          }
-        )
+        this.props.fetchpostings()
+        this.props.fetchapplicants()
+        this.props.fetchPostingApplicants()
+        this.props.fetchuser()
+        
     }
 
 
 
   render() {
-    const ApplicantComponent = this.state.applicantComponent || Nothing;
+    console.log('rerender main dashboard', this.props.selectedApplicant)
+    const ApplicantComponent = (this.props.selectedApplicant != null) ? this.state.applicantComponent : Nothing;
+    console.log('should display', ApplicantComponent)
     const CalendlyModal = this.state.calendlyModal || Nothing;
     const ScheduleMeeting = this.state.scheduleMeeting || Nothing;
 
     return (
       <div className="App">
-          <NewApplicant formObject={this.state.formObject} closeModal={this._closeModal} onFormChangeHandler={this._onFormChangeHandler} onFormSubmission={this._onFormSubmission} />
-          <NewPosting formObject={this.state.formObject} closeModal={this._closeModal} onFormChangeHandler={this._onFormChangeHandler} onFormSubmission={this._onFormSubmission} />
-          <AddApplicantToPosting handlesAddApplicantToPosting={this._handlesAddApplicantToPosting} postingRecords={this.state.postingData} applicantRecords={this.state.applicantData} formObject={this.state.formObject} closeModal={this._closeModal} onFormChangeHandler={this._onFormChangeHandler} onFormSubmission={this._onFormSubmission} />
-          <ApplicantComponent postingRecords={this.state.postingData} currentApplicantsPostings={this.state.currentApplicantsPostings} currentApplicant={this.state.currentApplicant} closeModalCorrectly={this._closeModalCorrectly}/>
-          <CalendlyModal onFormChangeHandler={this._onFormChangeHandler} onFormSubmission={this._onFormSubmission} calendly_url={this.state.formObject.calendly_url} closeModalCorrectly={this._closeModalCorrectly}/>
+          <NewApplicant 
+            formObject={this.state.formObject}
+            closeModal={this._closeModal}
+            onFormChangeHandler={this._onFormChangeHandler}
+            onFormSubmission={this._onFormSubmission} />
+
+          <NewPosting formObject={this.state.formObject}
+            closeModal={this._closeModal}
+            onFormChangeHandler={this._onFormChangeHandler}
+            onFormSubmission={this._onFormSubmission} />
+
+          <AddApplicantToPosting
+            handlesAddApplicantToPosting={this._handlesAddApplicantToPosting}
+            formObject={this.state.formObject}
+            closeModal={this._closeModal}
+            onFormChangeHandler={this._onFormChangeHandler}
+            onFormSubmission={this._onFormSubmission} />
+
+          <ApplicantComponent
+            currentApplicantsPostings={this.state.currentApplicantsPostings}
+            currentApplicant={this.state.currentApplicant}
+            closeModalCorrectly={this._closeModalCorrectly}/>
+
+          <CalendlyModal
+            onFormChangeHandler={this._onFormChangeHandler}
+            onFormSubmission={this._onFormSubmission}
+            calendly_url={this.state.formObject.calendly_url}
+            closeModalCorrectly={this._closeModalCorrectly}/>
+
           {/* <ScheduleMeeting calendlyLink={this.state.calendly_url} closeModalCorrectly={this._closeModalCorrectly} /> */}
-          <Header userData={this.state.userData} calendly_urlClickHandler={this._calendly_urlClickHandler} engagingTheModal={this._engagingTheModal} postingSelectedHandler={this._postingSelectedHandler} applicantSelectedHandler={this._applicantSelectedHandler} applicantRecords={this.state.applicantData} postingRecords={this.state.postingData} postingSelected={this.state.postingSelected} />
-          <Container calendly_url={this.state.calendly_url} userData={this.state.userData} calendlyMeetingHandler={this._calendlyMeetingHandler} movedCardStageHandler={this._movedCardStageHandler} applicantPostingMovedHandler={this._applicantPostingMovedHandler} applicantSelectedHandler={this._applicantSelectedHandler} postingSelected={this.state.postingSelected} postingRecords={this.state.postingData} applicantRecords={this.state.applicantData} postingApplicantRecords={this.state.newPostingApplicantData} />
+
+          <Header 
+            calendly_urlClickHandler={this._calendly_urlClickHandler}
+            engagingTheModal={this._engagingTheModal}
+            postingSelectedHandler={this._postingSelectedHandler}
+            applicantSelectedHandler={this._applicantSelectedHandler}
+            postingSelected={this.state.postingSelected} />
+
+          <Container
+            calendly_url={this.state.calendly_url}
+            calendlyMeetingHandler={this._calendlyMeetingHandler}
+            movedCardStageHandler={this._movedCardStageHandler}
+            applicantPostingMovedHandler={this._applicantPostingMovedHandler}
+            applicantSelectedHandler={this._applicantSelectedHandler}
+            postingSelected={this.state.postingSelected} />
+            
       </div>
     );
   }
 }
 
-export default Dashboard;
+let mapStateToProps = ({ applicantData, postingData, postingApplicantData, selectedApplicant }) => {
+  return {
+    applicantData, 
+    postingData, 
+    postingApplicantData,
+    selectedApplicant
+  }
+}
+
+let mapDispatchToProps = (dispatch) => {
+  // return {actions: bindActionCreators({ fetchpostings }, dispatch)}
+  return {
+    fetchpostings: () => dispatch(fetchpostings()),
+    fetchapplicants: () => dispatch(fetchapplicants()),
+    fetchPostingApplicants: () => dispatch(fetchPostingApplicants()),
+    fetchuser: () => dispatch(fetchuser()),
+    updateSelectedApplicant: () => dispatch(updateSelectedApplicant())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

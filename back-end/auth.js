@@ -34,6 +34,6 @@ module.exports = isAuthorized = (req, res, next) => {
     })
     .catch((err) => {
         // res.redirect('/login');
-        console.log(e)
+        console.log(err)
   })
 }

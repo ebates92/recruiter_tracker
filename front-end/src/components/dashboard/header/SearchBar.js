@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import postingLogo from './posting_logo.png';
 import applicantLogo from './applicant_logo.png';
 import DropdownMainSearchComponent from '../dropdowns'
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'react';
+import selectedTarget from '../../../actions/selected.js'
 
 const Nothing = () => <span></span>;
 
@@ -11,24 +14,17 @@ class SearchBar extends Component {
         this.state = {
             dropdownMainSearch: null,
             searchTerm: '',
-            applicantOptions: this.props.applicantRecords,
-            postingOptions: this.props.postingRecords,
+            applicantOptions: '',
+            postingOptions: '',
             // filteredList: this.props.defaultRecords
         }
-    }
-
-    componentWillReceiveProps () {
-        this.setState({
-           applicantOptions: this.props.applicantRecords,
-           postingOptions: this.props.postingRecords,
-        })
     }
 
     _onFocusForDropdowns = (event) => {
         this.setState({
             dropdownMainSearch: DropdownMainSearchComponent,
-            postingOptions: this.props.postingRecords,
-            applicantOptions: this.props.applicantRecords,
+            postingOptions: this.props.postingData,
+            applicantOptions: this.props.applicantData,
         })
         document.querySelector('.whole-searchbar').addEventListener('mouseleave', this._mouseLeave)
     }
@@ -40,8 +36,8 @@ class SearchBar extends Component {
                 const expression = new RegExp('^' + searchTerm + '.*', 'gi');
             
                 // associating applicant to posting
-                  let applicantOptions = this.props.applicantRecords.filter((applicant) => applicant.firstName.concat(applicant.lastName).match(expression));
-                  let postingOptions = this.props.postingRecords.filter((posting) => posting.positionTitle.match(expression))
+                  let applicantOptions = this.props.applicantData[0].filter((applicant) => applicant.firstName.concat(applicant.lastName).match(expression));
+                  let postingOptions = this.props.postingData[0].filter((posting) => posting.positionTitle.match(expression))
                   this.setState({
                         applicantOptions,
                         postingOptions,
@@ -50,17 +46,29 @@ class SearchBar extends Component {
                 }
 
     _onClickSearchDropdown = (event) => {
-        this.setState({
-            mainSearch: event.target.innerHTML,
-            dropdownMainSearch: null
-        })
-        // will filter the dashboard to show these position records
-        if (event.target.id === 'posting') {
-            this.props.postingSelectedHandler(event)
-        // will open the applicant record
-        } else if ( event.target.id === 'applicant') {
-            this.props.applicantSelectedHandler(event);
-        }
+
+            this.setState({
+                dropdownMainSearch: null
+            })
+            this.props.selectedTarget(event)
+            // will filter the dashboard to show these position records
+            // const targetType = event.target.id
+            // const targetId = event.currentTarget.accessKey
+            // const targetData = (targetType === 'postings') ? (this.props.postingData[0]) : (this.props.applicantData[0])
+            // const dataTypeObject = targetData.filter((data) => {
+            //     return(data.id === parseInt(event.currentTarget.accessKey))
+            // })
+
+            // selectedTarget(targetType,targetId)
+        // }
+
+
+        // if (event.target.id === 'posting') {
+        //     this.props.postingSelectedHandler(event)
+        // // will open the applicant record
+        // } else if ( event.target.id === 'applicant') {
+        //     this.props.applicantSelectedHandler(event);
+        // }
         
     }
 
@@ -68,17 +76,17 @@ class SearchBar extends Component {
     // FOR UX OF DROPDOWN STAYING OPEN OR CLOSED
         _mouseEnter = (event) => {
             console.log('about to set mouse enter state')
+
             this.setState({
                 dropdownMainSearch: DropdownMainSearchComponent,
-                postingOptions: this.props.postingRecords,
-                applicantOptions: this.props.applicantRecords,
+                postingOptions: this.props.postingData,
+                applicantOptions: this.props.applicantData,
             })
         }
 
         _mouseLeave = (event) => {
             this.setState({
                 dropdownMainSearch: null,
-                mainSearch: ''
             })
             console.log('about to add mouseenter')
             document.querySelector('.whole-searchbar').addEventListener('mouseenter', this._mouseEnter, false)
@@ -88,6 +96,10 @@ class SearchBar extends Component {
             console.log('about to remove mouseenter')
             document.querySelector('.whole-searchbar').removeEventListener('mouseenter', this._mouseEnter, false)
             document.querySelector('.whole-searchbar').removeEventListener('mouseleave', this._mouseLeave, false)
+            this.setState({
+                dropdownMainSearch: null,
+                searchTerm: ''
+            })
         }
 
 
@@ -108,7 +120,23 @@ class SearchBar extends Component {
                 </div>
         )
     }
-
 }
 
-export default SearchBar;
+// REDUX APPLICATION STATE (COMBINED REDUCERS)
+function mapStateToProps({ postingData, applicantData }) {
+    return { 
+        postingData,
+        applicantData
+     }
+}
+
+// REDUX EVENT HANDLERS (ACTIONS)
+function mapDispatchToProps(dispatch) {
+    // return bindActionCreators({},dispatch)
+    return {
+        selectedTarget: (event) => dispatch(selectedTarget(event))
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(SearchBar)
+// export default SearchBar;

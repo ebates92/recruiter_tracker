@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 // import axios from 'axios';
 // import ModalTypes from './Modal-types.js';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
- class NewPosting extends Component {
+ class CalendlyLink extends Component {
 
     render() {
         return (
@@ -29,4 +31,17 @@ import React, { Component } from 'react';
     }
 }
 
-export default NewPosting;
+// REDUX APPLICATION STATE (COMBINED REDUCERS)
+function mapStateToProps(state) {
+    return {
+
+    }
+}
+
+// REDUX EVENT HANDLERS (ACTIONS)
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({},dispatch)
+}
+
+// export default connect(mapStateToProps,mapDispatchToProps)(CalendlyLink);
+export default CalendlyLink;

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Records from './Records.js';
 import Column from './Column.js';
 
+// DOESN'T NEED REDUX STATE
+
 class RecordColumn extends Component {
   constructor(props) {
     super(props);
@@ -16,31 +18,31 @@ class RecordColumn extends Component {
       <React.Fragment>
         {/* Sourcing */}
         <Column columnType='Sourcing' movedCardStageHandler={this.props.movedCardStageHandler}>
-          <Records calendly_url={this.props.calendly_url} userData={this.props.userData} calendlyMeetingHandler={this.props.calendlyMeetingHandler} applicantPostingMovedHandler={this.props.applicantPostingMovedHandler} applicantSelectedHandler={this.props.applicantSelectedHandler} postingApplicantRecords={this.props.postingApplicantRecords.filter((record) => record.applicantStage === 'Sourcing')} postingRecords={this.props.postingRecords} applicantRecords={this.props.applicantRecords} />
+          <Records columnType = {'Sourcing'} calendlyMeetingHandler={this.props.calendlyMeetingHandler} applicantPostingMovedHandler={this.props.applicantPostingMovedHandler} applicantSelectedHandler={this.props.applicantSelectedHandler} />
         </Column>
         {/* Screening */}
         <Column columnType='Screening' movedCardStageHandler={this.props.movedCardStageHandler}>
-          <Records calendly_url={this.props.calendly_url} userData={this.props.userData} calendlyMeetingHandler={this.props.calendlyMeetingHandler} applicantPostingMovedHandler={this.props.applicantPostingMovedHandler} applicantSelectedHandler={this.props.applicantSelectedHandler} postingApplicantRecords={this.props.postingApplicantRecords.filter((record) => record.applicantStage === 'Screening')} postingRecords={this.props.postingRecords} applicantRecords={this.props.applicantRecords} />
+          <Records columnType = {'Screening'} calendlyMeetingHandler={this.props.calendlyMeetingHandler} applicantPostingMovedHandler={this.props.applicantPostingMovedHandler} applicantSelectedHandler={this.props.applicantSelectedHandler} />
         </Column >
         {/* Initial Interview */}
         <Column columnType='Initial Interview' movedCardStageHandler={this.props.movedCardStageHandler}>
-          <Records calendly_url={this.props.calendly_url} userData={this.props.userData} calendlyMeetingHandler={this.props.calendlyMeetingHandler} applicantPostingMovedHandler={this.props.applicantPostingMovedHandler} applicantSelectedHandler={this.props.applicantSelectedHandler} postingApplicantRecords={this.props.postingApplicantRecords.filter((record) => record.applicantStage === 'Initial Interview')} postingRecords={this.props.postingRecords} applicantRecords={this.props.applicantRecords} />
+          <Records columnType = {'Initial Interview'} calendlyMeetingHandler={this.props.calendlyMeetingHandler} applicantPostingMovedHandler={this.props.applicantPostingMovedHandler} applicantSelectedHandler={this.props.applicantSelectedHandler} />
         </Column>
         {/* Final Interview */}
         <Column columnType='Final Interview' movedCardStageHandler={this.props.movedCardStageHandler}>
-          <Records calendly_url={this.props.calendly_url} userData={this.props.userData} calendlyMeetingHandler={this.props.calendlyMeetingHandler} applicantPostingMovedHandler={this.props.applicantPostingMovedHandler} applicantSelectedHandler={this.props.applicantSelectedHandler} postingApplicantRecords={this.props.postingApplicantRecords.filter((record) => record.applicantStage === 'Final Interview')} postingRecords={this.props.postingRecords} applicantRecords={this.props.applicantRecords} />
+          <Records columnType = {'Final Interview'} calendlyMeetingHandler={this.props.calendlyMeetingHandler} applicantPostingMovedHandler={this.props.applicantPostingMovedHandler} applicantSelectedHandler={this.props.applicantSelectedHandler} />
         </Column>
         {/* Verification */}
         <Column columnType='Verification' movedCardStageHandler={this.props.movedCardStageHandler}>
-          <Records calendly_url={this.props.calendly_url} userData={this.props.userData} calendlyMeetingHandler={this.props.calendlyMeetingHandler} applicantPostingMovedHandler={this.props.applicantPostingMovedHandler} applicantSelectedHandler={this.props.applicantSelectedHandler} postingApplicantRecords={this.props.postingApplicantRecords.filter((record) => record.applicantStage === 'Verification')} postingRecords={this.props.postingRecords} applicantRecords={this.props.applicantRecords} />
+          <Records columnType = {'Verification'} calendlyMeetingHandler={this.props.calendlyMeetingHandler} applicantPostingMovedHandler={this.props.applicantPostingMovedHandler} applicantSelectedHandler={this.props.applicantSelectedHandler} />
         </Column>
         {/* Offer */}
         <Column columnType='Offer' movedCardStageHandler={this.props.movedCardStageHandler}>
-          <Records calendly_url={this.props.calendly_url} userData={this.props.userData} calendlyMeetingHandler={this.props.calendlyMeetingHandler} applicantPostingMovedHandler={this.props.applicantPostingMovedHandler} applicantSelectedHandler={this.props.applicantSelectedHandler} postingApplicantRecords={this.props.postingApplicantRecords.filter((record) => record.applicantStage === 'Offer')} postingRecords={this.props.postingRecords} applicantRecords={this.props.applicantRecords} />
+          <Records columnType = {'Offer'} calendlyMeetingHandler={this.props.calendlyMeetingHandler} applicantPostingMovedHandler={this.props.applicantPostingMovedHandler} applicantSelectedHandler={this.props.applicantSelectedHandler} />
         </Column>
         {/* Complete */}
         <Column columnType='Complete' movedCardStageHandler={this.props.movedCardStageHandler}>
-          <Records calendly_url={this.props.calendly_url} userData={this.props.userData} calendlyMeetingHandler={this.props.calendlyMeetingHandler} applicantPostingMovedHandler={this.props.applicantPostingMovedHandler} applicantSelectedHandler={this.props.applicantSelectedHandler} postingApplicantRecords={this.props.postingApplicantRecords.filter((record) => record.applicantStage === 'Complete')} postingRecords={this.props.postingRecords} applicantRecords={this.props.applicantRecords} />
+          <Records columnType = {'Complete'} calendlyMeetingHandler={this.props.calendlyMeetingHandler} applicantPostingMovedHandler={this.props.applicantPostingMovedHandler} applicantSelectedHandler={this.props.applicantSelectedHandler} />
         </Column>
       </React.Fragment>
     );
