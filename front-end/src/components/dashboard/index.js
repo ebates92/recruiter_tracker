@@ -27,31 +27,13 @@ class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // postingData: [],
-      // applicantData: [],
-      // postingApplicantData: [],
       error: null,
-      filteredList: [],
 
       // update applicant selected
-      currentApplicant: '',
-      currentApplicantsPostings: '',
       applicantComponent: ApplicantComponent,
-
-      // updating the posting dropdown and container
-      newPostingApplicantData: [],
-      postingSelected: 'All',
-
-      // FOR SETTINGS SECTION
-      userData: '',
-      calendlyModal: null,
 
       // FOR SCHEDULING MODAL
       scheduleMeeting: null,
-
-      // update and interact with the modal (when we refactor this code)
-      // modalType: 'New Posting',
-      // modalToDeploy: '',
 
       // pushing data to the database
       formObject: {
@@ -162,23 +144,6 @@ class Dashboard extends Component {
     })
   }
 
-  _closeModal = (event) => {
-    const id = event.target.id
-    document.querySelector('body').setAttribute('style', 'position: ');
-    document.querySelector(`[data-modal-container-${id}]`).classList.add('hide');
-    this._resetState()
-}
-
-_closeModalCorrectly = (event) => {
-  this.props.updateSelectedApplicant({
-    target: {id:'SELECTED_applicant'},
-    currentTarget: {accessKey: null}
-  })
-  this.setState({
-    calendlyModal: null,
-    scheduleMeeting: null,
-  })
-}
 
   _handlesAddApplicantToPosting = (type, key) => {
     if (type === 'applicant'){
@@ -233,29 +198,27 @@ _closeModalCorrectly = (event) => {
       }
     })
   }
-    
 
-// SEARCH BAR
 
-  _applicantSelectedHandler = (event) => {
-    if (event.target.className === 'ui green basic button') {
-      return null
-    } else {
-      const applicant = this.state.applicantData.filter((applicant) => {
-        return (applicant.id === parseInt(event.currentTarget.accessKey))
-      })
+  // CLOSING MODALS
 
-      const currentApplicantsPostings = this.state.postingApplicantData.filter((postingApplicant) => {
-        return (postingApplicant.applicantId === parseInt(event.currentTarget.accessKey))
-      })
+  _closeModal = (event) => {
+    const id = event.target.id
+    document.querySelector('body').setAttribute('style', 'position: ');
+    document.querySelector(`[data-modal-container-${id}]`).classList.add('hide');
+    this._resetState()
+}
 
-      this.setState({
-        currentApplicant: applicant,
-        applicantComponent: ApplicantComponent,
-        currentApplicantsPostings
-      })
-    }
-  }
+_closeModalCorrectly = (event) => {
+  this.props.updateSelectedApplicant({
+    target: {id:'SELECTED_applicant'},
+    currentTarget: {accessKey: null}
+  })
+  this.setState({
+    calendlyModal: null,
+    scheduleMeeting: null,
+  })
+}
 
 
   // SETTINGS MODALS
@@ -264,6 +227,14 @@ _closeModalCorrectly = (event) => {
     this.setState({
         calendlyModal: CalendlyModal
     })
+}
+
+// CALENDLY SCHEDULE MEETING
+
+_calendlyMeetingHandler = () => {
+  this.setState({
+    scheduleMeeting: ScheduleMeeting
+  })
 }
 
 // MOVING THE DASHBOARD RECORDS TO DIFFERENT COLUMNS
@@ -293,13 +264,6 @@ _movedCardStageHandler = (stage) => {
     })
 }
 
-// CALENDLY SCHEDULE MEETING
-
-_calendlyMeetingHandler = () => {
-  this.setState({
-    scheduleMeeting: ScheduleMeeting
-  })
-}
 
 // API CALLS
   componentDidMount() {
@@ -307,7 +271,6 @@ _calendlyMeetingHandler = () => {
         this.props.fetchapplicants()
         this.props.fetchPostingApplicants()
         this.props.fetchuser()
-        
     }
 
 
