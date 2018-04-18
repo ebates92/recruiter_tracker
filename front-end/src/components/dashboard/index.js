@@ -257,10 +257,7 @@ _movedCardStageHandler = (stage) => {
     .then(
       (res) => {
         // RESETS THE DASHBOARD WITH NEW DATA
-          this.setState({
-            postingApplicantData: res,
-            newPostingApplicantData: res
-          })
+        this.props.fetchPostingApplicants()
     })
 }
 
@@ -303,8 +300,6 @@ _movedCardStageHandler = (stage) => {
             onFormSubmission={this._onFormSubmission} />
 
           <ApplicantComponent
-            currentApplicantsPostings={this.state.currentApplicantsPostings}
-            currentApplicant={this.state.currentApplicant}
             closeModalCorrectly={this._closeModalCorrectly}/>
 
           <CalendlyModal
@@ -317,18 +312,13 @@ _movedCardStageHandler = (stage) => {
 
           <Header 
             calendly_urlClickHandler={this._calendly_urlClickHandler}
-            engagingTheModal={this._engagingTheModal}
-            postingSelectedHandler={this._postingSelectedHandler}
-            applicantSelectedHandler={this._applicantSelectedHandler}
-            postingSelected={this.state.postingSelected} />
+            engagingTheModal={this._engagingTheModal} />
 
           <Container
             calendly_url={this.state.calendly_url}
             calendlyMeetingHandler={this._calendlyMeetingHandler}
             movedCardStageHandler={this._movedCardStageHandler}
-            applicantPostingMovedHandler={this._applicantPostingMovedHandler}
-            applicantSelectedHandler={this._applicantSelectedHandler}
-            postingSelected={this.state.postingSelected} />
+            applicantPostingMovedHandler={this._applicantPostingMovedHandler} />
             
       </div>
     );

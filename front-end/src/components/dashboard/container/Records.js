@@ -39,9 +39,11 @@ class Records extends Component {
                       calendlyMeetingHandler={this.props.calendlyMeetingHandler} 
                       applicantPostingMovedHandler={this.props.applicantPostingMovedHandler} 
                       applicantSelectedHandler={this.props.applicantSelectedHandler} 
-                      record={record} applicantRecord={applicantRecord} 
+                      record={record}
+                      applicantRecord={applicantRecord} 
                       positionRecord={positionRecord} 
-                      buttonStyle={buttonStyle} />
+                      buttonStyle={buttonStyle} 
+                      selectedTarget={this.props.selectedTarget}/>
             }))
         } else {
           return null
@@ -73,7 +75,7 @@ function mapStateToProps({ postingData, applicantData, postingApplicantData, use
 function mapDispatchToProps(dispatch) {
   // return bindActionCreators({},dispatch)
   return {
-    selectedTarget: () => dispatch(selectedTarget())
+    selectedTarget: (event) => dispatch(selectedTarget(event))
   }
 }
 
