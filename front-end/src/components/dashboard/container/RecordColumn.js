@@ -18,31 +18,31 @@ class RecordColumn extends Component {
       <React.Fragment>
         {/* Sourcing */}
         <Column columnType='Sourcing' movedCardStageHandler={this.props.movedCardStageHandler}>
-          <Records columnType = {'Sourcing'} calendlyMeetingHandler={this.props.calendlyMeetingHandler} applicantPostingMovedHandler={this.props.applicantPostingMovedHandler} applicantSelectedHandler={this.props.applicantSelectedHandler} />
+          <Records columnType = {'Sourcing'} applicantPostingMovedHandler={this.props.applicantPostingMovedHandler} applicantSelectedHandler={this.props.applicantSelectedHandler} />
         </Column>
         {/* Screening */}
         <Column columnType='Screening' movedCardStageHandler={this.props.movedCardStageHandler}>
-          <Records columnType = {'Screening'} calendlyMeetingHandler={this.props.calendlyMeetingHandler} applicantPostingMovedHandler={this.props.applicantPostingMovedHandler} applicantSelectedHandler={this.props.applicantSelectedHandler} />
+          <Records columnType = {'Screening'} applicantPostingMovedHandler={this.props.applicantPostingMovedHandler} applicantSelectedHandler={this.props.applicantSelectedHandler} />
         </Column >
         {/* Initial Interview */}
         <Column columnType='Initial Interview' movedCardStageHandler={this.props.movedCardStageHandler}>
-          <Records columnType = {'Initial Interview'} calendlyMeetingHandler={this.props.calendlyMeetingHandler} applicantPostingMovedHandler={this.props.applicantPostingMovedHandler} applicantSelectedHandler={this.props.applicantSelectedHandler} />
+          <Records columnType = {'Initial Interview'} applicantPostingMovedHandler={this.props.applicantPostingMovedHandler} applicantSelectedHandler={this.props.applicantSelectedHandler} />
         </Column>
         {/* Final Interview */}
         <Column columnType='Final Interview' movedCardStageHandler={this.props.movedCardStageHandler}>
-          <Records columnType = {'Final Interview'} calendlyMeetingHandler={this.props.calendlyMeetingHandler} applicantPostingMovedHandler={this.props.applicantPostingMovedHandler} applicantSelectedHandler={this.props.applicantSelectedHandler} />
+          <Records columnType = {'Final Interview'} applicantPostingMovedHandler={this.props.applicantPostingMovedHandler} applicantSelectedHandler={this.props.applicantSelectedHandler} />
         </Column>
         {/* Verification */}
         <Column columnType='Verification' movedCardStageHandler={this.props.movedCardStageHandler}>
-          <Records columnType = {'Verification'} calendlyMeetingHandler={this.props.calendlyMeetingHandler} applicantPostingMovedHandler={this.props.applicantPostingMovedHandler} applicantSelectedHandler={this.props.applicantSelectedHandler} />
+          <Records columnType = {'Verification'} applicantPostingMovedHandler={this.props.applicantPostingMovedHandler} applicantSelectedHandler={this.props.applicantSelectedHandler} />
         </Column>
         {/* Offer */}
         <Column columnType='Offer' movedCardStageHandler={this.props.movedCardStageHandler}>
-          <Records columnType = {'Offer'} calendlyMeetingHandler={this.props.calendlyMeetingHandler} applicantPostingMovedHandler={this.props.applicantPostingMovedHandler} applicantSelectedHandler={this.props.applicantSelectedHandler} />
+          <Records columnType = {'Offer'} applicantPostingMovedHandler={this.props.applicantPostingMovedHandler} applicantSelectedHandler={this.props.applicantSelectedHandler} />
         </Column>
         {/* Complete */}
         <Column columnType='Complete' movedCardStageHandler={this.props.movedCardStageHandler}>
-          <Records columnType = {'Complete'} calendlyMeetingHandler={this.props.calendlyMeetingHandler} applicantPostingMovedHandler={this.props.applicantPostingMovedHandler} applicantSelectedHandler={this.props.applicantSelectedHandler} />
+          <Records columnType = {'Complete'} applicantPostingMovedHandler={this.props.applicantPostingMovedHandler} applicantSelectedHandler={this.props.applicantSelectedHandler} />
         </Column>
       </React.Fragment>
     );

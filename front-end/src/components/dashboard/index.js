@@ -231,11 +231,11 @@ _closeModalCorrectly = (event) => {
 
 // CALENDLY SCHEDULE MEETING
 
-_calendlyMeetingHandler = () => {
-  this.setState({
-    scheduleMeeting: ScheduleMeeting
-  })
-}
+// _calendlyMeetingHandler = () => {
+//   this.setState({
+//     scheduleMeeting: ScheduleMeeting
+//   })
+// }
 
 // MOVING THE DASHBOARD RECORDS TO DIFFERENT COLUMNS
 

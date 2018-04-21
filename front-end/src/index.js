@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import promiseMiddleware from 'redux-promise';
 import RootReducer from './reducers';
 
+
 // const ReduxDev = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 
 // const createStoreWithMiddleware = applyMiddleware(promiseMiddleware)

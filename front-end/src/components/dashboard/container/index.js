@@ -13,7 +13,7 @@ class Container extends Component {
       <div className="container">
         <ProgressBarWrapper />
         <div className="status-columns">
-          <RecordColumn calendly_url={this.props.calendly_url} calendlyMeetingHandler={this.props.calendlyMeetingHandler} movedCardStageHandler={this.props.movedCardStageHandler} applicantPostingMovedHandler={this.props.applicantPostingMovedHandler} applicantSelectedHandler={this.props.applicantSelectedHandler} postingSelected={this.props.postingSelected} />
+          <RecordColumn calendly_url={this.props.calendly_url} calendlyMeetingHandler={this.props.calendlyMeetingHandler} movedCardStageHandler={this.props.movedCardStageHandler} applicantPostingMovedHandler={this.props.applicantPostingMovedHandler} />
         </div>
       </div>
     ); 
