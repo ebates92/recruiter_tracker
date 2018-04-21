@@ -14,9 +14,21 @@ class Records extends Component {
     super(props);
   }
 
+  _cardClicked = (event) => {
+    if (event.target.className === "remove-from-position") {
+      this._removeApplicantFromPosition(event)
+      return null
+    } else if (event.target.className === "ui green basic button") {
+      return null
+    } else if (event.currentTarget.id === "card") {
+      this.props.selectedTarget(event)
+      return null
+    }
+  }
+
   _removeApplicantFromPosition = (event) => {
     const data = {
-      postingApplicantId: event.currentTarget.accessKey,
+      postingApplicantId: event.currentTarget.title,
       stage: "Not Qualified"
     };
     axios.post(`${url}/posting/moved-card`, data)
@@ -54,14 +66,12 @@ class Records extends Component {
             return <Record
                       calendly_url={this.props.calendly_url}
                       userData={this.props.userData} 
-                      calendlyMeetingHandler={this.props.calendlyMeetingHandler} 
                       applicantPostingMovedHandler={this.props.applicantPostingMovedHandler} 
-                      applicantSelectedHandler={this.props.applicantSelectedHandler} 
                       record={record}
                       applicantRecord={applicantRecord} 
                       positionRecord={positionRecord} 
                       buttonStyle={buttonStyle} 
-                      selectedTarget={this.props.selectedTarget}
+                      cardClicked={this._cardClicked}
                       removeApplicantFromPosition={this.removeApplicantFromPosition} />
             }))
         } else {
@@ -95,7 +105,7 @@ function mapDispatchToProps(dispatch) {
   // return bindActionCreators({},dispatch)
   return {
     selectedTarget: (event) => dispatch(selectedTarget(event)),
-    fetchPostingApplicants: () => dispatch(selectedTarget())
+    fetchPostingApplicants: () => dispatch(fetchPostingApplicants())
   }
 }
 
