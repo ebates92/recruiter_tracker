@@ -30,6 +30,7 @@ class Record extends Component {
     const card = this.props.applicantRecord.length > 0 ? (
       <div className="ui card" id="card" accessKey={this.props.applicantRecord[0].id} key={this.props.record.id} onClick={this.props.selectedTarget}>
         <h3 id='applicant'>{this.props.applicantRecord[0].firstName}</h3>
+        <div className='remove-from-position' onClick={this.props.removeApplicantFromPosition}>x</div>
         <div className="content" id="card-content">
           <h4><em><span> {this.props.positionRecord[0].positionTitle}</span></em></h4>
           <div className='align-schedule-button'>

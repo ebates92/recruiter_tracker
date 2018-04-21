@@ -5,6 +5,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "moment": "^2.20.1",
+    "proptypes": "^1.1.0",
     "react": "^16.2.0",
     "react-dnd": "^2.5.4",
     "react-dnd-html5-backend": "^2.5.4",
@@ -12,10 +13,12 @@
     "react-html-email": "^3.0.0",
     "react-moment": "^0.7.0",
     "react-redux": "^5.0.7",
-    "react-router-dom": "^4.0.0",
+    "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.1",
     "redux": "^3.7.2",
-    "redux-promise": "^0.5.3"
+    "redux-form": "^6.6.3",
+    "redux-promise": "^0.5.3",
+    "redux-store": "0.0.0"
   },
   "scripts": {
     "start": "react-scripts start",

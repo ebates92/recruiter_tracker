@@ -2,12 +2,30 @@ import React, { Component } from 'react';
 import Record from './Record';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'react';
-import rootReducer from '../../../reducers'
-import selectedTarget from '../../../actions/selected.js'
+import rootReducer from '../../../reducers';
+import selectedTarget from '../../../actions/selected.js';
+import axios from 'axios';
+import { url } from '../../../api_route';
+
+import { fetchPostingApplicants } from '../../../actions/get_posting_applicants.js';
 
 class Records extends Component {
   constructor(props) {
     super(props);
+  }
+
+  _removeApplicantFromPosition = (event) => {
+    const data = {
+      postingApplicantId: event.currentTarget.accessKey,
+      stage: "Not Qualified"
+    };
+    axios.post(`${url}/posting/moved-card`, data)
+    .then(response => response.data)
+      .then(
+        (res) => {
+          // RESETS THE DASHBOARD WITH NEW DATA
+          this.props.fetchPostingApplicants()
+      })
   }
 
   // Passed in the column type and needed to filter out the records that weren't relevant.  All of the [0] are because redux for some reason
@@ -43,7 +61,8 @@ class Records extends Component {
                       applicantRecord={applicantRecord} 
                       positionRecord={positionRecord} 
                       buttonStyle={buttonStyle} 
-                      selectedTarget={this.props.selectedTarget}/>
+                      selectedTarget={this.props.selectedTarget}
+                      removeApplicantFromPosition={this.removeApplicantFromPosition} />
             }))
         } else {
           return null
@@ -75,7 +94,8 @@ function mapStateToProps({ postingData, applicantData, postingApplicantData, use
 function mapDispatchToProps(dispatch) {
   // return bindActionCreators({},dispatch)
   return {
-    selectedTarget: (event) => dispatch(selectedTarget(event))
+    selectedTarget: (event) => dispatch(selectedTarget(event)),
+    fetchPostingApplicants: () => dispatch(selectedTarget())
   }
 }
 
