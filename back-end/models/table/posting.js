@@ -14,9 +14,6 @@ const Posting = sequelize.define('posting',{
     salaryRange: {
         type: Sequelize.INTEGER,allowNull:true
     },
-    qualifications:{
-        type: Sequelize.STRING, allowNull: true
-    },
     hiringManager:{
         type: Sequelize.STRING, allowNull: true
     },
@@ -26,6 +23,9 @@ const Posting = sequelize.define('posting',{
     isFilled:{
         type: Sequelize.BOOLEAN, allowNull: true
     },
+    competencies:{
+        type: Sequelize.STRING, allowNull: true
+    }
 
 });
 

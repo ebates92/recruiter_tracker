@@ -22,12 +22,12 @@ router.route('/posting')
             positionTitle: req.body.positionTitle,
             jobDescription: req.body.jobDescription,
             salaryRange: req.body.salaryRange,
-            qualifications: req.body.qualifications,
             hiringManager: req.body.hiringManager,
             additionalNotes: req.body.additionalNotes,
             isFilled: req.body.is,
             // userId: res.locals.id,
-            userId: 1
+            userId: 1,
+            competencies: req.body.competencies,
         }).then((postings) => {
             console.log(postings)
             res.json(postings);

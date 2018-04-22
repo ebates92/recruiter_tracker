@@ -50,10 +50,10 @@ class Dashboard extends Component {
         positionTitle: '',
         jobDescription: '',
         salaryRange: 0,
-        qualifications: '',
         hiringManager: '',
         additionalNotes: '',
         isFilled: false,
+        competencies: '',
 
         // add applicant to posting
         applicantId: '',
