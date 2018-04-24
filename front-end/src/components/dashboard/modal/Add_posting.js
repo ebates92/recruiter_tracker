@@ -2,8 +2,32 @@ import React, { Component } from 'react';
 // import ModalTypes from './Modal-types.js';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import Competencies from './Add_posting_competencies'
 
  class NewPosting extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            competency: '',
+            competencies: ''
+        }
+    }
+
+    _competencyHandler = (event) => {
+        let value = event.target.value;
+        this.setState({
+            competency: value
+        })
+    }
+
+    _onClickAddCompetency = (event) => {
+        this.setState(prevState => ({
+            competencies: [...prevState.competencies, this.state.competency],
+            competency: ''
+        }), () => {
+            this.props.dashboardAddCompetency(this.state.competencies)
+        })
+    }
 
     render() {
         const checkboxStyle = {marginTop: '.9rem'}
@@ -69,10 +93,11 @@ import { bindActionCreators } from 'redux';
 
                                 <div className="ui-input" id='override-ui-input' style={competenciesStyle}><span></span><span>Add Position Competencies</span>
                                 <div className="clearfix"></div>
-                                <input type="text" name="additionalNotes" placeholder='Strategic Thinker' onChange={this.props.onFormChangeHandler} value={this.props.formObject.competencies}/>
-                                <button style={competenciesButtonStyle} type='button' name="competency" onClick="">Add</button></div>
+                                <input type="text" name="competency" placeholder='Strategic thinker...' onChange={this._competencyHandler} value={this.state.competency}/>
+                                <button style={competenciesButtonStyle} type='button' name="competency" onClick={this._onClickAddCompetency}>Add</button></div>
                             </div>
                         </form>
+                        <Competencies competencies={this.state.competencies} />
                     </div>
                     <div className="modal-footer">
                         <button id='posting' onClick={this.props.closeModal}>Cancel</button>

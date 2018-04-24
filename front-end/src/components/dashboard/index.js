@@ -90,6 +90,15 @@ class Dashboard extends Component {
     }))
   }
 
+  _dashboardAddCompetency = (comp) => {
+    this.setState(prevState => ({
+      formObject: {
+        ...prevState.formObject,
+        competencies: comp
+      }
+  }))
+  }
+
   _onFormSubmission(event){
     const data = this.state.formObject;
     const model = event.target.id
@@ -185,6 +194,7 @@ class Dashboard extends Component {
           hiringManager: '',
           additionalNotes: '',
           isFilled: false,
+          competencies: '',
     
           // add applicant to posting
           applicantId: '',
@@ -287,10 +297,12 @@ _movedCardStageHandler = (stage) => {
             onFormChangeHandler={this._onFormChangeHandler}
             onFormSubmission={this._onFormSubmission} />
 
-          <NewPosting formObject={this.state.formObject}
+          <NewPosting 
+            formObject={this.state.formObject}
             closeModal={this._closeModal}
             onFormChangeHandler={this._onFormChangeHandler}
-            onFormSubmission={this._onFormSubmission} />
+            onFormSubmission={this._onFormSubmission}
+            dashboardAddCompetency={this._dashboardAddCompetency} />
 
           <AddApplicantToPosting
             handlesAddApplicantToPosting={this._handlesAddApplicantToPosting}
