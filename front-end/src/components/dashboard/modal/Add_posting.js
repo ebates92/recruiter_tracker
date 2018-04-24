@@ -9,7 +9,8 @@ import Competencies from './Add_posting_competencies'
         super(props);
         this.state = {
             competency: '',
-            competencies: ''
+            competencies: '',
+            competencyWeighting: ''
         }
     }
 
@@ -21,11 +22,17 @@ import Competencies from './Add_posting_competencies'
     }
 
     _onClickAddCompetency = (event) => {
+        const newCompetencies = [...this.state.competencies, this.state.competency]
+        const weightingAvg = 1/(newCompetencies.length)
+        const weightingArray = newCompetencies.map(() => weightingAvg)
+        
+
         this.setState(prevState => ({
-            competencies: [...prevState.competencies, this.state.competency],
-            competency: ''
+            competencies: newCompetencies,
+            competency: '',
+            competencyWeighting: weightingArray
         }), () => {
-            this.props.dashboardAddCompetency(this.state.competencies)
+            this.props.dashboardAddCompetency(this.state.competencies, this.state.competencyWeighting)
         })
     }
 
@@ -97,7 +104,8 @@ import Competencies from './Add_posting_competencies'
                                 <button style={competenciesButtonStyle} type='button' name="competency" onClick={this._onClickAddCompetency}>Add</button></div>
                             </div>
                         </form>
-                        <Competencies competencies={this.state.competencies} />
+                        {/* <div>Competencies</div> */}
+                        <Competencies competencies={this.state.competencies} competencyWeighting={this.state.competencyWeighting}/>
                     </div>
                     <div className="modal-footer">
                         <button id='posting' onClick={this.props.closeModal}>Cancel</button>

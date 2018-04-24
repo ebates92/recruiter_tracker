@@ -845,3 +845,21 @@ textarea {
   height: 100%;
   box-shadow: 0 2px 3px 0 #d4d4d5, 0 0 0 7px rgba(224, 224, 224, 0.349);
 }
+
+ /* ADD POSTING COMPETENCIES */
+
+ .competencies {
+  margin: 1rem 2rem;
+  padding: 1rem;
+  border-top: 1px solid grey;
+  display: flex;
+  flex-direction: column;
+ }
+
+ .competency {
+  padding: .5rem;
+  box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 5px rgba(247, 247, 247, 0.349);
+  margin: .5rem;
+  display: flex;
+  justify-content: space-between;
+ }
