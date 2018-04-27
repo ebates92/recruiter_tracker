@@ -96,6 +96,7 @@ function mapStateToProps({ postingData, applicantData, postingApplicantData, use
     applicantData,
     postingApplicantData,
     userData,
+    // provides the filter for reducing postingApplicantData when a filter is applied for viewing a certain position
     selectedPosting
   }
 }
@@ -104,7 +105,9 @@ function mapStateToProps({ postingData, applicantData, postingApplicantData, use
 function mapDispatchToProps(dispatch) {
   // return bindActionCreators({},dispatch)
   return {
+    // handles which applicant was clicked
     selectedTarget: (event) => dispatch(selectedTarget(event)),
+    // handles the update to the page when a record is removed
     fetchPostingApplicants: () => dispatch(fetchPostingApplicants())
   }
 }

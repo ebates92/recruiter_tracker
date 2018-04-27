@@ -8,7 +8,7 @@ export default function dataSelected(event) {
         targetType = event.target.id
         targetId = event.currentTarget.accessKey
         if (event.currentTarget.id === 'card') {
-            targetType = 'applicant'
+            targetType = 'applicant_posting'
         }
     }
     // let targetType = (event === undefined) ? null : event.target.id

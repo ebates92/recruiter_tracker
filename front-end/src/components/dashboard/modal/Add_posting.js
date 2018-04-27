@@ -21,6 +21,15 @@ import Competencies from './Add_posting_competencies'
         })
     }
 
+    _closeModal = (event) => {
+        this.setState({
+            competency: '',
+            competencies: '',
+            competencyWeighting: ''
+        })
+        this.props.closeModal(event)
+    }
+
     _weightingHandler = (event) => {
         let value = Number(event.target.value);
         let index = event.target.accessKey
@@ -120,7 +129,7 @@ import Competencies from './Add_posting_competencies'
                         <Competencies weightingHandler={this._weightingHandler} competencies={this.state.competencies} competencyWeighting={this.state.competencyWeighting}/>
                     </div>
                     <div className="modal-footer">
-                        <button id='posting' onClick={this.props.closeModal}>Cancel</button>
+                        <button id='posting' onClick={this._closeModal}>Cancel</button>
                         {/* <button>Save & New</button> */}
                         <button type="submit" id='posting' onClick={this.props.onFormSubmission}>Save</button>
                     </div>

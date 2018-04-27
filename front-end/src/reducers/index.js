@@ -5,6 +5,7 @@ import ReducerGetPostingApplicants from './reducer_get_posting_applicants';
 import ReducerGetUser from './reducer_get_user';
 import ReducerSelectedApplicant from './reducer_selected_applicant'
 import ReducerSelectedPosting from './reducer_selected_posting'
+import ReducerSelectedApplicantPosting from './reducer_selected_applicant_posting'
 
 const rootReducer = combineReducers({
     postingData: ReducerGetPostings,
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
     postingApplicantData: ReducerGetPostingApplicants,
     userData: ReducerGetUser,
     selectedApplicant: ReducerSelectedApplicant,
-    selectedPosting: ReducerSelectedPosting
+    selectedPosting: ReducerSelectedPosting,
+    selectedApplicantPosting: ReducerSelectedApplicantPosting
 })
 
 export default rootReducer;
