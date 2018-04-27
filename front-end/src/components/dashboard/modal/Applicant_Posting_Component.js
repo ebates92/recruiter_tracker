@@ -22,32 +22,39 @@ import updateSelectedApplicantPosting from '../../../actions/selected.js'
           })
 
         const currentApplicant = this.props.applicantData.filter((data) => {return data.id === parseInt(currentApplicantPosting[0].applicantId)})
+        const currentPosting = this.props.postingData.filter((data) => { return data.id === parseInt(currentApplicantPosting[0].postingId)})
 
 
 
         return (
             <div className="modal-overlay" data-modal-container-applicantcomponent>
                 <div className="modal-container">
-                    <div className="modal-header"><h2><strong>{currentApplicant[0].firstName} {currentApplicant[0].lastName}</strong></h2></div>
-                    <div className="modal-body applicant-component-body">
-                        <div className='applicant-component-left-side'>
-                            <div className='applicant-component-section-title'>Personal Information</div>
-                            <div className='applicant-component-information-container'>
-                                <div className='applicant-component-information'>
-                                    <div className="applicant-component-datafield"><strong>{currentApplicant[0].firstName} {currentApplicant[0].lastName}</strong></div>
-                                    <div className="applicant-component-datafield">{currentApplicant[0].email}</div>
-                                    <div className="applicant-component-datafield">{currentApplicant[0].phone}</div>
-                                    <div className="applicant-component-datafield"><a href='{currentApplicant[0].linked_in}'>{currentApplicant[0].linked_in}</a></div>
-                                    <div className="applicant-component-datafield">{currentApplicant[0].recruiter_notes}</div>
+                    <div className="modal-header"><h2><strong>{currentPosting[0].positionTitle} - {currentApplicant[0].firstName} {currentApplicant[0].lastName}</strong></h2></div>
+                    <div className="modal-body applicant-posting-component-body">
+                        <div>
+                            <div className="applicant-component-datafield">{currentApplicant[0].email}</div>
+                            <div className="applicant-component-datafield">{currentApplicant[0].phone}</div>
+                            <div className="applicant-component-datafield"><a href='{currentApplicant[0].linked_in}'>{currentApplicant[0].linked_in}</a></div>
+                        </div>
+                        <div className='rating-boxes'>
+                            <div>
+                                <div className='applicant-component-section-title'>Recruiter Rating:</div>
+                                <div className='applicant-component-information-container'>
+                                    <div className='applicant-component-information'>
+                                    </div>
                                 </div>
                             </div>
                             <div>
-                                <div className='applicant-component-section-title'>Relevant Postings</div>
-                                {/* <PostingsApplied postingRecords={this.props.postingData} currentApplicantsPostings={currentApplicantsPostings}/> */}
+                                <div className='applicant-component-section-title'>Manager Rating:</div>
+                                <div className='applicant-component-information-container'>
+                                    <div className='applicant-component-information'>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                        
                         <div className='applicant-component-right-side'>
-                            <div></div>
+                            <div className='resume'></div>
                             {/* <img src="./resume-image.png" alt="basic resume"/> */}
                         </div>
                     
