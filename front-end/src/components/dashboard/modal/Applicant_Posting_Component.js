@@ -29,33 +29,29 @@ import updateSelectedApplicantPosting from '../../../actions/selected.js'
         return (
             <div className="modal-overlay" data-modal-container-applicantcomponent>
                 <div className="modal-container">
-                    <div className="modal-header"><h2><strong>{currentPosting[0].positionTitle} - {currentApplicant[0].firstName} {currentApplicant[0].lastName}</strong></h2></div>
+                    <div className="modal-header"><h2><strong>{currentPosting[0].positionTitle} - {currentApplicant[0].firstName} {currentApplicant[0].lastName}</strong></h2>
+                        <div className="personal-data">
+                            <div className="applicant-component-datafield applicant-component-datafield-two">{currentApplicant[0].email}</div>
+                            <div className="applicant-component-datafield applicant-component-datafield-two">-</div>
+                            <div className="applicant-component-datafield applicant-component-datafield-two">{currentApplicant[0].phone}</div>
+                            <div className="applicant-component-datafield applicant-component-datafield-two">-</div>
+                            <div className="applicant-component-datafield applicant-component-datafield-two"><a href='{currentApplicant[0].linked_in}'>{currentApplicant[0].linked_in}</a></div>
+                        </div>
+                    </div>
                     <div className="modal-body applicant-posting-component-body">
-                        <div>
-                            <div className="applicant-component-datafield">{currentApplicant[0].email}</div>
-                            <div className="applicant-component-datafield">{currentApplicant[0].phone}</div>
-                            <div className="applicant-component-datafield"><a href='{currentApplicant[0].linked_in}'>{currentApplicant[0].linked_in}</a></div>
-                        </div>
+
                         <div className='rating-boxes'>
-                            <div>
+                            <div className='applicant-posting-component-information-container'>
                                 <div className='applicant-component-section-title'>Recruiter Rating:</div>
-                                <div className='applicant-component-information-container'>
                                     <div className='applicant-component-information'>
+
                                     </div>
-                                </div>
                             </div>
-                            <div>
+                            <div className='applicant-posting-component-information-container'>
                                 <div className='applicant-component-section-title'>Manager Rating:</div>
-                                <div className='applicant-component-information-container'>
-                                    <div className='applicant-component-information'>
-                                    </div>
+                                <div className='applicant-component-information'>
                                 </div>
                             </div>
-                        </div>
-                        
-                        <div className='applicant-component-right-side'>
-                            <div className='resume'></div>
-                            {/* <img src="./resume-image.png" alt="basic resume"/> */}
                         </div>
                     
                     </div>

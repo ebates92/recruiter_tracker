@@ -295,7 +295,7 @@ input {
   background-color: white;
   border-bottom: 2px solid rgb(221, 219, 218);
   padding: 16px;
-  height: 60px;
+  height: auto;
   text-align: center;
 }
 
@@ -848,9 +848,27 @@ textarea {
 
 /* APPLICANT POSTINGS PROFILE - TAKES SOME CSS CLASSES FROM APPLICANT PROFILE */
 
+.personal-data {
+  font-size: .8rem;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.applicant-component-datafield-two {
+  padding: 0 1rem;
+}
+
+.applicant-posting-component-information-container {
+  box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
+  width: 48%;
+  
+}
+
 .applicant-posting-component-body {
   display: flex;
   flex-direction: column;
+  padding-top: .5rem;
 }
 
 .rating-boxes {
