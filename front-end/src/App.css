@@ -273,6 +273,7 @@ input {
 .modal-container {
   max-width: 840px;
   min-width: 815px;
+  color: #575755;
   /* height: 100%;
   padding: 50px 0;
   margin: 0 auto; */
@@ -294,9 +295,12 @@ input {
 .modal-header {
   background-color: white;
   border-bottom: 2px solid rgb(221, 219, 218);
-  padding: 16px;
+  padding: 1.2rem;
   height: auto;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
 .modal-header h2 {
@@ -852,17 +856,10 @@ textarea {
   font-size: .8rem;
   display: flex;
   justify-content: center;
-  margin-bottom: 2rem;
 }
 
 .applicant-component-datafield-two {
-  padding: 0 1rem;
-}
-
-.applicant-posting-component-information-container {
-  box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
-  width: 48%;
-  
+  padding: 0 .3rem;
 }
 
 .applicant-posting-component-body {
@@ -871,19 +868,81 @@ textarea {
   padding-top: .5rem;
 }
 
+.competency-scores {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 1.1rem 0rem 2.4rem 0rem;
+}
+
+.recruit-rating {
+  grid-column-start: 1;
+  font-size: 1.1rem;
+}
+
+.fa-angle-double-right {
+  margin-left: 12%;
+  margin-right: 8%;
+  font-size: 1.25rem;
+  /* color:black; */
+}
+
+.avg-rating {
+  grid-column-start: 3;
+  font-size: 1.35rem;
+  /* color:black; */
+}
+
+.fa-angle-double-left {
+  /* grid-column-start: 2; */
+  margin-left: 8%;
+  margin-right: 12%;
+  font-size: 1.25rem;
+  /* color:black; */
+}
+
+.manager-rating {
+  font-size: 1.1rem;
+}
+
+.applicant-posting-component-information-container {
+  box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 5px rgba(247, 247, 247, 1);
+  width: 48%;
+  
+}
+
 .rating-boxes {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
 }
 
-/* .applicant-posting-component-left-side {
-  grid-column-start: 1;
+.competency-rating-title {
+  margin: .5rem 0rem;
+  font-size: 1.25rem;
+  text-align: center;
 }
 
-.applicant-posting-component-right-side {
-  grid-column-start: 2;
-} */
+.competency-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: .1rem .5rem;
+}
+
+.stars {
+  display: flex;
+  flex-direction: row;
+  padding: .3rem 0rem;
+}
+
+.star {
+  margin: 0 .05rem;
+}
+
+.competency-name {
+  margin: auto 0;
+}
 
 
  /* ADD POSTING COMPETENCIES */
