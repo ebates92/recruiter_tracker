@@ -143,6 +143,7 @@ import updateSelectedApplicantPosting from '../../../actions/selected.js'
                                                 <div className='star'>★</div>
                                                 <div className='star'>★</div>
                                                 <div className='star'>★</div>
+                                                <div></div>
                                             </div>
                                         </div>
                                     </div>
