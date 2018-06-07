@@ -28,6 +28,7 @@ router.route('/posting')
             // userId: res.locals.id,
             userId: 1,
             competencies: req.body.competencies,
+            competencyWeighting: req.body.competencyWeighting
         }).then((postings) => {
             console.log(postings)
             res.json(postings);

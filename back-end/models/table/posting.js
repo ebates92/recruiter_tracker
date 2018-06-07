@@ -24,7 +24,10 @@ const Posting = sequelize.define('posting',{
         type: Sequelize.BOOLEAN, allowNull: true
     },
     competencies:{
-        type: Sequelize.STRING, allowNull: true
+        type: Sequelize.ARRAY(Sequelize.TEXT), allowNull: true
+    },
+    competencyWeighting:{
+        type: Sequelize.ARRAY(Sequelize.TEXT), allowNull: true
     }
 
 });
