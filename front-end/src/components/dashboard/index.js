@@ -56,8 +56,8 @@ class Dashboard extends Component {
         hiringManager: '',
         additionalNotes: '',
         isFilled: false,
-        competencies: '',
-        competencyWeighting: '',
+        competencies: [],
+        competencyWeighting: [],
 
         // add applicant to posting
         applicantId: '',
@@ -95,6 +95,8 @@ class Dashboard extends Component {
   }
 
   _dashboardAddCompetency = (comp, weight) => {
+    const newCompetencies = this.state.formObject.competencies.push(comp)
+    const newCompetencyWeighting = this.state.formObject.competencies.push(comp)
 
     this.setState(prevState => ({
       formObject: {

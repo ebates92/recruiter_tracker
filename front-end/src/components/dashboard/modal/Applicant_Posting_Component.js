@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import PostingsApplied from './Postings_applied'
-// import ModalTypes from './Modal-types.js';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import updateSelectedApplicantPosting from '../../../actions/selected.js'
+import Competency_stars from './Competency_rating_stars.js'
 
  class ApplicantComponent extends Component {
 
@@ -59,93 +58,14 @@ import updateSelectedApplicantPosting from '../../../actions/selected.js'
                             <div className='applicant-posting-component-information-container'>
                                 <div className='competency-rating-title'>Recruiter</div>
                                     <div>
-                                        <div className='competency-container'>
-                                            <div className="competency-name">Creative</div>
-                                            <div className='stars'>
-                                                <div className='star'>★</div>
-                                                <div className='star'>★</div>
-                                                <div className='star'>★</div>
-                                                <div className='star'>★</div>
-                                                <div className='star'>★</div>
-                                            </div>
-                                        </div>
-                                        <div className='competency-container'>
-                                            <div className='competency-name'>Strategic</div>
-                                            <div className='stars'>
-                                                <div className='star'>★</div>
-                                                <div className='star'>★</div>
-                                                <div className='star'>★</div>
-                                                <div className='star'>★</div>
-                                                <div className='star'>★</div>
-                                            </div>
-                                        </div>
-                                        <div className='competency-container'>
-                                            <div className='competency-name'>Innovative</div>
-                                            <div className='stars'>
-                                                <div className='star'>★</div>
-                                                <div className='star'>★</div>
-                                                <div className='star'>★</div>
-                                                <div className='star'>★</div>
-                                                <div className='star'>★</div>
-                                            </div>
-                                        </div>
-                                        <div className='competency-container'>
-                                            <div className='competency-name'>Good Communicator</div>
-                                            <div className='stars'>
-                                                <div className='star'>★</div>
-                                                <div className='star'>★</div>
-                                                <div className='star'>★</div>
-                                                <div className='star'>★</div>
-                                                <div className='star'>★</div>
-                                            </div>
-                                        </div>
+                                        <Competency_stars competencies={currentPosting[0].competencies}/>
                                     </div>
                             </div>
                             <div className='applicant-posting-component-information-container'>
                                 <div className='competency-rating-title'>Manager</div>
                                 <div className='applicant-component-information'>
-                                <div>
-                                        <div className='competency-container'>
-                                            <div className="competency-name">Creative</div>
-                                            <div className='stars'>
-                                                <div className='star'>★</div>
-                                                <div className='star'>★</div>
-                                                <div className='star'>★</div>
-                                                <div className='star'>★</div>
-                                                <div className='star'>★</div>
-                                            </div>
-                                        </div>
-                                        <div className='competency-container'>
-                                            <div className='competency-name'>Strategic</div>
-                                            <div className='stars'>
-                                                <div className='star'>★</div>
-                                                <div className='star'>★</div>
-                                                <div className='star'>★</div>
-                                                <div className='star'>★</div>
-                                                <div className='star'>★</div>
-                                            </div>
-                                        </div>
-                                        <div className='competency-container'>
-                                            <div className='competency-name'>Innovative</div>
-                                            <div className='stars'>
-                                                <div className='star'>★</div>
-                                                <div className='star'>★</div>
-                                                <div className='star'>★</div>
-                                                <div className='star'>★</div>
-                                                <div className='star'>★</div>
-                                            </div>
-                                        </div>
-                                        <div className='competency-container'>
-                                            <div className='competency-name'>Good Communicator</div>
-                                            <div className='stars'>
-                                                <div className='star'>★</div>
-                                                <div className='star'>★</div>
-                                                <div className='star'>★</div>
-                                                <div className='star'>★</div>
-                                                <div className='star'>★</div>
-                                                <div></div>
-                                            </div>
-                                        </div>
+                                    <div>
+                                        <Competency_stars competencies={currentPosting[0].competencies}/>
                                     </div>
                                 </div>
                             </div>
