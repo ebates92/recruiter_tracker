@@ -5,6 +5,12 @@ import updateSelectedApplicantPosting from '../../../actions/selected.js'
 import Competency_stars from './Competency_rating_stars.js'
 
  class ApplicantComponent extends Component {
+     constructor(props){
+         super(props);
+         this.state = {
+             rating: [2,3,4,1]
+         }
+     }
 
     //  allows the ability to set redux state for selected applicant posting back to original state
     closeModal = () => {
@@ -58,14 +64,14 @@ import Competency_stars from './Competency_rating_stars.js'
                             <div className='applicant-posting-component-information-container'>
                                 <div className='competency-rating-title'>Recruiter</div>
                                     <div>
-                                        <Competency_stars competencies={currentPosting[0].competencies}/>
+                                        <Competency_stars competencies={currentPosting[0].competencies} starRating={this.state.rating}/>
                                     </div>
                             </div>
                             <div className='applicant-posting-component-information-container'>
                                 <div className='competency-rating-title'>Manager</div>
                                 <div className='applicant-component-information'>
                                     <div>
-                                        <Competency_stars competencies={currentPosting[0].competencies}/>
+                                        <Competency_stars competencies={currentPosting[0].competencies} starRating={this.state.rating}/>
                                     </div>
                                 </div>
                             </div>

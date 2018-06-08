@@ -936,7 +936,16 @@ textarea {
   padding: .3rem 0rem;
 }
 
-.star {
+.star-outer {
+  margin: 0 .05rem;
+  font-family: FontAwesome;
+}
+
+.star-outer::before {
+    content: "\f006 \f006 \f006 \f006 \f006";
+}
+
+.star-inner {
   margin: 0 .05rem;
 }
 
