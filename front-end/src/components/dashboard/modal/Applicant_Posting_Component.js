@@ -1,16 +1,34 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import updateSelectedApplicantPosting from '../../../actions/selected.js'
 import Competency_stars from './Competency_rating_stars.js'
+
+const url = 'http://localhost:3000';
 
  class ApplicantComponent extends Component {
      constructor(props){
          super(props);
          this.state = {
              managerRating: [0,0,0,0],
-             recruiterRating: [0,0,0,0]
+             recruiterRating: [0,0,0,0],
+             selectedApplicantPosting: this.props.selectedApplicantPosting
          }
+     }
+
+     _onFormSubmission = () => {
+         const data = {
+             managerRating: this.state.managerRating,
+             recruiterRating: this.state.recruiterRating,
+             selectedApplicantPosting: this.state.selectedApplicantPosting
+         }
+         axios.post(`${url}/posting/competencyratings`, data)
+            .then(response => response.data)
+            .then((res) => {
+                return null
+            })
+        this.closeModal()
      }
 
     //  allows the ability to set redux state for selected applicant posting back to original state
@@ -115,8 +133,7 @@ import Competency_stars from './Competency_rating_stars.js'
                     </div>
                     <div className="modal-footer">
                         <button id='applicantcomponent' onClick={this.closeModal}>Cancel</button>
-                        {/* <button>Save & New</button> */}
-                        {/* {<button type="submit" id='posting' onClick={this.props.onFormSubmission}>Save</button>} */}
+                        <button type="submit" id='posting' onClick={this._onFormSubmission}>Save</button>
                     </div>
                 </div>
             </div>

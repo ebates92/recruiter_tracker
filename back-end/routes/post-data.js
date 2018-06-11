@@ -92,5 +92,16 @@ router.route('/moved-card')
         })
     })
 
+// UPDATINGS COMPETENCY RATINGS
+router.route('/competencyratings')
+    .post((req, res) => {
+        PostingApplicant.update({
+            managerRating: req.body.managerRating,
+            recruiterRating: req.body.recruiterRating
+        }, {
+            where: {id: req.body.selectedApplicantPosting}
+        }).then((postingapplicant) => res.json(postingapplicant))
+    })
+
 
 module.exports = router;
