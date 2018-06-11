@@ -109,7 +109,6 @@ User.create({
                     postingId: 3,
                     applicantId: 3,
                     userId: user.dataValues.id,
-
                     applicantStage: 'Initial Interview',
                     isRejected: false,
                     hiringManager_notes: 'Hire them!'

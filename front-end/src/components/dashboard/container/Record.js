@@ -28,7 +28,7 @@ class Record extends Component {
     const emailData = `mailto:${this.props.applicantRecord[0].email}?subject=Interview for ${this.props.positionRecord[0].positionTitle} role&body=Hi ${this.props.applicantRecord[0].firstName},%0D%0A %0D%0A To schedule a meeting with me for the ${this.props.positionRecord[0].positionTitle} role, please paste this link into your web browser. %0D%0A %0D%0A ${calendlyLink} %0D%0A %0D%0A Thanks! %0D%0A ${this.props.userData.firstName} `
 
     const card = this.props.applicantRecord.length > 0 ? (
-      <div className="ui card" id="card" title={this.props.record.id} accessKey={this.props.applicantRecord[0].id} key={this.props.record.id} onClick={this.props.cardClicked}>
+      <div className="ui card" id="card" title={this.props.record.id} accessKey={this.props.record.id} key={this.props.record.id} onClick={this.props.cardClicked}>
         <h3 id='applicant'>{this.props.applicantRecord[0].firstName}</h3>
         <div className='remove-from-position'>x</div>
         <div className="content" id="card-content">

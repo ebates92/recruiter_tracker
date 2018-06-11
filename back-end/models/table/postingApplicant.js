@@ -13,6 +13,12 @@ const PostingApplicant = sequelize.define('postingApplicant',{
     },
     hiringManager_notes:  {
         type: Sequelize.STRING, allowNull:true
+    },
+    managerRating: {
+        type: Sequelize.ARRAY(Sequelize.TEXT), allowNull: true
+    },
+    recruiterRating: {
+        type: Sequelize.ARRAY(Sequelize.TEXT), allowNull: true
     }
 });
 

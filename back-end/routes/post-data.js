@@ -22,12 +22,13 @@ router.route('/posting')
             positionTitle: req.body.positionTitle,
             jobDescription: req.body.jobDescription,
             salaryRange: req.body.salaryRange,
-            qualifications: req.body.qualifications,
             hiringManager: req.body.hiringManager,
             additionalNotes: req.body.additionalNotes,
             isFilled: req.body.is,
             // userId: res.locals.id,
-            userId: 1
+            userId: 1,
+            competencies: req.body.competencies,
+            competencyWeighting: req.body.competencyWeighting
         }).then((postings) => {
             console.log(postings)
             res.json(postings);
@@ -89,6 +90,17 @@ router.route('/moved-card')
                 // where:{userId: res.locals.id}
             }).then((postingapplicant) => res.json(postingapplicant))
         })
+    })
+
+// UPDATINGS COMPETENCY RATINGS
+router.route('/competencyratings')
+    .post((req, res) => {
+        PostingApplicant.update({
+            managerRating: req.body.managerRating,
+            recruiterRating: req.body.recruiterRating
+        }, {
+            where: {id: req.body.selectedApplicantPosting}
+        }).then((postingapplicant) => res.json(postingapplicant))
     })
 
 

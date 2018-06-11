@@ -9,6 +9,9 @@ import AddApplicantToPosting from './modal/Add_applicant_to_posting.js';
 import ApplicantComponent from './modal/Applicant_Component';
 import CalendlyModal from './modal/Calendly';
 import ScheduleMeeting from './modal/Schedule';
+import ApplicantPostingComp from './modal/Applicant_Posting_Component'
+
+// REDUX
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -50,10 +53,11 @@ class Dashboard extends Component {
         positionTitle: '',
         jobDescription: '',
         salaryRange: 0,
-        qualifications: '',
         hiringManager: '',
         additionalNotes: '',
         isFilled: false,
+        competencies: [],
+        competencyWeighting: [],
 
         // add applicant to posting
         applicantId: '',
@@ -88,6 +92,19 @@ class Dashboard extends Component {
           [input]: value
         }
     }))
+  }
+
+  _dashboardAddCompetency = (comp, weight) => {
+    const newCompetencies = this.state.formObject.competencies.push(comp)
+    const newCompetencyWeighting = this.state.formObject.competencies.push(comp)
+
+    this.setState(prevState => ({
+      formObject: {
+        ...prevState.formObject,
+        competencies: comp,
+        competencyWeighting: weight
+      }
+  }))
   }
 
   _onFormSubmission(event){
@@ -185,6 +202,7 @@ class Dashboard extends Component {
           hiringManager: '',
           additionalNotes: '',
           isFilled: false,
+          competencies: '',
     
           // add applicant to posting
           applicantId: '',
@@ -275,6 +293,7 @@ _movedCardStageHandler = (stage) => {
   render() {
     console.log('rerender main dashboard', this.props.selectedApplicant)
     const ApplicantComponent = (this.props.selectedApplicant != null) ? this.state.applicantComponent : Nothing;
+    const ApplicantPostingComponent = (this.props.selectedApplicantPosting != null) ? ApplicantPostingComp : Nothing;
     console.log('should display', ApplicantComponent)
     const CalendlyModal = this.state.calendlyModal || Nothing;
     const ScheduleMeeting = this.state.scheduleMeeting || Nothing;
@@ -287,10 +306,12 @@ _movedCardStageHandler = (stage) => {
             onFormChangeHandler={this._onFormChangeHandler}
             onFormSubmission={this._onFormSubmission} />
 
-          <NewPosting formObject={this.state.formObject}
+          <NewPosting 
+            formObject={this.state.formObject}
             closeModal={this._closeModal}
             onFormChangeHandler={this._onFormChangeHandler}
-            onFormSubmission={this._onFormSubmission} />
+            onFormSubmission={this._onFormSubmission}
+            dashboardAddCompetency={this._dashboardAddCompetency} />
 
           <AddApplicantToPosting
             handlesAddApplicantToPosting={this._handlesAddApplicantToPosting}
@@ -300,7 +321,10 @@ _movedCardStageHandler = (stage) => {
             onFormSubmission={this._onFormSubmission} />
 
           <ApplicantComponent
-            closeModalCorrectly={this._closeModalCorrectly}/>
+            closeModalCorrectly={this._closeModalCorrectly} />
+
+          <ApplicantPostingComponent
+            closeModalCorrectly={this._closeModalCorrectly} />
 
           <CalendlyModal
             onFormChangeHandler={this._onFormChangeHandler}
@@ -325,12 +349,13 @@ _movedCardStageHandler = (stage) => {
   }
 }
 
-let mapStateToProps = ({ applicantData, postingData, postingApplicantData, selectedApplicant }) => {
+let mapStateToProps = ({ applicantData, postingData, postingApplicantData, selectedApplicant, selectedApplicantPosting }) => {
   return {
     applicantData, 
     postingData, 
     postingApplicantData,
-    selectedApplicant
+    selectedApplicant,
+    selectedApplicantPosting
   }
 }
 

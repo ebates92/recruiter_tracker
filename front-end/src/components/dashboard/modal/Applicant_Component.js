@@ -44,7 +44,7 @@ import updateSelectedApplicant from '../../../actions/selected.js'
                             </div>
                         </div>
                         <div className='applicant-component-right-side'>
-                            <div></div>
+                            <div className='resume'></div>
                             {/* <img src="./resume-image.png" alt="basic resume"/> */}
                         </div>
                     
