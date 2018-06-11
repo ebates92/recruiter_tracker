@@ -24,7 +24,7 @@ import Competency_stars from './Competency_rating_stars.js'
     // updates star clicked state
     _starClick = (event) => {
         console.log(event.currentTarget)
-        const rating = event.currentTarget.accessKey
+        const rating = parseInt(event.currentTarget.accessKey)
         const competencyIndex = event.currentTarget.id
 
        if (event.currentTarget.classList.value === 'recruiter') {
@@ -59,10 +59,21 @@ import Competency_stars from './Competency_rating_stars.js'
         const currentApplicant = this.props.applicantData.filter((data) => {return data.id === parseInt(currentApplicantPosting[0].applicantId)})
         const currentPosting = this.props.postingData.filter((data) => { return data.id === parseInt(currentApplicantPosting[0].postingId)})
 
-        const recruiterRating = 4.5
-        const managerRating = 4
-        const avgRating = Math.round(((recruiterRating + managerRating)/2)*100)/100
-
+        // calculates the values for average rating to be displayed
+        const recruiterCount = this.state.recruiterRating.filter((rating) => rating != 0)
+        const managerCount = this.state.managerRating.filter((rating) => rating != 0)
+        const recruiterRating = Math.round((this.state.recruiterRating.reduce((total, currentValue) => total + currentValue)/recruiterCount.length || 0)*100)/100
+        const managerRating = Math.round((this.state.managerRating.reduce((total, currentValue) => total + currentValue)/managerCount.length || 0)*100)/100
+        const avgRatingFunction = () => {
+            if(recruiterRating === 0) {
+                return managerRating;
+            } else if (managerRating === 0) {
+                return recruiterRating
+            } else {
+                return Math.round(((recruiterRating + managerRating)/2)*100)/100
+            }
+        }
+        const avgRating = avgRatingFunction()
 
         return (
             <div className="modal-overlay" data-modal-container-applicantcomponent>
