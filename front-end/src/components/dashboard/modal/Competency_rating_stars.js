@@ -14,11 +14,12 @@ const CompetencyStars = (props) => {
             // creates the filled stars
             const filledStar = props.starRating[index];
 
+            // includes competency id, accesskey for identifying star clicked, this will allow us to update star ratings.
             const filledComponents = (value) => {
                 let x
                 let jsx = []
                 for (x = 0; x < value; x++) {
-                    jsx.push(<i class="fas fa-star star"></i>)
+                    jsx.push(<div onClick={props.starClick} id={index} accessKey={x+1} className={props.type}><i class="fas fa-star star"></i></div>)
                 }
                 return (jsx)
             }
@@ -28,11 +29,14 @@ const CompetencyStars = (props) => {
             // creates the empty stars
             const emptyStar = 5 - filledStar;
 
+            // includes competency id, accesskey for identifying star clicked, this will allow us to update star ratings.
             const emptyComponents = (value) => {
                 let x
+                let starPosition
                 let jsx = []
                 for (x = 0; x < value; x++) {
-                    jsx.push(<i class="far fa-star star"></i>)
+                    starPosition = filledStar + (x+1);
+                    jsx.push(<div onClick={props.starClick} id={index} accessKey={starPosition} className={props.type}><i class="far fa-star star"></i></div>)
                 }
                 return (jsx)
             }

@@ -8,7 +8,8 @@ import Competency_stars from './Competency_rating_stars.js'
      constructor(props){
          super(props);
          this.state = {
-             rating: [2,3,4,1]
+             managerRating: [0,0,0,0],
+             recruiterRating: [0,0,0,0]
          }
      }
 
@@ -18,6 +19,29 @@ import Competency_stars from './Competency_rating_stars.js'
             target: {id:'applicant_posting'},
             currentTarget: {accessKey: null}
           })
+    }
+
+    // updates star clicked state
+    _starClick = (event) => {
+        console.log(event.currentTarget)
+        const rating = event.currentTarget.accessKey
+        const competencyIndex = event.currentTarget.id
+
+       if (event.currentTarget.classList.value === 'recruiter') {
+            const newRating = this.state.recruiterRating.slice()
+            newRating[competencyIndex] = rating
+            this.setState({
+                recruiterRating: newRating
+            })
+       } else {
+            const newRating = this.state.managerRating.slice()
+            newRating[competencyIndex] = rating
+            this.setState({
+                managerRating: newRating
+            })
+       }
+
+
     }
 
 
@@ -64,14 +88,14 @@ import Competency_stars from './Competency_rating_stars.js'
                             <div className='applicant-posting-component-information-container'>
                                 <div className='competency-rating-title'>Recruiter</div>
                                     <div>
-                                        <Competency_stars competencies={currentPosting[0].competencies} starRating={this.state.rating}/>
+                                        <Competency_stars type="recruiter" starClick={this._starClick} competencies={currentPosting[0].competencies} starRating={this.state.recruiterRating}/>
                                     </div>
                             </div>
                             <div className='applicant-posting-component-information-container'>
                                 <div className='competency-rating-title'>Manager</div>
                                 <div className='applicant-component-information'>
                                     <div>
-                                        <Competency_stars competencies={currentPosting[0].competencies} starRating={this.state.rating}/>
+                                        <Competency_stars type="manager" starClick={this._starClick} competencies={currentPosting[0].competencies} starRating={this.state.managerRating}/>
                                     </div>
                                 </div>
                             </div>
