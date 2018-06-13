@@ -2,6 +2,7 @@ import React from 'react';
 
 const CompetencyStars = (props) => {
 
+    // modify the arrays that were sent as strings from postgres
     const competencyRemoveBrackets = props.competencies.substring(1, props.competencies.length -1)
     const competencySplit = competencyRemoveBrackets.split(',')
 
