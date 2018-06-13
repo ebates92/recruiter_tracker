@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import updateSelectedApplicantPosting from '../../../actions/selected.js'
 import Competency_stars from './Competency_rating_stars.js'
+import { fetchPostingApplicants } from '../../../actions/get_posting_applicants.js'
 
 const url = 'http://localhost:3000';
 
@@ -26,7 +27,7 @@ const url = 'http://localhost:3000';
          axios.post(`${url}/posting/competencyratings`, data)
             .then(response => response.data)
             .then((res) => {
-                return null
+                this.props.fetchPostingApplicants();
             })
         this.closeModal()
      }
@@ -41,7 +42,6 @@ const url = 'http://localhost:3000';
 
     // updates star clicked state
     _starClick = (event) => {
-        console.log(event.currentTarget)
         const rating = parseInt(event.currentTarget.accessKey)
         const competencyIndex = event.currentTarget.id
 
@@ -58,8 +58,6 @@ const url = 'http://localhost:3000';
                 managerRating: newRating
             })
        }
-
-
     }
 
 
@@ -154,7 +152,8 @@ function mapStateToProps({ postingData, applicantData, postingApplicantData, sel
 // REDUX EVENT HANDLERS (ACTIONS)
 function mapDispatchToProps(dispatch) {
     return {
-        updateSelectedApplicantPosting: (event) => dispatch(updateSelectedApplicantPosting(event))
+        updateSelectedApplicantPosting: (event) => dispatch(updateSelectedApplicantPosting(event)),
+        fetchPostingApplicants: () => dispatch(fetchPostingApplicants())
     }
 }
 
