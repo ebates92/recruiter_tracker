@@ -62,6 +62,8 @@ router.route('/applicanttoposting')
             applicantStage: req.body.applicantStage,
             isRejected: req.body.isRejected,
             hiringManager_notes: req.body.hiringManager_notes,
+            managerRating: [0,0,0,0],
+            recruiterRating: [0,0,0,0]
         }).then((postingapplicant) => res.json(postingapplicant))
     })
 

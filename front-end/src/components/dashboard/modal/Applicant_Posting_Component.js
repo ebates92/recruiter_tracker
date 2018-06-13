@@ -11,12 +11,45 @@ const url = 'http://localhost:3000';
  class ApplicantComponent extends Component {
      constructor(props){
          super(props);
+        //  redux is providing this filtered data
          this.state = {
-             managerRating: [0,0,0,0],
-             recruiterRating: [0,0,0,0],
-             selectedApplicantPosting: this.props.selectedApplicantPosting
+             managerRating: this.props.selectedApplicantPosting.applicantPostingData.managerRating,
+             recruiterRating: this.props.selectedApplicantPosting.applicantPostingData.recruiterRating,
+             selectedApplicantPosting: this.props.selectedApplicantPosting.id
          }
      }
+
+    
+    _testStrings = () => {
+        const managerRating = this.state.managerRating;
+        const recruiterRating = this.state.recruiterRating;
+                
+        const fixStrings = (string) => {
+            const ratingRemoveBrackets = string.substring(1, string.length - 1)
+            const ratingSplit = ratingRemoveBrackets.split(',')
+            const ratingParsed = ratingSplit.map((each) => parseInt(each))
+            return ratingParsed;
+         }
+        
+         if (typeof managerRating === 'string') {
+             const fixedString = fixStrings(managerRating)
+             this.setState({
+                 managerRating: fixedString
+             })
+         } 
+
+        if (typeof recruiterRating === 'string') {
+            const fixedString = fixStrings(recruiterRating)
+            this.setState({
+                recruiterRating: fixedString
+            })
+        }
+    }
+
+    // fix the stupid string array that comes from postgres into a useable array
+    componentWillMount() {
+        this._testStrings()
+    }
 
      _onFormSubmission = () => {
          const data = {
@@ -68,14 +101,8 @@ const url = 'http://localhost:3000';
             marginBottom: '.7rem'
         }
 
-        // FUNCTIONS
-        const currentApplicantPosting = this.props.postingApplicantData.filter((postingApplicant) => {
-            return (postingApplicant.id === parseInt(this.props.selectedApplicantPosting))
-          })
-        const currentApplicant = this.props.applicantData.filter((data) => {return data.id === parseInt(currentApplicantPosting[0].applicantId)})
-        const currentPosting = this.props.postingData.filter((data) => { return data.id === parseInt(currentApplicantPosting[0].postingId)})
-
         // calculates the values for average rating to be displayed
+
         const recruiterCount = this.state.recruiterRating.filter((rating) => rating != 0)
         const managerCount = this.state.managerRating.filter((rating) => rating != 0)
         const recruiterRating = Math.round((this.state.recruiterRating.reduce((total, currentValue) => total + currentValue)/recruiterCount.length || 0)*100)/100
@@ -94,13 +121,13 @@ const url = 'http://localhost:3000';
         return (
             <div className="modal-overlay" data-modal-container-applicantcomponent>
                 <div className="modal-container">
-                    <div className="modal-header"><h2 style={headerMargin}><strong>{currentPosting[0].positionTitle} - {currentApplicant[0].firstName} {currentApplicant[0].lastName}</strong></h2>
+                    <div className="modal-header"><h2 style={headerMargin}><strong>{this.props.selectedApplicantPosting.postingData.positionTitle} - {this.props.selectedApplicantPosting.applicantData.firstName} {this.props.selectedApplicantPosting.applicantData.lastName}</strong></h2>
                         <div className="personal-data">
-                            <div className="applicant-component-datafield applicant-component-datafield-two">{currentApplicant[0].email}</div>
+                            <div className="applicant-component-datafield applicant-component-datafield-two">{this.props.selectedApplicantPosting.applicantData.email}</div>
                             <div className="applicant-component-datafield applicant-component-datafield-two">-</div>
-                            <div className="applicant-component-datafield applicant-component-datafield-two">{currentApplicant[0].phone}</div>
+                            <div className="applicant-component-datafield applicant-component-datafield-two">{this.props.selectedApplicantPosting.applicantData.phone}</div>
                             <div className="applicant-component-datafield applicant-component-datafield-two">-</div>
-                            <div className="applicant-component-datafield applicant-component-datafield-two"><a href='{currentApplicant[0].linked_in}'>{currentApplicant[0].linked_in}</a></div>
+                            <div className="applicant-component-datafield applicant-component-datafield-two"><a href='{this.props.selectedApplicantPosting.applicantData.linked_in}'>{this.props.selectedApplicantPosting.applicantData.linked_in}</a></div>
                         </div>
                     </div>
                     <div className="modal-body applicant-posting-component-body">
@@ -115,14 +142,14 @@ const url = 'http://localhost:3000';
                             <div className='applicant-posting-component-information-container'>
                                 <div className='competency-rating-title'>Recruiter</div>
                                     <div>
-                                        <Competency_stars type="recruiter" starClick={this._starClick} competencies={currentPosting[0].competencies} starRating={this.state.recruiterRating}/>
+                                        <Competency_stars type="recruiter" starClick={this._starClick} competencies={this.props.selectedApplicantPosting.postingData.competencies} starRating={this.state.recruiterRating}/>
                                     </div>
                             </div>
                             <div className='applicant-posting-component-information-container'>
                                 <div className='competency-rating-title'>Manager</div>
                                 <div className='applicant-component-information'>
                                     <div>
-                                        <Competency_stars type="manager" starClick={this._starClick} competencies={currentPosting[0].competencies} starRating={this.state.managerRating}/>
+                                        <Competency_stars type="manager" starClick={this._starClick} competencies={this.props.selectedApplicantPosting.postingData.competencies} starRating={this.state.managerRating}/>
                                     </div>
                                 </div>
                             </div>
