@@ -6,7 +6,7 @@ export default function dataSelected(event, postingData, applicantData, postingA
     let currentApplicantPosting = [undefined];
     let currentApplicant = [undefined];
     let currentPosting = [undefined];
-    let data = null;
+    let data = targetId;
 
     if (event != undefined) {
         targetType = event.target.id
@@ -24,6 +24,8 @@ export default function dataSelected(event, postingData, applicantData, postingA
         currentApplicant = applicantData.filter((data) => {return data.id === parseInt(currentApplicantPosting[0].applicantId)})
         currentPosting = postingData.filter((data) => { return data.id === parseInt(currentApplicantPosting[0].postingId)})
         data = {id: targetId, applicantData: currentApplicant[0], applicantPostingData: currentApplicantPosting[0], postingData: currentPosting[0]}
+    } else {
+        data = targetId;
     }
 
     return {
